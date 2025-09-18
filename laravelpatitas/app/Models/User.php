@@ -22,13 +22,13 @@ class User extends Authenticatable
      * $this->attributes['phone'] - string - contains the user telephone number
      * $this->attributes['address'] - string - contains the user address
      * $this->attributes['password'] - string - contains the user password
-     * $this->attribute['role_id'] - int - contains the foreign key role (ID)
+     * $this->attribute['role'] - enum['admin', 'buyer', ] - contains the user role
      * $this->attributes['created_at'] - timestamp - contains the created date
      * $this->attributes['updated_at'] - timestamp - contains the updated date
      */
 
     protected $table = 'users';
-    protected $fillable = ['name', 'email', 'phone', 'password', 'address', 'role_id'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'address', 'role'];
     public $timestamps = true;
 
     /**
@@ -99,15 +99,12 @@ class User extends Authenticatable
         return $this->attributes['created_at'];
     }
 
-public function getUpdatedAt(): Carbon
+    public function getUpdatedAt(): Carbon
     {
         return $this->attributes['updated_at'];
     }
 
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class, 'role_id');
-    }
+    public function setRole
 
     /**
      * Get the attributes that should be cast.
