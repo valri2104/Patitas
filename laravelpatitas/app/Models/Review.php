@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
 
 class Review extends Model
@@ -48,5 +49,10 @@ class Review extends Model
      public function getUpdatedAt(): Carbon
      {
         return $this->attributes['updated_at'];
+     }
+
+     public function user(): BelongsTo
+     {
+        return $this->belongsTo(User::class);
      }
 }
