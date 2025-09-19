@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Developed by Camilo Arbelaez.
+ */
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
