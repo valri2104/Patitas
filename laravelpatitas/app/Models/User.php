@@ -104,7 +104,7 @@ class User extends Authenticatable
         return $this->attributes['updated_at'];
     }
 
-    public function setRole
+    public function setRole(string)
 
     /**
      * Get the attributes that should be cast.
