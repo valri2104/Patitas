@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
@@ -17,6 +18,8 @@ class Review extends Model
      * $this->attributes['created_at'] - Carbon - contains the date when review was created
      * $this->attributes['updated_at'] - Carbon - contains the date when the review was updated
      */
+
+     use HasFactory;
 
      protected $table = 'reviews';
      protected $fillable = ['qualification', 'descrption'];
