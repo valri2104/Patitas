@@ -1,0 +1,225 @@
+---
+description: "Reglas de programación del proyecto Patitas"
+alwaysApply: true
+---
+CURSOR AI RULES - PROYECTO PATITAS
+
+INFORMACION DEL PROYECTO:
+Tu eres un asistente de programación especializado en Laravel para el proyecto "Patitas", un e-commerce de productos para mascotas con servicios veterinarios.
+
+TECNOLOGIAS:
+- Framework: Laravel 12.x
+- Base de datos: MySQL  
+- Frontend: Blade templates
+- CSS: Bootstrap/Tailwind
+- Autenticación: Laravel Auth
+
+ENTIDADES DEL SISTEMA:
+- User: Usuarios con roles (admin, buyer, veterinarian)
+- Product: Catálogo de productos para mascotas
+- Order/OrderItem: Sistema de pedidos y carrito
+- Review: Reseñas de productos
+- VeterinaryAppointment: Citas veterinarias
+
+REGLAS GENERALES:
+- Todo código debe cumplir con Laravel Pint (OBLIGATORIO)
+- Variables en camelCase siempre
+- No importar nada que no se use
+- NUNCA dejar echo, dd(), var_dump() en código final
+- Todos los textos deben usar __('messages.key') para localización
+- Documentar funciones complejas
+
+REGLAS PARA CONTROLADORES:
+
+1. Tipado obligatorio en parámetros y retorno:
+   public function show(int $id): View
+
+2. ViewData array OBLIGATORIO para pasar datos a vistas:
+   $viewData = [];
+   $viewData['field'] = 'data';
+   return view('view.name')->with('viewData', $viewData);
+
+3. Tipado de respuestas específicas:
+   use Illuminate\Http\RedirectResponse;
+   public function redirect(): RedirectResponse
+
+4. Controlador solo como intermediario:
+   - No lógica de base de datos directa
+   - No validaciones directas
+   - Solo llamar a otros componentes
+
+5. Retorno estándar de vistas:
+   return view('view.name')->with('viewData', $viewData);
+
+6. Variables en camelCase:
+   $productName = 'Laptop';
+
+7. No repetir nombre de clase en funciones:
+   CORRECTO: public function show()
+   INCORRECTO: public function showProduct()
+
+8. No usar lógica reutilizable en controladores, usar clases de utilidades
+
+REGLAS PARA MODELOS:
+
+1. Documentación completa de atributos al inicio:
+   /**
+    * PRODUCT ATTRIBUTES  
+    * $this->attributes['id'] - int - clave primaria del producto
+    * $this->attributes['name'] - string - nombre del producto
+    * $this->attributes['price'] - float - precio del producto
+    * $this->attributes['created_at'] - timestamp - fecha de creación
+    * $this->attributes['updated_at'] - timestamp - fecha de actualización
+    *
+    * $this->reviews - Review[] - reseñas del producto
+    * $this->orderItems - OrderItem[] - items de pedidos
+    */
+
+2. $fillable obligatorio:
+   protected $fillable = ['name', 'description', 'price', 'stock'];
+
+3. Getters y Setters OBLIGATORIOS para todos los atributos (excepto auto-generados):
+   public function getName(): string
+   {
+       return $this->attributes['name'];
+   }
+   
+   public function setName(string $name): void
+   {
+       $this->attributes['name'] = $name;
+   }
+
+4. Getters para timestamps:
+   public function getCreatedAt(): string
+   {
+       return $this->attributes['created_at'];
+   }
+
+5. Relaciones con tipado:
+   public function reviews(): HasMany
+   {
+       return $this->hasMany(Review::class);
+   }
+   
+   public function getReviews(): Collection
+   {
+       return $this->reviews;
+   }
+
+6. Solo acceso mediante getters/setters, NUNCA directo:
+   CORRECTO: $product->getName()
+   INCORRECTO: $product->name
+
+7. Cada modelo debe tener Factory y/o Seeder
+
+REGLAS PARA RUTAS:
+
+1. Formato string para controlador@método:
+   Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
+
+2. Variables para evitar repetición:
+   $productController = 'App\Http\Controllers\ProductController';
+   Route::get('/products', $productController . '@index');
+
+3. Solo direccionamiento, sin lógica adicional
+
+4. Métodos HTTP específicos:
+   - POST para formularios de creación/actualización
+   - DELETE para eliminación
+
+REGLAS PARA VISTAS:
+
+1. Formato .blade.php obligatorio
+
+2. Extensión de layouts:
+   - Vistas públicas: @extends('layouts.app')
+   - Vistas admin: @extends('layouts.admin')
+
+3. Localización OBLIGATORIA para todos los textos:
+   {{ __('products.title') }}
+   Excepción: información de variables/objetos no necesita localización
+
+4. Sin lógica PHP dentro de vistas:
+   - No consultas MySQL
+   - No lógica compleja
+   - No abrir/cerrar etiquetas PHP
+
+5. Identación de 4 espacios para HTML
+
+6. Nomenclatura carpetas y archivos:
+   - Singular y minúsculas: product/, order/
+   - No repetir nombres: product/show.blade.php (NO product/showProduct.blade.php)
+
+REGLAS PARA ARCHIVOS:
+
+1. Nomenclatura con primera letra mayúscula:
+   - ProductController.php
+   - UserFactory.php
+   - Product.php (modelos)
+
+2. Estructura de directorios:
+   app/Http/Controllers/Admin/ (controladores admin)
+   resources/views/admin/ (vistas admin)
+   resources/lang/es/ (localización)
+
+FLUJO DE TRABAJO:
+
+1. Ramas personales por desarrollador: nombre-desarrollador
+2. Pull Request hacia rama 'desarrollo'
+3. Laravel Pint obligatorio antes de commit
+4. GitHub Projects para gestión con prefijos "app" o "admin"
+
+REGLAS ESPECÍFICAS DEL PROYECTO PATITAS:
+
+1. Roles de usuario en User model:
+   public function isAdmin(): bool
+   {
+       return $this->getRole() === 'admin';
+   }
+
+2. Categorías de productos:
+   - Alimento: Concentrados, premios, suplementos  
+   - Juguetes: Pelotas, huesos, cuerdas
+   - Medicina: Vitaminas, antiparasitarios, shampoos
+   - Accesorios: Collares, correas, camas, transportadores
+
+3. Validaciones comunes:
+   'name' => 'required|string|max:255',
+   'price' => 'required|numeric|min:0',
+   'stock' => 'required|integer|min:0',
+   'category' => 'required|in:Alimento,Juguetes,Medicina,Accesorios',
+   'role' => 'required|in:admin,buyer,veterinarian',
+
+4. Middlewares:
+   - auth: Para rutas que requieren login
+   - admin: Para rutas de administración
+
+RESTRICCIONES IMPORTANTES:
+
+NO HACER NUNCA:
+- Lógica de BD directa en controladores
+- Texto hardcodeado en vistas
+- Acceso directo a atributos de modelo
+- echo, dd(), var_dump() en código final
+- PHP abierto/cerrado en vistas
+- Imports no utilizados
+- Variables en snake_case
+
+SIEMPRE HACER:
+- Usar getters/setters para modelos
+- ViewData array en controladores
+- Tipado en funciones
+- Laravel Pint antes de commit
+- Localización para textos
+- Validaciones en FormRequests
+- Middlewares para autorización
+
+COMANDOS ÚTILES:
+./vendor/bin/pint (obligatorio antes de commit)
+php artisan make:model Product -mf
+php artisan make:controller ProductController --resource
+php artisan make:request ProductRequest
+php artisan migrate
+php artisan db:seed
+
+CONTEXTO: Este es un e-commerce para productos de mascotas. Siempre pensar en la experiencia del usuario comprando productos para sus mascotas y administradores gestionando inventario y pedidos.
