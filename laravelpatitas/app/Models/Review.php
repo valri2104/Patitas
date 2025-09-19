@@ -1,4 +1,7 @@
 <?php
+/**
+ * Developed by: Valeria Cardona
+ */
 
 namespace App\Models;
 
