@@ -9,9 +9,9 @@ Tu eres un asistente de programación especializado en Laravel para el proyecto 
 
 TECNOLOGIAS:
 - Framework: Laravel 12.x
-- Base de datos: MySQL  
+- Base de datos: MySQL
 - Frontend: Blade templates
-- CSS: Bootstrap/Tailwind
+- CSS: Bootstrap
 - Autenticación: Laravel Auth
 
 ENTIDADES DEL SISTEMA:
@@ -64,7 +64,7 @@ REGLAS PARA MODELOS:
 
 1. Documentación completa de atributos al inicio:
    /**
-    * PRODUCT ATTRIBUTES  
+    * PRODUCT ATTRIBUTES
     * $this->attributes['id'] - int - clave primaria del producto
     * $this->attributes['name'] - string - nombre del producto
     * $this->attributes['price'] - float - precio del producto
@@ -83,7 +83,7 @@ REGLAS PARA MODELOS:
    {
        return $this->attributes['name'];
    }
-   
+
    public function setName(string $name): void
    {
        $this->attributes['name'] = $name;
@@ -100,7 +100,7 @@ REGLAS PARA MODELOS:
    {
        return $this->hasMany(Review::class);
    }
-   
+
    public function getReviews(): Collection
    {
        return $this->reviews;
@@ -178,7 +178,7 @@ REGLAS ESPECÍFICAS DEL PROYECTO PATITAS:
    }
 
 2. Categorías de productos:
-   - Alimento: Concentrados, premios, suplementos  
+   - Alimento: Concentrados, premios, suplementos
    - Juguetes: Pelotas, huesos, cuerdas
    - Medicina: Vitaminas, antiparasitarios, shampoos
    - Accesorios: Collares, correas, camas, transportadores
