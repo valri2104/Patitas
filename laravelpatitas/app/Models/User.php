@@ -123,7 +123,7 @@ class User extends Authenticatable
         return Role::from($this->attributes['role']);
     }
 
-    public function review(): HasMany
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }
