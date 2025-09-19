@@ -11,6 +11,7 @@ class Review extends Model
     /**
      * REVIEW
      * $this->attributes['id'] - int - contains the review ID
+     * $this->attributes['user_id'] - int - contains the foreign key (user_id) from users table
      * $this->attributes['qualification'] - int - contains the review qualification
      * $this->attributes['description'] - string - contains the review description
      * $this->attributes['created_at'] - Carbon - contains the date when review was created
@@ -29,6 +30,11 @@ class Review extends Model
      public function getId(): int
      {
         return $this->attributes['id'];
+     }
+
+     public function getUserId(): int
+     {
+        return $this->attributes['user_id'];
      }
 
      public function setQualification(int $qualification): void
