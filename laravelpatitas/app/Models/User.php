@@ -27,7 +27,7 @@ class User extends Authenticatable
      */
 
     protected $table = 'users';
-    protected $fillable = ['name', 'email', 'phone', 'password', 'address', 'role'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'address'];
     public $timestamps = true;
     protected $casts = [
         'role' => Role::class,
@@ -110,13 +110,11 @@ class User extends Authenticatable
 
     public function setRole(Role|string $role): void
     {
-        if($role instanceof Role) {
-            $this->attributes['role'] = $role -> value;
-        } elseif (Role::tryFrom($role)){
-            $this->attributes['role'] = Role::from($role) -> value;
-        } else {
-            unset($this->attributes['role']);
+        if(!in_array($role,[Role::Admin, Role::Veterinarian]))
+        {
+            return;
         }
+        $this->attibutes['role'] = $role -> value;
     }
 
     public function getRole(): Role
