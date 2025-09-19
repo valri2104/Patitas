@@ -6,9 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
+use App\Enums\Role;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -22,7 +21,7 @@ class User extends Authenticatable
      * $this->attributes['phone'] - string - contains the user telephone number
      * $this->attributes['address'] - string - contains the user address
      * $this->attributes['password'] - string - contains the user password
-     * $this->attribute['role'] - enum['admin', 'buyer', ] - contains the user role
+     * $this->attributes['role'] - enum['Admin', 'Buyer', 'Veterinarian'] - contains the user role
      * $this->attributes['created_at'] - timestamp - contains the created date
      * $this->attributes['updated_at'] - timestamp - contains the updated date
      */
@@ -30,6 +29,11 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $fillable = ['name', 'email', 'phone', 'password', 'address', 'role'];
     public $timestamps = true;
+    protected $casts = [
+        'role' => Role::class,
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -91,7 +95,7 @@ class User extends Authenticatable
 
     public function setPassword(string $password): void
     {
-        $this->attributes['password'] = Hash::make($password);
+        $this->attributes['password'] = $password;
     }
 
     public function getCreatedAt(): Carbon
@@ -104,18 +108,19 @@ class User extends Authenticatable
         return $this->attributes['updated_at'];
     }
 
-    public function setRole(string)
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function setRole(Role|string $role): void
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        if($role instanceof Role) {
+            $this->attributes['role'] = $role -> value;
+        } elseif (Role::tryFrom($role)){
+            $this->attributes['role'] = Role::from($role) -> value;
+        } else {
+            unset($this->attributes['role']);
+        }
+    }
+
+    public function getRole(): Role
+    {
+        return Role::from($this->attributes['role']);
     }
 }
