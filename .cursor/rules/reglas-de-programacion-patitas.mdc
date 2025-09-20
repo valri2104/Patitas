@@ -1,84 +1,85 @@
 ---
-description: "Reglas de programación del proyecto Patitas"
+description: "Programming rules for Patitas project"
 alwaysApply: true
 ---
-CURSOR AI RULES - PROYECTO PATITAS
+CURSOR AI RULES - PATITAS PROJECT
 
-INFORMACION DEL PROYECTO:
-Tu eres un asistente de programación especializado en Laravel para el proyecto "Patitas", un e-commerce de productos para mascotas con servicios veterinarios.
+PROJECT INFORMATION:
+You are a programming assistant specialized in Laravel for the "Patitas" project, an e-commerce for pet products with veterinary services.
 
-TECNOLOGIAS:
+TECHNOLOGIES:
 - Framework: Laravel 12.x
-- Base de datos: MySQL
+- Database: MySQL
 - Frontend: Blade templates
 - CSS: Bootstrap
-- Autenticación: Laravel Auth
+- Authentication: Laravel Auth
 
-ENTIDADES DEL SISTEMA:
-- User: Usuarios con roles (admin, buyer, veterinarian)
-- Product: Catálogo de productos para mascotas
-- Order/OrderItem: Sistema de pedidos y carrito
-- Review: Reseñas de productos
-- VeterinaryAppointment: Citas veterinarias
+SYSTEM ENTITIES:
+- User: Users with roles (admin, buyer, veterinarian)
+- Product: Pet products catalog
+- Order/OrderItem: Order and cart system
+- Review: Product reviews
+- VeterinaryAppointment: Veterinary appointments
 
-REGLAS GENERALES:
-- Todo código debe cumplir con Laravel Pint (OBLIGATORIO)
-- Variables en camelCase siempre
-- No importar nada que no se use
-- NUNCA dejar echo, dd(), var_dump() en código final
-- Todos los textos deben usar __('messages.key') para localización
-- Documentar funciones complejas
+GENERAL RULES:
+- All code must comply with Laravel Pint (MANDATORY)
+- ALL CODE MUST BE IN ENGLISH: variables, methods, comments, documentation, file names
+- Variables in camelCase always
+- Do not import anything that is not used
+- NEVER leave echo, dd(), var_dump() in final code
+- All texts must use __('messages.key') for localization
+- Document complex functions IN ENGLISH
 
-REGLAS PARA CONTROLADORES:
+CONTROLLER RULES:
 
-1. Tipado obligatorio en parámetros y retorno:
+1. Mandatory typing in parameters and return:
    public function show(int $id): View
 
-2. ViewData array OBLIGATORIO para pasar datos a vistas:
+2. ViewData array MANDATORY to pass data to views:
    $viewData = [];
    $viewData['field'] = 'data';
    return view('view.name')->with('viewData', $viewData);
 
-3. Tipado de respuestas específicas:
+3. Specific response typing:
    use Illuminate\Http\RedirectResponse;
    public function redirect(): RedirectResponse
 
-4. Controlador solo como intermediario:
-   - No lógica de base de datos directa
-   - No validaciones directas
-   - Solo llamar a otros componentes
+4. Controller only as intermediary:
+   - No direct database logic
+   - No direct validations
+   - Only call other components
 
-5. Retorno estándar de vistas:
+5. Standard view return:
    return view('view.name')->with('viewData', $viewData);
 
-6. Variables en camelCase:
+6. Variables in camelCase:
    $productName = 'Laptop';
 
-7. No repetir nombre de clase en funciones:
-   CORRECTO: public function show()
-   INCORRECTO: public function showProduct()
+7. Do not repeat class name in functions:
+   CORRECT: public function show()
+   INCORRECT: public function showProduct()
 
-8. No usar lógica reutilizable en controladores, usar clases de utilidades
+8. Do not use reusable logic in controllers, use utility classes
 
-REGLAS PARA MODELOS:
+MODEL RULES:
 
-1. Documentación completa de atributos al inicio:
+1. Complete attribute documentation at the beginning IN ENGLISH:
    /**
     * PRODUCT ATTRIBUTES
-    * $this->attributes['id'] - int - clave primaria del producto
-    * $this->attributes['name'] - string - nombre del producto
-    * $this->attributes['price'] - float - precio del producto
-    * $this->attributes['created_at'] - timestamp - fecha de creación
-    * $this->attributes['updated_at'] - timestamp - fecha de actualización
+    * $this->attributes['id'] - int - product primary key
+    * $this->attributes['name'] - string - product name
+    * $this->attributes['price'] - float - product price
+    * $this->attributes['created_at'] - timestamp - creation date
+    * $this->attributes['updated_at'] - timestamp - last update date
     *
-    * $this->reviews - Review[] - reseñas del producto
-    * $this->orderItems - OrderItem[] - items de pedidos
+    * $this->reviews - Review[] - product reviews
+    * $this->orderItems - OrderItem[] - order items
     */
 
-2. $fillable obligatorio:
+2. $fillable mandatory:
    protected $fillable = ['name', 'description', 'price', 'stock'];
 
-3. Getters y Setters OBLIGATORIOS para todos los atributos (excepto auto-generados):
+3. MANDATORY Getters and Setters for all attributes (except auto-generated):
    public function getName(): string
    {
        return $this->attributes['name'];
@@ -89,13 +90,13 @@ REGLAS PARA MODELOS:
        $this->attributes['name'] = $name;
    }
 
-4. Getters para timestamps:
+4. Getters for timestamps:
    public function getCreatedAt(): string
    {
        return $this->attributes['created_at'];
    }
 
-5. Relaciones con tipado:
+5. Relations with typing:
    public function reviews(): HasMany
    {
        return $this->hasMany(Review::class);
@@ -106,84 +107,84 @@ REGLAS PARA MODELOS:
        return $this->reviews;
    }
 
-6. Solo acceso mediante getters/setters, NUNCA directo:
-   CORRECTO: $product->getName()
-   INCORRECTO: $product->name
+6. Only access through getters/setters, NEVER direct:
+   CORRECT: $product->getName()
+   INCORRECT: $product->name
 
-7. Cada modelo debe tener Factory y/o Seeder
+7. Each model must have Factory and/or Seeder
 
-REGLAS PARA RUTAS:
+ROUTE RULES:
 
-1. Formato string para controlador@método:
+1. String format for controller@method:
    Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
 
-2. Variables para evitar repetición:
+2. Variables to avoid repetition:
    $productController = 'App\Http\Controllers\ProductController';
    Route::get('/products', $productController . '@index');
 
-3. Solo direccionamiento, sin lógica adicional
+3. Only routing, no additional logic
 
-4. Métodos HTTP específicos:
-   - POST para formularios de creación/actualización
-   - DELETE para eliminación
+4. Specific HTTP methods:
+   - POST for creation/update forms
+   - DELETE for deletion
 
-REGLAS PARA VISTAS:
+VIEW RULES:
 
-1. Formato .blade.php obligatorio
+1. .blade.php format mandatory
 
-2. Extensión de layouts:
-   - Vistas públicas: @extends('layouts.app')
-   - Vistas admin: @extends('layouts.admin')
+2. Layout extension:
+   - Public views: @extends('layouts.app')
+   - Admin views: @extends('layouts.admin')
 
-3. Localización OBLIGATORIA para todos los textos:
+3. MANDATORY localization for all texts:
    {{ __('products.title') }}
-   Excepción: información de variables/objetos no necesita localización
+   Exception: variable/object information does not need localization
 
-4. Sin lógica PHP dentro de vistas:
-   - No consultas MySQL
-   - No lógica compleja
-   - No abrir/cerrar etiquetas PHP
+4. No PHP logic inside views:
+   - No MySQL queries
+   - No complex logic
+   - No opening/closing PHP tags
 
-5. Identación de 4 espacios para HTML
+5. 4-space indentation for HTML
 
-6. Nomenclatura carpetas y archivos:
-   - Singular y minúsculas: product/, order/
-   - No repetir nombres: product/show.blade.php (NO product/showProduct.blade.php)
+6. Folder and file naming:
+   - Singular and lowercase: product/, order/
+   - Do not repeat names: product/show.blade.php (NOT product/showProduct.blade.php)
 
-REGLAS PARA ARCHIVOS:
+FILE RULES:
 
-1. Nomenclatura con primera letra mayúscula:
+1. Naming with first letter capitalized:
    - ProductController.php
    - UserFactory.php
-   - Product.php (modelos)
+   - Product.php (models)
 
-2. Estructura de directorios:
-   app/Http/Controllers/Admin/ (controladores admin)
-   resources/views/admin/ (vistas admin)
-   resources/lang/es/ (localización)
+2. Directory structure:
+   app/Http/Controllers/Admin/ (admin controllers)
+   resources/views/admin/ (admin views)
+   resources/lang/es/ (localization)
 
-FLUJO DE TRABAJO:
+WORKFLOW:
 
-1. Ramas personales por desarrollador: nombre-desarrollador
-2. Pull Request hacia rama 'desarrollo'
-3. Laravel Pint obligatorio antes de commit
-4. GitHub Projects para gestión con prefijos "app" o "admin"
+1. Personal branches per developer: developer-name
+2. Pull Request to 'development' branch
+3. Laravel Pint mandatory before commit
+4. GitHub Projects for management with "app" or "admin" prefixes
 
-REGLAS ESPECÍFICAS DEL PROYECTO PATITAS:
+PATITAS PROJECT SPECIFIC RULES:
 
-1. Roles de usuario en User model:
+1. User roles in User model:
    public function isAdmin(): bool
    {
        return $this->getRole() === 'admin';
    }
 
-2. Categorías de productos:
-   - Alimento: Concentrados, premios, suplementos
-   - Juguetes: Pelotas, huesos, cuerdas
-   - Medicina: Vitaminas, antiparasitarios, shampoos
-   - Accesorios: Collares, correas, camas, transportadores
+2. Product categories:
+   - Alimento: Concentrates, treats, supplements
+   - Juguetes: Balls, bones, ropes
+   - Medicina: Vitamins, antiparasitics, shampoos
+   - Accesorios: Collars, leashes, beds, carriers
 
-3. Validaciones comunes:
+3. Common validations:
    'name' => 'required|string|max:255',
    'price' => 'required|numeric|min:0',
    'stock' => 'required|integer|min:0',
@@ -191,35 +192,37 @@ REGLAS ESPECÍFICAS DEL PROYECTO PATITAS:
    'role' => 'required|in:admin,buyer,veterinarian',
 
 4. Middlewares:
-   - auth: Para rutas que requieren login
-   - admin: Para rutas de administración
+   - auth: For routes requiring login
+   - admin: For administration routes
 
-RESTRICCIONES IMPORTANTES:
+IMPORTANT RESTRICTIONS:
 
-NO HACER NUNCA:
-- Lógica de BD directa en controladores
-- Texto hardcodeado en vistas
-- Acceso directo a atributos de modelo
-- echo, dd(), var_dump() en código final
-- PHP abierto/cerrado en vistas
-- Imports no utilizados
-- Variables en snake_case
+NEVER DO:
+- Direct DB logic in controllers
+- Hardcoded text in views
+- Direct access to model attributes
+- echo, dd(), var_dump() in final code
+- Opening/closing PHP in views
+- Unused imports
+- snake_case variables
+- CODE IN SPANISH (variables, methods, comments, documentation)
 
-SIEMPRE HACER:
-- Usar getters/setters para modelos
-- ViewData array en controladores
-- Tipado en funciones
-- Laravel Pint antes de commit
-- Localización para textos
-- Validaciones en FormRequests
-- Middlewares para autorización
+ALWAYS DO:
+- Use getters/setters for models
+- ViewData array in controllers
+- Function typing
+- Laravel Pint before commit
+- Localization for texts
+- Validations in FormRequests
+- Middlewares for authorization
+- ALL CODE IN ENGLISH (variables, methods, comments, documentation)
 
-COMANDOS ÚTILES:
-./vendor/bin/pint (obligatorio antes de commit)
+USEFUL COMMANDS:
+./vendor/bin/pint (mandatory before commit)
 php artisan make:model Product -mf
 php artisan make:controller ProductController --resource
 php artisan make:request ProductRequest
 php artisan migrate
 php artisan db:seed
 
-CONTEXTO: Este es un e-commerce para productos de mascotas. Siempre pensar en la experiencia del usuario comprando productos para sus mascotas y administradores gestionando inventario y pedidos.
+CONTEXT: This is an e-commerce for pet products. Always think about the user experience when buying products for their pets and administrators managing inventory and orders.
