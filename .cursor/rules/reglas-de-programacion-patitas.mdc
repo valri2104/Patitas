@@ -167,8 +167,15 @@ WORKFLOW:
 
 1. Personal branches per developer: developer-name
 2. Pull Request to 'development' branch
-3. Laravel Pint mandatory before commit
+3. Laravel Pint ONLY on modified or created files (NOT entire project)
 4. GitHub Projects for management with "app" or "admin" prefixes
+
+LARAVEL PINT RULES:
+- Execute Laravel Pint ONLY on files you create or modify
+- NEVER run Laravel Pint on the entire project
+- Use specific file commands: ./vendor/bin/pint app/Models/Product.php
+- Use folder-specific commands: ./vendor/bin/pint app/Models/ (only if you created/modified files in that folder)
+- DO NOT use ./vendor/bin/pint without parameters (affects entire project)
 
 PATITAS PROJECT SPECIFIC RULES:
 
@@ -211,7 +218,7 @@ ALWAYS DO:
 - Use getters/setters for models
 - ViewData array in controllers
 - Function typing
-- Laravel Pint before commit
+- Laravel Pint ONLY on files you create or modify
 - Localization for texts
 - Validations in FormRequests
 - Middlewares for authorization

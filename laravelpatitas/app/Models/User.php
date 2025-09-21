@@ -3,12 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Notifications\Notifiable;
-use Carbon\Carbon;
 use App\Enums\Role;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -26,25 +27,27 @@ class User extends Authenticatable
      * $this->attributes['created_at'] - timestamp - contains the created date
      * $this->attributes['updated_at'] - timestamp - contains the updated date
      */
-
     protected $table = 'users';
+
     protected $fillable = ['name', 'email', 'phone', 'password', 'address'];
+
     public $timestamps = true;
+
     protected $casts = [
-        'role' => Role::class,
+        'role'              => Role::class,
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
     ];
 
     /**
      * The attributes that should be hidden for serialization.
-    */
+     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    public function getId() : int
+    public function getId(): int
     {
         return $this->attributes['id'];
     }
@@ -111,11 +114,10 @@ class User extends Authenticatable
 
     public function setRole(Role|string $role): void
     {
-        if(!in_array($role,[Role::Admin, Role::Veterinarian]))
-        {
+        if (! in_array($role, [Role::Admin, Role::Veterinarian])) {
             return;
         }
-        $this->attibutes['role'] = $role -> value;
+        $this->attibutes['role'] = $role->value;
     }
 
     public function getRole(): Role

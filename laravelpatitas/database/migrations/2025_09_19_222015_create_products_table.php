@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Developed by Camilo Arbelaez.
  */
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->boolean('customizable')->default(false);
             $table->string('imageUrl')->nullable();
             $table->timestamps();
-            
+
             // Índices para optimizar consultas
             $table->index('category');
             $table->index('price');

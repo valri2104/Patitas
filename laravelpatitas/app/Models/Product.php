@@ -1,13 +1,18 @@
 <?php
+
 /**
  * Developed by Camilo Arbelaez.
  */
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use HasFactory;
+
     /**
      * PRODUCT ATTRIBUTES
      * $this->attributes['id'] - int - product primary key
@@ -33,7 +38,7 @@ class Product extends Model
 
     protected $casts = [
         'customizable' => 'boolean',
-        'price' => 'decimal:2',
+        'price'        => 'decimal:2',
     ];
 
     public function getId(): int
@@ -129,6 +134,7 @@ class Product extends Model
     public function decreaseStock(int $quantity): void
     {
         $currentStock = $this->getStock();
+
         if ($currentStock >= $quantity) {
             $this->setStock($currentStock - $quantity);
         }
