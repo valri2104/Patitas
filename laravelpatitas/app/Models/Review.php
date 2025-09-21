@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Developed by: Valeria Cardona
  */
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Carbon\Carbon;
 
 class Review extends Model
 {
@@ -21,50 +22,51 @@ class Review extends Model
      * $this->attributes['created_at'] - Carbon - contains the date when review was created
      * $this->attributes['updated_at'] - Carbon - contains the date when the review was updated
      */
+    use HasFactory;
 
-     use HasFactory;
+    protected $table = 'reviews';
 
-     protected $table = 'reviews';
-     protected $fillable = ['qualification', 'descrption'];
-     public $timestamps = true;
+    protected $fillable = ['qualification', 'descrption'];
 
-     public function setId(int $id): void
-     {
+    public $timestamps = true;
+
+    public function setId(int $id): void
+    {
         $this->attributes['id'] = $id;
-     }
+    }
 
-     public function getId(): int
-     {
+    public function getId(): int
+    {
         return $this->attributes['id'];
-     }
+    }
 
-     public function getUserId(): int
-     {
+    public function getUserId(): int
+    {
         return $this->attributes['user_id'];
-     }
+    }
 
-     public function setQualification(int $qualification): void
-     {
+    public function setQualification(int $qualification): void
+    {
         $this->attributes['qualification'] = $qualification;
-     }
+    }
 
-     public function getQualification(): int
-     {
+    public function getQualification(): int
+    {
         return $this->attributes['qualification'];
-     }
+    }
 
-     public function getCreatedAt(): Carbon
-     {
-      return $this->attributes['created_at'];
-     }
+    public function getCreatedAt(): Carbon
+    {
+        return $this->attributes['created_at'];
+    }
 
-     public function getUpdatedAt(): Carbon
-     {
+    public function getUpdatedAt(): Carbon
+    {
         return $this->attributes['updated_at'];
-     }
+    }
 
-     public function user(): BelongsTo
-     {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
-     }
+    }
 }

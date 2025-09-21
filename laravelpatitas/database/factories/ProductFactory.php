@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Developed by Camilo Arbelaez.
  */
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -54,6 +56,16 @@ class ProductFactory extends Factory
                 'Alimento Húmedo',
                 'Treats de Pollo',
                 'Vitaminas Caninas',
+                'Dog Chow Adulto',
+                'Felix Adulto',
+                'Acana Heritage',
+                'Orijen Original',
+                'Taste of the Wild',
+                'Canidae Pure',
+                'Wellness Core',
+                'Merrick Classic',
+                'Fromm Family',
+                'Ziwi Peak',
             ],
             'Juguetes' => [
                 'Pelota de Tennis',
@@ -71,6 +83,11 @@ class ProductFactory extends Factory
                 'Cuerda Nudos',
                 'Juguete Flotante',
                 'Peluche Chirriante',
+                'Disco Volador',
+                'Pelota Luminosa',
+                'Juguete Puzzle',
+                'Mordedor Congelable',
+                'Túnel de Juego',
             ],
             'Medicina' => [
                 'Bravecto Antipulgas',
@@ -88,6 +105,11 @@ class ProductFactory extends Factory
                 'Loción Dermatológica',
                 'Jarabe Expectorante',
                 'Ungüento Antiséptico',
+                'Nexgard Garrapatas',
+                'Frontline Plus',
+                'Revolution Spot On',
+                'Advocate Pipeta',
+                'Simparica Chewable',
             ],
             'Accesorios' => [
                 'Collar de Cuero',
@@ -105,10 +127,21 @@ class ProductFactory extends Factory
                 'Juego de Platos',
                 'Cepillo de Aseo',
                 'Cortaúñas Profesional',
+                'Collar GPS',
+                'Correa Extensible',
+                'Cama Elevada',
+                'Transportadora Flexible',
+                'Comedero Elevado',
+                'Fuente de Agua',
+                'Arnés Reflectante',
+                'Cojín Térmico',
             ],
         ];
 
-        return $this->faker->randomElement($names[$category]);
+        $baseName = $this->faker->randomElement($names[$category]);
+        $suffix   = $this->faker->unique()->numberBetween(1, 9999);
+
+        return $baseName . ' #' . $suffix;
     }
 
     /**
