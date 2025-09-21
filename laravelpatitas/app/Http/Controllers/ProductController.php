@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+/**
+ * ProductController handles the public product catalog functionality.
+ * 
+ * Routes:
+ * - GET /products - List all products with optional category filter
+ * - GET /products/{id} - Show individual product details
+ * 
+ * Usage examples:
+ * - /products - Show all products with stock
+ * - /products?category=Alimento - Show only food products
+ * - /products/1 - Show product with ID 1
+ */
+class ProductController extends Controller
+{
+    /**
+     * Display a listing of products with optional category filtering
+     */
+    public function index(Request $request): View
+    {
+        $viewData             = [];
+        $viewData['title']    = __('app.products.list.title');
+        $viewData['subtitle'] = __('app.products.list.subtitle');
+
+        // Available categories
+        $viewData['categories'] = ['Alimento', 'Juguetes', 'Medicina', 'Accesorios'];
+
+        // Get selected category from query parameter
+        $selectedCategory             = $request->query('category');
+        $viewData['selectedCategory'] = $selectedCategory;
+
+        // Build query for products with stock > 0
+        $query = Product::where('stock', '>', 0);
+
+        // Apply category filter if selected
+        if ($selectedCategory && in_array($selectedCategory, $viewData['categories'])) {
+            $query->where('category', $selectedCategory);
+        }
+
+        // Get filtered products
+        $viewData['products'] = $query->orderBy('name', 'asc')->get();
+
+        return view('product.index')->with('viewData', $viewData);
+    }
+
+    /**
+     * Display the specified product
+     */
+    public function show(int $id): View
+    {
+        $product = Product::findOrFail($id);
+
+        $viewData            = [];
+        $viewData['title']   = $product->getName();
+        $viewData['product'] = $product;
+
+        return view('product.show')->with('viewData', $viewData);
+    }
+}
