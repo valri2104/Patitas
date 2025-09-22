@@ -12,8 +12,12 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        // Clear existing products
-        Product::truncate();
+    // Disable foreign key checks and truncate child tables first
+    \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    \DB::table('order_items')->truncate();
+    \DB::table('orders')->truncate();
+    Product::truncate();
+    \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $this->command->info('Creating products...');
 

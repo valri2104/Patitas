@@ -1,4 +1,9 @@
+
 <?php
+// OrderItem routes
+$orderItemController = 'App\\Http\\Controllers\\OrderItemController';
+Route::get('/order-items', $orderItemController . '@index')->name('orderItem.index');
+Route::get('/order-items/{id}', $orderItemController . '@show')->name('orderItem.show');
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -50,7 +55,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+// Order routes (user)
 Route::middleware('auth')->group(function () {
+    Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
+    Route::get('/orders/create', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
+    Route::post('/orders', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
+    Route::get('/orders/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.show');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

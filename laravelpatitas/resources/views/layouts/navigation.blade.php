@@ -21,6 +21,14 @@
                     <x-nav-link :href="route('veterinary-appointment.index')" :active="request()->routeIs('veterinary-appointment.index')">
                         {{ __('Citas Veterinarias') }}
                     </x-nav-link>
+                    @auth
+                    <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.index')">
+                        {{ __('Mis pedidos') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('orderItem.index')" :active="request()->routeIs('orderItem.index')">
+                        {{ __('orderItems.cart') }}
+                    </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
