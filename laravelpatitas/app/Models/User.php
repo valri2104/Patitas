@@ -16,7 +16,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * USER ATTRBUTES
+     * USER ATTRIBUTES
      * $this->attributes['id'] - int - contains the user primary key (ID)
      * $this->attributes['name'] - string - contains the user name
      * $this->attribute['email] - string - contains the user email
@@ -117,12 +117,17 @@ class User extends Authenticatable
         if (! in_array($role, [Role::Admin, Role::Veterinarian])) {
             return;
         }
-        $this->attibutes['role'] = $role->value;
+        $this->attributes['role'] = $role->value;
     }
 
     public function getRole(): Role
     {
         return Role::from($this->attributes['role']);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->getRole() === Role::Admin;
     }
 
     public function reviews(): HasMany
