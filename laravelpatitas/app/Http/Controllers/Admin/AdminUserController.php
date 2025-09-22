@@ -1,17 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class AdminUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $viewData = [];
+        $viewData['title'] = __('users.index.title');
+        $viewData['subtitle'] = __('users.index.subtitle');
+        $viewData['users'] = User::orderBy('name', 'asc')->get();
+
+        return view('admin.user.index')->with('viewData', $viewData);
     }
 
     /**
@@ -19,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**

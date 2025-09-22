@@ -25,6 +25,21 @@ Route::get('/products/{id}', $productController . '@show')->name('product.show')
 // ============================================================================
 // ADMIN ROUTES (Requires authentication and admin role)
 // ============================================================================
+Route::get('/admin/dashboard', 'App\Http\Controllers\Admin\AdminController@index')->name('admin.index');
+
+// Admin User Management Routes
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    $adminUserController = 'App\Http\Controllers\Admin\AdminUserController';
+
+    // User CRUD Routes
+    Route::get('/users', $adminUserController . '@index')->name('admin.user.index');
+    Route::get('/users/create', $adminUserController . '@create')->name('admin.user.create');
+    Route::post('/users', $adminUserController . '@store')->name('admin.user.store');
+    Route::get('/users/{id}', $adminUserController . '@show')->name('admin.user.show');
+    Route::get('/users/{id}/edit', $adminUserController . '@edit')->name('admin.user.edit');
+    Route::put('/users/{id}', $adminUserController . '@update')->name('admin.user.update');
+    Route::delete('/users/{id}', $adminUserController . '@destroy')->name('admin.user.destroy');
+});
 
 // Admin Product Management Routes
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {

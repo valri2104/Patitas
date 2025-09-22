@@ -29,7 +29,8 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav me-auto">
                     <a class="nav-link" href="#">{{ __('admin.navigation.dashboard') }}</a>
-                    <a class="nav-link" href="#">{{ __('admin.navigation.products') }}</a>
+                    <a class="nav-link"
+                        href="{{ route('admin.product.index') }}">{{ __('admin.navigation.products') }}</a>
                     <a class="nav-link" href="#">{{ __('admin.navigation.users') }}</a>
                     <a class="nav-link" href="#">{{ __('admin.navigation.orders') }}</a>
                 </div>

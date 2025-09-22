@@ -32,7 +32,7 @@ class User extends Authenticatable
      */
     protected $table = 'users';
 
-    protected $fillable = ['name', 'email', 'phone', 'password', 'address'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'address', 'role'];
 
     public $timestamps = true;
 
@@ -84,7 +84,7 @@ class User extends Authenticatable
         return $this->attributes['phone'];
     }
 
-    public function setPhone(string $phone): void
+    public function setPhone(?string $phone): void
     {
         $this->attributes['phone'] = $phone;
     }
@@ -94,7 +94,7 @@ class User extends Authenticatable
         return $this->attributes['address'];
     }
 
-    public function setAddress(string $address): void
+    public function setAddress(?string $address): void
     {
         $this->attributes['address'] = $address;
     }
@@ -116,8 +116,8 @@ class User extends Authenticatable
 
     public function setRole(Role|string $role): void
     {
-        if (! in_array($role, [Role::Admin, Role::Veterinarian])) {
-            return;
+        if (is_string($role)) {
+            $role = Role::from($role);
         }
         $this->attributes['role'] = $role->value;
     }
