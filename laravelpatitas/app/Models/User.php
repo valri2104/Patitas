@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Developed by: Valeria Cardona
+ */
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -64,7 +66,7 @@ class User extends Authenticatable
 
     public function setName(string $name): void
     {
-        $this->attributes['name'] = $name;
+        $this->attributes['name'] = ucwords($name);
     }
 
     public function getEmail(): string

@@ -5,11 +5,18 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(); // laravel/ui default home route
 
+
+// User register routes
+$registerController = 'App\Http\Controllers\Auth\RegisterController';
+Route::get('/register', $registerController . '@showRegistationForm')->name('register');
+Route::post('/register', $registerController . '@register')->name('register');
+
 // ============================================================================
 // PUBLIC ROUTES (No middleware required)
 // ============================================================================
 
 // Public Product Catalog Routes
+
 $productController = 'App\Http\Controllers\ProductController';
 Route::get('/products', $productController . '@index')->name('product.index');
 Route::get('/products/{id}', $productController . '@show')->name('product.show');

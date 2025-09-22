@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register.store') }}">
                             @csrf
 
                             <div class="row mb-3">
@@ -41,6 +41,24 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="phone"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Phone') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="phone" type="tel" name="phone" value="{{ old('phone') }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="address"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="address" type="text" name="address" value="{{ old('address') }}">
                                 </div>
                             </div>
 

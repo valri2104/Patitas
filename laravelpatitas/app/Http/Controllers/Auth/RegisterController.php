@@ -1,28 +1,35 @@
 <?php
+/**
+ * Developed by: Valeria Cardona
+ */
 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+
+/**
+ * RegisterController handles the user registration functionality.
+ *
+ * Routes:
+ * - GET /register - Display the registration form
+ * - POST /register - Process the registration and create a new user
+ *
+ * Usage examples:
+ * - /register (GET) - Show the registration form to the user
+ * - /register (POST) - Validate input, create the user, log them in, and redirect
+ *
+ * Notes:
+ * - Uses UserRequest to validate registration data.
+ * - By default, assigns the "buyer" role defined in the database.
+ * - After successful registration, redirects to the path defined in $redirectTo.
+ */
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
@@ -41,30 +48,39 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * Handle registration with UserRequest.
      */
-    protected function validator(array $data)
+    public function register(UserRequest $request): RedirectResponse
     {
-        return Validator::make($data, [
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $user = $this->create($request->validated());
+
+        Auth::login($user);
+
+        return redirect($this->redirectTo);
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
+ * Show the registration form.
+ */
+    public function showRegistrationForm()
     {
-        return User::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return view('auth.register');
+    }
+
+
+    /**
+     * Create a new user instance after a valid registration.
+     */
+    protected function create(array $data): User
+    {
+        $user = new User();
+        $user->setName($data['name']);
+        $user->setEmail($data['email']);
+        $user->setPhone($data['phone']);
+        $user->setAddress($data['address']);
+        $user->setPassword($data['password']);
+        $user->save();
+
+        return $user;
     }
 }
