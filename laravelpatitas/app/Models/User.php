@@ -32,7 +32,7 @@ class User extends Authenticatable
      */
     protected $table = 'users';
 
-    protected $fillable = ['name', 'email', 'phone', 'password', 'address', 'role'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'address'];
 
     public $timestamps = true;
 
@@ -106,29 +106,17 @@ class User extends Authenticatable
 
     public function getCreatedAt(): Carbon
     {
-        $value = $this->attributes['created_at'] ?? null;
-        if ($value instanceof Carbon) {
-            return $value;
-        }
-        return $value ? new Carbon($value) : Carbon::now();
+        return $this->attributes['created_at'];
     }
 
     public function getUpdatedAt(): Carbon
     {
-        $value = $this->attributes['updated_at'] ?? null;
-        if ($value instanceof Carbon) {
-            return $value;
-        }
-        return $value ? new Carbon($value) : Carbon::now();
+        return $this->attributes['updated_at'];
     }
 
     public function setRole(Role|string $role): void
     {
-        if (is_string($role)) {
-            $role = Role::from($role);
-        }
-        
-        if (! in_array($role, [Role::Admin, Role::Buyer, Role::Veterinarian])) {
+        if (! in_array($role, [Role::Admin, Role::Veterinarian])) {
             return;
         }
         $this->attributes['role'] = $role->value;
