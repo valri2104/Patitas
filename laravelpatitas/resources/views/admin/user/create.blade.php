@@ -1,54 +1,49 @@
 @extends('layouts.admin')
 
-@section('title', __('admin.products.create.title'))
-@section('subtitle', __('admin.products.create.subtitle'))
+@section('title', __('admin.users.create.title'))
+@section('subtitle', __('admin.users.create.subtitle'))
 
 @section('content')
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2>{{ __('admin.products.create.title') }}</h2>
-                <p class="text-muted mb-0">{{ __('admin.products.create.subtitle') }}</p>
+                <h2>{{ __('admin.users.create.title') }}</h2>
+                <p class="text-muted mb-0">{{ __('admin.users.create.subtitle') }}</p>
             </div>
-            <a href="{{ route('admin.product.index') }}" class="btn btn-outline-secondary">
-                <i class="fas fa-arrow-left me-2"></i>{{ __('admin.products.actions.back_to_list') }}
+            <a href="{{ route('admin.user.index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>{{ __('admin.users.actions.back_to_list') }}
             </a>
         </div>
 
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">{{ __('admin.products.create.form_title') }}</h5>
+                <h5 class="card-title mb-0">{{ __('admin.users.create.form_title') }}</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.product.store') }}" method="POST">
+                <form action="{{ route('admin.user.store') }}" method="POST">
                     @csrf
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="name" class="form-label">{{ __('admin.products.form.name') }} <span
+                            <label for="name" class="form-label">{{ __('admin.users.form.name') }} <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" placeholder="{{ __('admin.products.form.name_placeholder') }}"
+                                name="name" placeholder="{{ __('admin.users.form.name_placeholder') }}"
                                 value="{{ old('name') }}" required>
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="category" class="form-label">{{ __('admin.products.form.category') }} <span
+                            <label for="email" class="form-label">{{ __('admin.users.form.email') }} <span
                                     class="text-danger">*</span></label>
-                            <select class="form-select @error('category') is-invalid @enderror" id="category"
-                                name="category" required>
-                                <option value="" disabled selected>
-                                    {{ __('admin.products.form.category_placeholder') }}</option>
-                                @foreach ($viewData['categories'] as $category)
-                                    <option value="{{ $category }}"
-                                        {{ old('category') == $category ? 'selected' : '' }}>
-                                        {{ __('admin.products.categories.' . $category) }}</option>
-                                @endforeach
-                            </select>
-                            @error('category')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
                     </div>

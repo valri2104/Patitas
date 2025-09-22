@@ -67,7 +67,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect($this->redirectTo);
+        return redirect($this->redirectTo());
     }
 
     /**
