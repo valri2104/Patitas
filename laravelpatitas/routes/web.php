@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(); // laravel/ui default home route
 
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
 
 // User register routes
 $registerController = 'App\Http\Controllers\Auth\RegisterController';
