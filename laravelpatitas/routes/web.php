@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(); // laravel/ui default home route
 
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
 
 // User register routes
 $registerController = 'App\Http\Controllers\Auth\RegisterController';
-Route::get('/register', $registerController . '@showRegistationForm')->name('register');
+Route::get('/register', $registerController . '@showRegistrationForm')->name('register');
 Route::post('/register', $registerController . '@register')->name('register');
 
 // ============================================================================

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use App\Enums\Role;
 
 /**
  * RegisterController handles the user registration functionality.
@@ -35,7 +36,17 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected function redirectTo(): string
+{
+    $user = Auth::user();
+
+    return match ($user->getRole()) {
+        Role::Admin        => '/admin/dashboard',
+        Role::Veterinarian => '/vet/dashboard',
+        Role::Buyer        => '/',
+        default            => '/home',
+    };
+}
 
     /**
      * Create a new controller instance.
