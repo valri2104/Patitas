@@ -9,9 +9,19 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Home/Welcome Route
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
+
+// Laravel UI default home route
+Auth::routes(); 
+
+// User register routes
+$registerController = 'App\Http\Controllers\Auth\RegisterController';
+Route::get('/register', $registerController . '@showRegistrationForm')->name('register');
+Route::post('/register', $registerController . '@register')->name('register');
+
 
 // Public Product Catalog Routes
+
 $productController = 'App\Http\Controllers\ProductController';
 Route::get('/products', $productController . '@index')->name('product.index');
 Route::get('/products/{id}', $productController . '@show')->name('product.show');
