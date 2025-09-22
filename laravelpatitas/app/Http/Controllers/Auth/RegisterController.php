@@ -28,7 +28,6 @@ use Illuminate\Http\RedirectResponse;
  * - After successful registration, redirects to the path defined in $redirectTo.
  */
 
-
 class RegisterController extends Controller
 {
     /**
@@ -59,6 +58,15 @@ class RegisterController extends Controller
 
         return redirect($this->redirectTo);
     }
+
+    /**
+ * Show the registration form.
+ */
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
 
     /**
      * Create a new user instance after a valid registration.
