@@ -43,3 +43,14 @@ nav {
 .product-card:hover .card-img-top {
     transform: scale(1.05);
 }
+
+/* Product Detail Styles */
+.product-detail-image {
+    max-height: 500px;
+    width: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-detail-image:hover {
+    transform: scale(1.02);
+}
