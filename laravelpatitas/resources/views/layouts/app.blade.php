@@ -16,7 +16,7 @@
     <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-1">
         <div class="container-fluid">
-            <a class="navbar-brand" href="home.index">
+            <a class="navbar-brand" href="{{ route('home.index') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="logo" width="55" height="55"
                     class="d-inline-block align-text-center">
                 <span class="fs-1">Patitas</span>
