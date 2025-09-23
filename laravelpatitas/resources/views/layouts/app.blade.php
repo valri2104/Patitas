@@ -16,7 +16,7 @@
     <!-- header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-1">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="home.index">
                 <img src="{{ asset('images/logo.png') }}" alt="logo" width="55" height="55"
                     class="d-inline-block align-text-center">
                 <span class="fs-1">Patitas</span>
@@ -28,8 +28,8 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active" href="#">Home</a>
-                    <a class="nav-link active" href="#">About</a>
+                    <a class="nav-link active" href="#">Productos</a>
+                    <a class="nav-link active" href="#">Carrito</a>
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
                         <a class="nav-link active" href="{{ route('login') }}">Login</a>

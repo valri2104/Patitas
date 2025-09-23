@@ -27,12 +27,12 @@ class AdminSeeder extends Seeder
             $admin->setRole(Role::Admin);
             $admin->save();
 
-            echo "✅ Administrator user created successfully!\n";
-            echo "📧 Email: admin@patitas.com\n";
-            echo "🔑 Password: admin123\n";
-            echo "⚠️  Please change the password after first login\n";
+            echo "Administrator user created successfully!\n";
+            echo "Email: admin@patitas.com\n";
+            echo "Password: admin123\n";
+            echo "Please change the password after first login\n";
         } else {
-            echo "ℹ️  Administrator user already exists.\n";
+            echo "Administrator user already exists.\n";
         }
     }
 }
