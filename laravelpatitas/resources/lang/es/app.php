@@ -14,6 +14,12 @@ return [
     |
     */
 
+    'home' => [
+        'title' => 'Patitas - Tienda de Mascotas',
+        'welcome_message' => 'Bienvenido a Patitas, tu tienda de confianza para productos de mascotas',
+        'explore_products' => 'Explorar Productos',
+    ],
+
     'products' => [
         'list' => [
             'title'              => 'Catálogo de Productos',

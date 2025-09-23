@@ -1,8 +1,13 @@
 @extends('layouts.app')
-@section('title', 'Home Page - Online Store')
-@section('content')
 
-    <div class="text-center">
-        Welcome to the application
+@section('content')
+    <div class="container mt-4">
+        <div class="text-center">
+            <h1>{{ $viewData['title'] }}</h1>
+            <p class="lead">{{ __('app.home.welcome_message') }}</p>
+            <a href="{{ route('product.index') }}" class="btn btn-primary btn-lg">
+                {{ __('app.home.explore_products') }}
+            </a>
+        </div>
     </div>
 @endsection
