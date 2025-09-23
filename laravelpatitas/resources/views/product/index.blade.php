@@ -65,6 +65,51 @@
                 </div>
             @endif
 
+
+            <!-- Top and Cheapest Products Section -->
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="card border-primary h-100">
+                        <div class="card-header bg-primary text-white fw-bold">
+                            Nuestros 3 mejores productos
+                        </div>
+                        <div class="card-body">
+                            @foreach($viewData['topProducts'] as $product)
+                                <a href="{{ route('product.show', $product->getId()) }}" class="text-decoration-none text-dark">
+                                    <div class="d-flex align-items-center mb-2 hover-shadow">
+                                        <img src="{{ $product->getImageUrl() }}" alt="{{ $product->getName() }}" style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px; margin-right: 12px;">
+                                        <div>
+                                            <div class="fw-bold">{{ $product->getName() }}</div>
+                                            <div class="text-success">${{ number_format($product->getPrice(), 0, ',', '.') }}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-success h-100">
+                        <div class="card-header bg-success text-white fw-bold">
+                            Nuestros productos más accesibles
+                        </div>
+                        <div class="card-body">
+                            @foreach($viewData['cheapProducts'] as $product)
+                                <a href="{{ route('product.show', $product->getId()) }}" class="text-decoration-none text-dark">
+                                    <div class="d-flex align-items-center mb-2 hover-shadow">
+                                        <img src="{{ $product->getImageUrl() }}" alt="{{ $product->getName() }}" style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px; margin-right: 12px;">
+                                        <div>
+                                            <div class="fw-bold">{{ $product->getName() }}</div>
+                                            <div class="text-success">${{ number_format($product->getPrice(), 0, ',', '.') }}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Products Count -->
             <div class="row mb-3">
                 <div class="col-12">
