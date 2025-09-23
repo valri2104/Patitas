@@ -22,7 +22,7 @@
                                 </p>
                                 <p class="mb-0">
                                     <strong>{{ __('cart.order_date') }}:</strong> 
-                                    {{ now()->format('d/m/Y H:i') }}
+                                    {{ $viewData['orderDate'] }}
                                 </p>
                             </div>
                         @endif
