@@ -229,7 +229,7 @@ return [
 
 'admin' => [
         'index' => [
-            'title'           => 'Panel de adminisración',
+            'title'           => 'Panel de administración',
         ],
     ],
 

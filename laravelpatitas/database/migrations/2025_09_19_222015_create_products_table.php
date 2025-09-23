@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('imageUrl')->nullable();
             $table->timestamps();
 
-            // Índices para optimizar consultas
+            // Indexes to optimize queries
             $table->index('category');
             $table->index('price');
             $table->index('stock');
