@@ -20,6 +20,18 @@ class CartController extends Controller
 		$viewData['cartProducts'] = CartManager::getCartProducts();
 		return view('cart.index')->with('viewData', $viewData);
 	}
+    	/**
+	 * Update the quantity of a product in the cart.
+	 */
+	public function updateQuantity(Request $request): RedirectResponse
+	{
+		$request->validate([
+			'product_id' => 'required|integer|exists:products,id',
+			'quantity' => 'required|integer|min:1',
+		]);
+		CartManager::updateQuantity($request->input('product_id'), $request->input('quantity'));
+		return Redirect::route('cart.index');
+	}
 
 	/**
 	 * Add a product to the cart.

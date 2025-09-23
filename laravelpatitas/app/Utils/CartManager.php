@@ -50,6 +50,17 @@ class CartManager
         }
         return $products;
     }
+    /**
+     * Update the quantity of a product in the cart.
+     */
+    public static function updateQuantity(int $productId, int $quantity): void
+    {
+        $cart = Session::get('cart', []);
+        if (isset($cart[$productId])) {
+            $cart[$productId] = $quantity;
+            Session::put('cart', $cart);
+        }
+    }
 
     /**
      * Clear the cart.
@@ -58,4 +69,5 @@ class CartManager
     {
         Session::forget('cart');
     }
+
 }
