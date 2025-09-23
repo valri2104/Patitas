@@ -42,6 +42,9 @@ return [
             'Medicina'   => 'Medicina',
             'Accesorios' => 'Accesorios',
         ],
+        'actions' => [
+            'add_to_cart' => 'Agregar al carrito',
+        ],
     ],
 
     'navigation' => [
@@ -49,6 +52,10 @@ return [
         'products' => 'Productos',
         'about'    => 'Acerca de',
         'contact'  => 'Contacto',
+        'login'    => 'Iniciar Sesión',
+        'register' => 'Registrarse',
+        'logout'   => 'Cerrar Sesión',
+        'cart'     => 'Carrito',
     ],
 
     'common' => [

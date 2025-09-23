@@ -23,16 +23,16 @@ class AdminSeeder extends Seeder
             $admin->setEmail('admin@patitas.com');
             $admin->setPhone('3001234567');
             $admin->setAddress('Patitas HQ - Admin Office');
-            $admin->setPassword('admin123'); // Change this password after first login
+            $admin->setPassword('admin123');
             $admin->setRole(Role::Admin);
             $admin->save();
 
-            echo "Administrator user created successfully!\n";
-            echo "Email: admin@patitas.com\n";
-            echo "Password: admin123\n";
-            echo "Please change the password after first login\n";
+            echo "✅ Administrator user created successfully!\n";
+            echo "📧 Email: admin@patitas.com\n";
+            echo "🔑 Password: admin123\n";
+            echo "⚠️  Please change the password after first login\n";
         } else {
-            echo "Administrator user already exists.\n";
+            echo "ℹ️  Administrator user already exists.\n";
         }
     }
 }

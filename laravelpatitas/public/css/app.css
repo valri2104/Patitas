@@ -22,3 +22,24 @@ nav {
     height: 18vw;
     object-fit: cover;
 }
+
+/* Product Catalog Styles */
+.product-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top-container {
+    overflow: hidden;
+}
+
+.card-img-top {
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover .card-img-top {
+    transform: scale(1.05);
+}
