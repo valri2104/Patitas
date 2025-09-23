@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Home Page - Online Store')
+@section('title', __('admin.admin.index.title'))
 @section('content')
 
     <div class="text-center">
