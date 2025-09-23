@@ -11,10 +11,7 @@ class UserController extends Controller
         //
     }
 
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     public function store(Request $request)
     {
@@ -31,12 +28,10 @@ class UserController extends Controller
         //
     }
 
-
     public function update(Request $request, string $id)
     {
         //
     }
-
 
     public function destroy(string $id)
     {

@@ -40,7 +40,7 @@ class CartController extends Controller
             ];
         }
 
-        $viewData['cartItems']            = $cartItems;
+        $viewData['cartItems'] = $cartItems;
         // Also expose under expected key name for strict view rules
         $viewData['cartProducts']         = $cartItems;
         $viewData['totalAmount']          = $totalAmount;

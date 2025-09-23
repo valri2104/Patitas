@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AdminUserController extends Controller
 {
     public function index(): View
     {
-        $viewData = [];
-        $viewData['title'] = __('users.index.title');
+        $viewData             = [];
+        $viewData['title']    = __('users.index.title');
         $viewData['subtitle'] = __('users.index.subtitle');
-        $viewData['users'] = User::orderBy('name', 'asc')->get();
+        $viewData['users']    = User::orderBy('name', 'asc')->get();
 
         return view('admin.user.index')->with('viewData', $viewData);
     }

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'name' => 'Nombre',
+    'name'  => 'Nombre',
     'price' => 'Precio',
 ];
