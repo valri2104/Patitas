@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Order extends Model
 {
-    /** @use HasFactory<\Database\Factories\OrderFactory> */
     use HasFactory;
 
     /**
@@ -37,11 +36,6 @@ class Order extends Model
     public function getId(): int
     {
         return $this->attributes['id'];
-    }
-
-    public function setId(int $id): void
-    {
-        $this->attributes['id'] = $id;
     }
 
     public function getUserId(): int
@@ -124,9 +118,6 @@ class Order extends Model
         return $this->orderItems;
     }
 
-    /**
-     * Calculate the total amount of the order
-     */
     public function calculateTotal(): float
     {
         $total = 0;

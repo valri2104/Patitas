@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends Model
 {
-    /** @use HasFactory<\Database\Factories\OrderItemFactory> */
     use HasFactory;
 
     /**
@@ -33,11 +32,6 @@ class OrderItem extends Model
     public function getId(): int
     {
         return $this->attributes['id'];
-    }
-
-    public function setId(int $id): void
-    {
-        $this->attributes['id'] = $id;
     }
 
     public function getOrderId(): int
@@ -110,9 +104,6 @@ class OrderItem extends Model
         return $this->product;
     }
 
-    /**
-     * Calculate the subtotal for this order item
-     */
     public function calculateSubtotal(): float
     {
         return $this->getQuantity() * $this->getUnitPrice();
