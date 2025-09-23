@@ -13,22 +13,6 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * RegisterController handles the user registration functionality.
- *
- * Routes:
- * - GET /register - Display the registration form
- * - POST /register - Process the registration and create a new user
- *
- * Usage examples:
- * - /register (GET) - Show the registration form to the user
- * - /register (POST) - Validate input, create the user, log them in, and redirect
- *
- * Notes:
- * - Uses UserRequest to validate registration data.
- * - By default, assigns the "buyer" role defined in the database.
- * - After successful registration, redirects to the path defined in $redirectTo.
- */
 class RegisterController extends Controller
 {
     /**
