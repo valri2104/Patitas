@@ -24,25 +24,25 @@
 									@csrf
 									<input type="hidden" name="product_id" value="{{ $item['product']->getId() }}">
 									<input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" max="{{ $item['product']->getStock() }}" class="form-control form-control-sm me-2" style="width: 70px;">
-									<button type="submit" class="btn btn-primary btn-sm me-2">{{ __('Actualizar') }}</button>
+									<button type="submit" class="btn btn-primary btn-sm me-2">{{ __('cart.update') }}</button>
 								</form>
 							</td>
 							<td>
 								<form method="POST" action="{{ route('cart.remove') }}">
 									@csrf
 									<input type="hidden" name="product_id" value="{{ $item['product']->getId() }}">
-									<button type="submit" class="btn btn-danger btn-sm">{{ __('Eliminar') }}</button>
+									<button type="submit" class="btn btn-danger btn-sm">{{ __('cart.remove') }}</button>
 								</form>
 							</td>
 						</tr>
 					@endforeach
 				</tbody>
 			</table>
-			<a href="{{ route('cart.purchase') }}" class="btn btn-success mt-3">{{ __('Comprar') }}</a>
+			<a href="{{ route('cart.purchase') }}" class="btn btn-success mt-3">{{ __('cart.purchase') }}</a>
 		@else
-			<div class="alert alert-info mt-3">{{ __('Carro Vacío') }}</div>
+			<div class="alert alert-info mt-3">{{ __('cart.empty') }}</div>
 		@endif
 
-		<a href="{{ route('product.index') }}" class="btn btn-primary mt-3">{{ __('Volver a productos') }}</a>
+		<a href="{{ route('product.index') }}" class="btn btn-primary mt-3">{{ __('cart.back_to_products') }}</a>
 	</div>
 @endsection
