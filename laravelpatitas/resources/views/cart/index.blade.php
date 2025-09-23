@@ -3,8 +3,8 @@
 @section('content')
     <div class="container mt-4" data-confirm-remove="{{ __('cart.confirm_remove') }}">
         <h1>{{ $viewData['title'] }}</h1>
-        
-        @if(count($viewData['cartProducts']) > 0)
+
+        @if (count($viewData['cartProducts']) > 0)
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
@@ -24,25 +24,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($viewData['cartProducts'] as $item)
+                                        @foreach ($viewData['cartProducts'] as $item)
                                             <tr>
                                                 <td class="align-middle" style="width: 90px;">
-                                                    <img src="{{ $item['product']->getImageUrl() }}" alt="{{ $item['product']->getName() }}" class="img-fluid rounded" />
+                                                    <img src="{{ $item['product']->getImageUrl() }}"
+                                                        alt="{{ $item['product']->getName() }}" class="img-fluid rounded" />
                                                 </td>
                                                 <td class="align-middle">
                                                     <strong>{{ $item['product']->getName() }}</strong>
-                                                    @if($item['product']->getStock() < $item['quantity'])
-                                                        <span class="badge bg-warning text-dark ms-2">{{ __('cart.low_stock') }}</span>
+                                                    @if ($item['product']->getStock() < $item['quantity'])
+                                                        <span
+                                                            class="badge bg-warning text-dark ms-2">{{ __('cart.low_stock') }}</span>
                                                     @endif
                                                 </td>
                                                 <td>${{ $item['productPriceFormatted'] }}</td>
                                                 <td>
-                                                    <form method="POST" action="{{ route('cart.updateQuantity') }}" class="d-flex align-items-center">
+                                                    <form method="POST" action="{{ route('cart.updateQuantity') }}"
+                                                        class="d-flex align-items-center">
                                                         @csrf
-                                                        <input type="hidden" name="product_id" value="{{ $item['product']->getId() }}">
-                                                        <input type="number" name="quantity" value="{{ $item['quantity'] }}" 
-                                                               min="1" max="{{ $item['product']->getStock() }}" 
-                                                               class="form-control form-control-sm me-2" style="width: 80px;">
+                                                        <input type="hidden" name="product_id"
+                                                            value="{{ $item['product']->getId() }}">
+                                                        <input type="number" name="quantity"
+                                                            value="{{ $item['quantity'] }}" min="1"
+                                                            max="{{ $item['product']->getStock() }}"
+                                                            class="form-control form-control-sm me-2" style="width: 80px;">
                                                         <button type="submit" class="btn btn-outline-primary btn-sm me-2">
                                                             {{ __('cart.update') }}
                                                         </button>
@@ -50,9 +55,11 @@
                                                 </td>
                                                 <td><strong>${{ $item['subtotalFormatted'] }}</strong></td>
                                                 <td>
-                                                    <form method="POST" action="{{ route('cart.remove') }}" class="d-inline js-remove-form">
+                                                    <form method="POST" action="{{ route('cart.remove') }}"
+                                                        class="d-inline js-remove-form">
                                                         @csrf
-                                                        <input type="hidden" name="product_id" value="{{ $item['product']->getId() }}">
+                                                        <input type="hidden" name="product_id"
+                                                            value="{{ $item['product']->getId() }}">
                                                         <button type="submit" class="btn btn-outline-danger btn-sm">
                                                             {{ __('cart.remove') }}
                                                         </button>
@@ -66,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
@@ -86,15 +93,15 @@
                                 <strong>{{ __('cart.total') }}:</strong>
                                 <strong class="text-primary">${{ $viewData['totalAmountFormatted'] }}</strong>
                             </div>
-                            
+
                             @auth
                                 <div class="mb-3">
                                     <label for="delivery_address" class="form-label">{{ __('cart.delivery_address') }}</label>
-                                    <textarea class="form-control" id="delivery_address" name="delivery_address" 
-                                              rows="3" placeholder="{{ __('cart.address_placeholder') }}">{{ $viewData['prefilledAddress'] }}</textarea>
+                                    <textarea class="form-control" id="delivery_address" name="delivery_address" rows="3"
+                                        placeholder="{{ __('cart.address_placeholder') }}">{{ $viewData['prefilledAddress'] }}</textarea>
                                     <small class="form-text text-muted">{{ __('cart.address_help') }}</small>
                                 </div>
-                                
+
                                 <form method="POST" action="{{ route('cart.purchase') }}">
                                     @csrf
                                     <input type="hidden" name="delivery_address" id="delivery_address_input">
@@ -130,6 +137,7 @@
     <script>
         const cartRoot = document.querySelector('[data-confirm-remove]');
         const CART_CONFIRM_REMOVE = cartRoot ? cartRoot.getAttribute('data-confirm-remove') : '';
+
         function setDeliveryAddress() {
             const textarea = document.getElementById('delivery_address');
             const input = document.getElementById('delivery_address_input');
@@ -137,9 +145,9 @@
                 input.value = textarea.value;
             }
         }
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.js-remove-form').forEach(function(form) {
-                form.addEventListener('submit', function (e) {
+                form.addEventListener('submit', function(e) {
                     if (!confirm(CART_CONFIRM_REMOVE)) {
                         e.preventDefault();
                     }
