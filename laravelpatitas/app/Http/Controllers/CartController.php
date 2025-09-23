@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller
 {
-    /**
-     * Display the cart contents.
-     */
     public function index(): View
     {
         $viewData          = [];
@@ -64,9 +61,6 @@ class CartController extends Controller
         return view('cart.index')->with('viewData', $viewData);
     }
 
-    /**
-     * Update the quantity of a product in the cart.
-     */
     public function updateQuantity(Request $request): RedirectResponse
     {
         $request->validate([
@@ -78,9 +72,6 @@ class CartController extends Controller
         return Redirect::route('cart.index');
     }
 
-    /**
-     * Add a product to the cart.
-     */
     public function add(Request $request): RedirectResponse
     {
         $request->validate([
@@ -92,9 +83,6 @@ class CartController extends Controller
         return Redirect::route('cart.index');
     }
 
-    /**
-     * Remove a product from the cart.
-     */
     public function remove(Request $request): RedirectResponse
     {
         $request->validate([
@@ -105,9 +93,6 @@ class CartController extends Controller
         return Redirect::route('cart.index');
     }
 
-    /**
-     * Purchase the products in the cart.
-     */
     public function purchase(Request $request): RedirectResponse
     {
         // Validate user authentication
@@ -194,9 +179,6 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * Display the purchase confirmation page.
-     */
     public function purchaseConfirmation(): View
     {
         $viewData              = [];
