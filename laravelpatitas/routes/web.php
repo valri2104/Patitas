@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Auth;
@@ -6,6 +7,17 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(); // laravel/ui default home route
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
+
+// ============================================================================
+// CART ROUTES (No middleware required)
+// ============================================================================
+$cartController = 'App\\Http\\Controllers\\CartController';
+Route::middleware(['auth'])->group(function () use ($cartController) {
+    Route::get('/cart', $cartController . '@index')->name('cart.index');
+    Route::post('/cart/add', $cartController . '@add')->name('cart.add');
+    Route::post('/cart/remove', $cartController . '@remove')->name('cart.remove');
+    Route::get('/cart/purchase', $cartController . '@purchase')->name('cart.purchase');
+});
 
 // User register routes
 $registerController = 'App\Http\Controllers\Auth\RegisterController';

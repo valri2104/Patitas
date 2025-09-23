@@ -123,9 +123,14 @@
                                         </a>
                                         
                                         @if($product->isInStock())
-                                            <button class="btn btn-success" disabled>
-                                                <i class="fas fa-shopping-cart me-2"></i>{{ __('app.products.actions.add_to_cart') }}
-                                            </button>
+                                            <form method="POST" action="{{ route('cart.add') }}">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->getId() }}">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="fas fa-shopping-cart me-2"></i>{{ __('app.products.actions.add_to_cart') }}
+                                                </button>
+                                            </form>
                                         @else
                                             <button class="btn btn-secondary" disabled>
                                                 <i class="fas fa-ban me-2"></i>{{ __('app.products.show.out_of_stock') }}

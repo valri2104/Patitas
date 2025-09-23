@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link active" href="{{ route('product.index') }}">{{ __('app.navigation.products') }}</a>
-                    <a class="nav-link active" href="#">{{ __('app.navigation.cart') }}</a>
+                    <a class="nav-link active" href="{{ route('cart.index') }}">{{ __('app.navigation.cart') }}</a>
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
                         <a class="nav-link active" href="{{ route('login') }}">{{ __('app.navigation.login') }}</a>
