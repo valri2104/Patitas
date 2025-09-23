@@ -28,16 +28,16 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active" href="#">Productos</a>
-                    <a class="nav-link active" href="#">Carrito</a>
+                    <a class="nav-link active" href="{{ route('product.index') }}">{{ __('app.navigation.products') }}</a>
+                    <a class="nav-link active" href="#">{{ __('app.navigation.cart') }}</a>
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
-                        <a class="nav-link active" href="{{ route('login') }}">Login</a>
-                        <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                        <a class="nav-link active" href="{{ route('login') }}">{{ __('app.navigation.login') }}</a>
+                        <a class="nav-link active" href="{{ route('register') }}">{{ __('app.navigation.register') }}</a>
                     @else
                         <form id="logout" action="{{ route('logout') }}" method="POST">
                             <a role="button" class="nav-link active"
-                                onclick="document.getElementById('logout').submit();">Logout</a>
+                                onclick="document.getElementById('logout').submit();">{{ __('app.navigation.logout') }}</a>
                             @csrf
                         </form>
                     @endguest
