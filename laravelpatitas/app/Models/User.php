@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Developed by: Valeria Cardona
  */
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -124,7 +126,7 @@ class User extends Authenticatable
 
     public function getRole(): Role
     {
-        return Role::from($this->attributes['role']);
+        return Role::from($this->attributes['role'] ?? Role::Buyer->value);
     }
 
     public function isAdmin(): bool
