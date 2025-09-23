@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Developed by: Valeria Cardona
  */
@@ -25,12 +26,12 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'phone' => 'nullable|string|max:10',
-            'address' => 'nullable|string|max:255',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users,email',
+            'phone'    => 'nullable|string|max:10',
+            'address'  => 'nullable|string|max:255',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'in:admin, buyer, veterianrian',
+            'role'     => 'in:admin, buyer, veterianrian',
         ];
     }
 }

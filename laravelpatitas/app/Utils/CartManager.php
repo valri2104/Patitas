@@ -2,8 +2,8 @@
 
 namespace App\Utils;
 
-use Illuminate\Support\Facades\Session;
 use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 class CartManager
 {
@@ -13,6 +13,7 @@ class CartManager
     public static function addProduct(int $productId, int $quantity = 1): void
     {
         $cart = Session::get('cart', []);
+
         if (isset($cart[$productId])) {
             $cart[$productId] += $quantity;
         } else {
@@ -33,29 +34,33 @@ class CartManager
 
     /**
      * Get all products in the cart.
-     * @return array
      */
     public static function getCartProducts(): array
     {
-        $cart = Session::get('cart', []);
+        $cart     = Session::get('cart', []);
         $products = [];
+
         foreach ($cart as $productId => $quantity) {
             $product = Product::find($productId);
+
             if ($product) {
                 $products[] = [
-                    'product' => $product,
+                    'product'  => $product,
                     'quantity' => $quantity,
                 ];
             }
         }
+
         return $products;
     }
+
     /**
      * Update the quantity of a product in the cart.
      */
     public static function updateQuantity(int $productId, int $quantity): void
     {
         $cart = Session::get('cart', []);
+
         if (isset($cart[$productId])) {
             $cart[$productId] = $quantity;
             Session::put('cart', $cart);
@@ -69,5 +74,4 @@ class CartManager
     {
         Session::forget('cart');
     }
-
 }

@@ -144,92 +144,91 @@ return [
         'in'       => 'El valor seleccionado no es válido.',
     ],
     /**
-    *|--------------------------------------------------
-    *| Users translate
-    *|-------------------------------------------------
-    */
+     *|--------------------------------------------------
+     *| Users translate
+     *|-------------------------------------------------
+     */
     'users' => [
-    'index' => [
-        'title'          => 'Gestión de Usuarios',
-        'subtitle'       => 'Administra todos los usuarios del sistema',
-        'create_new'     => 'Crear Nuevo Usuario',
-        'total_users'    => 'Total de usuarios: :count',
-        'no_users'       => 'No hay usuarios registrados.',
-        'search_users'   => 'Buscar usuarios...',
-    ],
-    'create' => [
-        'title'      => 'Crear Nuevo Usuario',
-        'subtitle'   => 'Añade un nuevo usuario al sistema',
-        'form_title' => 'Información del Usuario',
-    ],
-    'edit' => [
-        'title'      => 'Editar Usuario: :name',
-        'subtitle'   => 'Modifica la información del usuario',
-        'form_title' => 'Actualizar Información',
-    ],
-    'show' => [
-        'title'               => 'Detalles del Usuario: :name',
-        'user_information'    => 'Información del Usuario',
-        'created_at'          => 'Creado el',
-        'updated_at'          => 'Última actualización',
-    ],
-    'form' => [
-        'name'                  => 'Nombre Completo',
-        'name_placeholder'      => 'Ingresa el nombre completo',
-        'email'                 => 'Correo Electrónico',
-        'email_placeholder'     => 'usuario@ejemplo.com',
-        'role'                  => 'Rol',
-        'role_placeholder'      => 'Selecciona un rol',
-        'phone' => 'Número de teléfono',
-        'phone_placeholder' => 'Ingresa el número de teléfono',
-        'address' => 'Dirección de residencia',
-        'address_placeholder' => 'Ingrese su dirección completa',
-        'password'              => 'Contraseña',
-        'password_placeholder'  => 'Ingresa una contraseña segura',
-        'password_confirm'      => 'Confirmar Contraseña',
-        'password_confirm_placeholder' => 'Repite la contraseña',
-    ],
-    'actions' => [
-        'create'         => 'Crear Usuario',
-        'update'         => 'Actualizar Usuario',
-        'delete'         => 'Eliminar',
-        'edit'           => 'Editar',
-        'view'           => 'Ver Detalles',
-        'back_to_list'   => 'Volver a la Lista',
-        'confirm_delete' => '¿Estás seguro de que deseas eliminar este usuario?',
-    ],
-    'table' => [
-        'name'      => 'Nombre',
-        'email'     => 'Correo Electrónico',
-        'phone'      => 'Teléfono',
-        'address'    => 'Dirección',
-        'password'   => 'Contraseña',
-        'role'    => 'Rol',
-    ],
-    'messages' => [
-        'created'          => 'Usuario creado exitosamente.',
-        'updated'          => 'Usuario actualizado exitosamente.',
-        'deleted'          => 'Usuario ":name" eliminado exitosamente.',
-        'not_found'        => 'Usuario no encontrado.',
-        'validation_error' => 'Por favor corrige los errores en el formulario.',
-        'delete_error'     => 'No se pudo eliminar el usuario. Inténtalo de nuevo.',
-    ],
-    'roles' => [
-        'admin' => 'Administrador',
-        'buyer' => 'Comprador',
-        'veterinarian' => 'Veterinario',
-    ],
-],
-
-/**
-    *|--------------------------------------------------
-    *| Admin translate
-    *|-------------------------------------------------
-    */
-
-'admin' => [
         'index' => [
-            'title'           => 'Panel de administración',
+            'title'        => 'Gestión de Usuarios',
+            'subtitle'     => 'Administra todos los usuarios del sistema',
+            'create_new'   => 'Crear Nuevo Usuario',
+            'total_users'  => 'Total de usuarios: :count',
+            'no_users'     => 'No hay usuarios registrados.',
+            'search_users' => 'Buscar usuarios...',
+        ],
+        'create' => [
+            'title'      => 'Crear Nuevo Usuario',
+            'subtitle'   => 'Añade un nuevo usuario al sistema',
+            'form_title' => 'Información del Usuario',
+        ],
+        'edit' => [
+            'title'      => 'Editar Usuario: :name',
+            'subtitle'   => 'Modifica la información del usuario',
+            'form_title' => 'Actualizar Información',
+        ],
+        'show' => [
+            'title'            => 'Detalles del Usuario: :name',
+            'user_information' => 'Información del Usuario',
+            'created_at'       => 'Creado el',
+            'updated_at'       => 'Última actualización',
+        ],
+        'form' => [
+            'name'                         => 'Nombre Completo',
+            'name_placeholder'             => 'Ingresa el nombre completo',
+            'email'                        => 'Correo Electrónico',
+            'email_placeholder'            => 'usuario@ejemplo.com',
+            'role'                         => 'Rol',
+            'role_placeholder'             => 'Selecciona un rol',
+            'phone'                        => 'Número de teléfono',
+            'phone_placeholder'            => 'Ingresa el número de teléfono',
+            'address'                      => 'Dirección de residencia',
+            'address_placeholder'          => 'Ingrese su dirección completa',
+            'password'                     => 'Contraseña',
+            'password_placeholder'         => 'Ingresa una contraseña segura',
+            'password_confirm'             => 'Confirmar Contraseña',
+            'password_confirm_placeholder' => 'Repite la contraseña',
+        ],
+        'actions' => [
+            'create'         => 'Crear Usuario',
+            'update'         => 'Actualizar Usuario',
+            'delete'         => 'Eliminar',
+            'edit'           => 'Editar',
+            'view'           => 'Ver Detalles',
+            'back_to_list'   => 'Volver a la Lista',
+            'confirm_delete' => '¿Estás seguro de que deseas eliminar este usuario?',
+        ],
+        'table' => [
+            'name'     => 'Nombre',
+            'email'    => 'Correo Electrónico',
+            'phone'    => 'Teléfono',
+            'address'  => 'Dirección',
+            'password' => 'Contraseña',
+            'role'     => 'Rol',
+        ],
+        'messages' => [
+            'created'          => 'Usuario creado exitosamente.',
+            'updated'          => 'Usuario actualizado exitosamente.',
+            'deleted'          => 'Usuario ":name" eliminado exitosamente.',
+            'not_found'        => 'Usuario no encontrado.',
+            'validation_error' => 'Por favor corrige los errores en el formulario.',
+            'delete_error'     => 'No se pudo eliminar el usuario. Inténtalo de nuevo.',
+        ],
+        'roles' => [
+            'admin'        => 'Administrador',
+            'buyer'        => 'Comprador',
+            'veterinarian' => 'Veterinario',
+        ],
+    ],
+
+    /**
+     *|--------------------------------------------------
+     *| Admin translate
+     *|-------------------------------------------------
+     */
+    'admin' => [
+        'index' => [
+            'title' => 'Panel de administración',
         ],
     ],
 
