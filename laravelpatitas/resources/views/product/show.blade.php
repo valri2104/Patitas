@@ -108,10 +108,15 @@
                             <!-- Action Buttons -->
                             <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4">
                                 @if($viewData['product']->isInStock())
-                                    <button class="btn btn-success btn-lg flex-md-fill me-md-2" disabled>
-                                        <i class="fas fa-shopping-cart me-2"></i>
-                                        {{ __('app.products.actions.add_to_cart') }}
-                                    </button>
+                                    <form method="POST" action="{{ route('cart.add') }}">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $viewData['product']->getId() }}">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <button type="submit" class="btn btn-success btn-lg flex-md-fill me-md-2">
+                                            <i class="fas fa-shopping-cart me-2"></i>
+                                            {{ __('app.products.actions.add_to_cart') }}
+                                        </button>
+                                    </form>
                                 @else
                                     <button class="btn btn-secondary btn-lg flex-md-fill me-md-2" disabled>
                                         <i class="fas fa-ban me-2"></i>
