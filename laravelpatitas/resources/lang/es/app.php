@@ -42,6 +42,9 @@ return [
             'Medicina'   => 'Medicina',
             'Accesorios' => 'Accesorios',
         ],
+        'actions' => [
+            'add_to_cart' => 'Agregar al carrito',
+        ],
     ],
 
     'navigation' => [
