@@ -91,7 +91,7 @@ class User extends Authenticatable
         $this->attributes['phone'] = $phone;
     }
 
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->attributes['address'];
     }

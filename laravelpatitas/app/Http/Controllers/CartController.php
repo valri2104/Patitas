@@ -71,7 +71,7 @@ class CartController extends Controller
     /**
      * Purchase the products in the cart.
      */
-    public function purchase(): RedirectResponse
+    public function purchase(Request $request): RedirectResponse
     {
         // Validate user authentication
         if (! Auth::check()) {
@@ -84,6 +84,11 @@ class CartController extends Controller
         if (empty($cartProducts)) {
             return Redirect::route('cart.index')->with('error', __('cart.messages.empty_cart'));
         }
+
+        // Validate delivery address
+        $request->validate([
+            'delivery_address' => 'required|string|min:10|max:500',
+        ]);
 
         // Validate stock availability before processing
         foreach ($cartProducts as $cartProduct) {
@@ -105,7 +110,7 @@ class CartController extends Controller
             $order->setOrderDate(now());
             $order->setStatus('pending');
             $order->setTotal(0); // Will be calculated after adding items
-            $order->setDeliveryAddress(Auth::user()->getAddress());
+            $order->setDeliveryAddress($request->input('delivery_address'));
             $order->save();
 
             $totalAmount = 0;
