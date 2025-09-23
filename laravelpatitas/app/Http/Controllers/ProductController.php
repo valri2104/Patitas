@@ -10,23 +10,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-/**
- * ProductController handles the public product catalog functionality.
- *
- * Routes:
- * - GET /products - List all products with optional category filter
- * - GET /products/{id} - Show individual product details
- *
- * Usage examples:
- * - /products - Show all products with stock
- * - /products?category=Alimento - Show only food products
- * - /products/1 - Show product with ID 1
- */
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of products with optional category filtering
-     */
     public function index(Request $request): View
     {
         $viewData             = [];
@@ -71,9 +56,6 @@ class ProductController extends Controller
         return view('product.index')->with('viewData', $viewData);
     }
 
-    /**
-     * Display the specified product
-     */
     public function show(int $id): View
     {
         $product = Product::findOrFail($id);
