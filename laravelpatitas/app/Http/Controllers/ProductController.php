@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Developed by Camilo Arbelaez.
  */
@@ -11,11 +12,11 @@ use Illuminate\View\View;
 
 /**
  * ProductController handles the public product catalog functionality.
- * 
+ *
  * Routes:
  * - GET /products - List all products with optional category filter
  * - GET /products/{id} - Show individual product details
- * 
+ *
  * Usage examples:
  * - /products - Show all products with stock
  * - /products?category=Alimento - Show only food products
@@ -39,16 +40,19 @@ class ProductController extends Controller
         $selectedCategory             = $request->query('category');
         $viewData['selectedCategory'] = $selectedCategory;
 
-        // Build query for products with stock > 0
-        $query = Product::where('stock', '>', 0);
+        // Get search term from query parameter
+        $searchTerm             = trim((string) $request->query('q', ''));
+        $viewData['searchTerm'] = $searchTerm;
 
-        // Apply category filter if selected
-        if ($selectedCategory && in_array($selectedCategory, $viewData['categories'])) {
-            $query->where('category', $selectedCategory);
-        }
+        // Build query via model scopes to keep controller as orchestrator
+        $query = Product::query()
+            ->inStock()
+            ->category(in_array($selectedCategory, $viewData['categories']) ? $selectedCategory : null)
+            ->searchByName($searchTerm)
+            ->orderBy('name', 'asc');
 
         // Get filtered products
-        $viewData['products'] = $query->orderBy('name', 'asc')->get();
+        $viewData['products'] = $query->get();
 
         return view('product.index')->with('viewData', $viewData);
     }

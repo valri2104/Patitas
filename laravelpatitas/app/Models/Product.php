@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -144,5 +145,42 @@ class Product extends Model
     {
         $currentStock = $this->getStock();
         $this->setStock($currentStock + $quantity);
+    }
+
+    /**
+     * Scope: filter products that are in stock (stock > 0).
+     */
+    public function scopeInStock(Builder $query): Builder
+    {
+        return $query->where('stock', '>', 0);
+    }
+
+    /**
+     * Scope: filter by exact category if provided and valid.
+     */
+    public function scopeCategory(Builder $query, ?string $category): Builder
+    {
+        if ($category === null || $category === '') {
+            return $query;
+        }
+
+        return $query->where('category', $category);
+    }
+
+    /**
+     * Scope: search products by name containing the given term (case-insensitive).
+     */
+    public function scopeSearchByName(Builder $query, ?string $term): Builder
+    {
+        if ($term === null) {
+            return $query;
+        }
+        $trimmed = trim($term);
+
+        if ($trimmed === '') {
+            return $query;
+        }
+
+        return $query->where('name', 'like', '%' . $trimmed . '%');
     }
 }

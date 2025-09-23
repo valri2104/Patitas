@@ -12,11 +12,26 @@
                 <p class="lead text-muted">{{ __('app.products.list.subtitle') }}</p>
             </div>
 
-            <!-- Category Filter Section -->
+            <!-- Search and Category Filter Section -->
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-body">
+                            <form method="GET" action="{{ route('product.index') }}" class="row g-2 align-items-center mb-3">
+                                <div class="col-md-8">
+                                    <label for="search" class="visually-hidden">{{ __('app.common.search') }}</label>
+                                    <input type="text" id="search" name="q" value="{{ $viewData['searchTerm'] ?? '' }}" class="form-control" placeholder="{{ __('app.common.search') }}" />
+                                </div>
+                                <div class="col-md-4 d-grid d-md-flex justify-content-md-end">
+                                    <button type="submit" class="btn btn-primary me-md-2">
+                                        <i class="fas fa-search me-2"></i>{{ __('app.common.search') }}
+                                    </button>
+                                    <a href="{{ route('product.index') }}" class="btn btn-outline-secondary">
+                                        <i class="fas fa-times me-2"></i>{{ __('app.common.clear_filters') }}
+                                    </a>
+                                </div>
+                            </form>
+
                             <h5 class="card-title mb-3">{{ __('app.products.list.filter_by_category') }}</h5>
                             <div class="d-flex flex-wrap gap-2">
                                 <!-- All Categories Link -->
@@ -27,7 +42,7 @@
                                 
                                 <!-- Category Filter Links -->
                                 @foreach($viewData['categories'] as $category)
-                                    <a href="{{ route('product.index', ['category' => $category]) }}" 
+                                    <a href="{{ route('product.index', ['category' => $category] + (isset($viewData['searchTerm']) && $viewData['searchTerm'] !== '' ? ['q' => $viewData['searchTerm']] : [])) }}" 
                                        class="btn {{ $viewData['selectedCategory'] === $category ? 'btn-primary' : 'btn-outline-primary' }}">
                                         {{ __('app.products.categories.' . $category) }}
                                     </a>
