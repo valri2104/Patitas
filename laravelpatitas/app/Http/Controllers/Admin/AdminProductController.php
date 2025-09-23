@@ -11,17 +11,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-/**
- * AdminProductController handles CRUD operations for product management.
- *
- * This controller provides complete administrative functionality for managing
- * products including creation, reading, updating, and deletion.
- */
 class AdminProductController extends Controller
 {
-    /**
-     * Display a listing of all products (admin view - shows all products)
-     */
     public function index(): View
     {
         $viewData             = [];
@@ -34,9 +25,6 @@ class AdminProductController extends Controller
         return view('admin.product.index')->with('viewData', $viewData);
     }
 
-    /**
-     * Show the form for creating a new product
-     */
     public function create(): View
     {
         $viewData               = [];
@@ -47,9 +35,6 @@ class AdminProductController extends Controller
         return view('admin.product.create')->with('viewData', $viewData);
     }
 
-    /**
-     * Store a newly created product in storage
-     */
     public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
@@ -83,9 +68,6 @@ class AdminProductController extends Controller
             ->with('success', __('admin.products.messages.created'));
     }
 
-    /**
-     * Display the specified product
-     */
     public function show(int $id): View
     {
         $product = Product::findOrFail($id);
@@ -97,9 +79,6 @@ class AdminProductController extends Controller
         return view('admin.product.show')->with('viewData', $viewData);
     }
 
-    /**
-     * Show the form for editing the specified product
-     */
     public function edit(int $id): View
     {
         $product = Product::findOrFail($id);
@@ -113,9 +92,6 @@ class AdminProductController extends Controller
         return view('admin.product.edit')->with('viewData', $viewData);
     }
 
-    /**
-     * Update the specified product in storage
-     */
     public function update(Request $request, int $id): RedirectResponse
     {
         $product = Product::findOrFail($id);
@@ -150,9 +126,6 @@ class AdminProductController extends Controller
             ->with('success', __('admin.products.messages.updated'));
     }
 
-    /**
-     * Remove the specified product from storage
-     */
     public function destroy(int $id): RedirectResponse
     {
         $product     = Product::findOrFail($id);
