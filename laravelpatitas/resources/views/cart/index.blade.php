@@ -38,7 +38,10 @@
 					@endforeach
 				</tbody>
 			</table>
-			<a href="{{ route('cart.purchase') }}" class="btn btn-success mt-3">{{ __('cart.purchase') }}</a>
+			<form method="POST" action="{{ route('cart.purchase') }}" class="d-inline">
+				@csrf
+				<button type="submit" class="btn btn-success mt-3">{{ __('cart.purchase') }}</button>
+			</form>
 		@else
 			<div class="alert alert-info mt-3">{{ __('cart.empty') }}</div>
 		@endif
