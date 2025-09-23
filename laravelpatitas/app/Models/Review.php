@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Review extends Model
 {
     /**
-     * REVIEW
+     * REVIEW ATTRIBUTES
      * $this->attributes['id'] - int - contains the review ID
      * $this->attributes['user_id'] - int - contains the foreign key (user_id) from users table
      * $this->attributes['qualification'] - int - contains the review qualification
@@ -29,11 +29,6 @@ class Review extends Model
     protected $fillable = ['qualification', 'descrption'];
 
     public $timestamps = true;
-
-    public function setId(int $id): void
-    {
-        $this->attributes['id'] = $id;
-    }
 
     public function getId(): int
     {

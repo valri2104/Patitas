@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Developed by: Valeria Cardona
  */
@@ -17,7 +16,6 @@ use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -28,7 +26,7 @@ class User extends Authenticatable
      * $this->attributes['phone'] - string - contains the user telephone number
      * $this->attributes['address'] - string - contains the user address
      * $this->attributes['password'] - string - contains the user password
-     * $this->attributes['role'] - enum['Admin', 'Buyer', 'Veterinarian'] - contains the user role
+     * $this->attributes['role'] - enum[Role::class] - contains the user role
      * $this->attributes['created_at'] - timestamp - contains the created date
      * $this->attributes['updated_at'] - timestamp - contains the updated date
      */
@@ -43,9 +41,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -54,11 +49,6 @@ class User extends Authenticatable
     public function getId(): int
     {
         return $this->attributes['id'];
-    }
-
-    public function setId(int $id): void
-    {
-        $this->attributes['id'] = $id;
     }
 
     public function getName(): string
