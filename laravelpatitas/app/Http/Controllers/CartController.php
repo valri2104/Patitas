@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\User;
 use App\Utils\CartManager;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -20,9 +21,45 @@ class CartController extends Controller
      */
     public function index(): View
     {
-        $viewData                 = [];
-        $viewData['title']        = __('cart.title');
-        $viewData['cartProducts'] = CartManager::getCartProducts();
+        $viewData          = [];
+        $viewData['title'] = __('cart.title');
+        $cartProducts      = CartManager::getCartProducts();
+
+        $cartItems   = [];
+        $totalAmount = 0;
+
+        foreach ($cartProducts as $item) {
+            $product  = $item['product'];
+            $quantity = $item['quantity'];
+            $subtotal = $product->getPrice() * $quantity;
+            $totalAmount += $subtotal;
+
+            $cartItems[] = [
+                'product'               => $product,
+                'quantity'              => $quantity,
+                'subtotal'              => $subtotal,
+                'subtotalFormatted'     => number_format($subtotal, 2),
+                'productPriceFormatted' => number_format($product->getPrice(), 2),
+            ];
+        }
+
+        $viewData['cartItems']            = $cartItems;
+        // Also expose under expected key name for strict view rules
+        $viewData['cartProducts']         = $cartItems;
+        $viewData['totalAmount']          = $totalAmount;
+        $viewData['totalAmountFormatted'] = number_format($totalAmount, 2);
+
+        // Prefill address for authenticated users
+        $prefilledAddress = '';
+
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            if ($user instanceof User) {
+                $prefilledAddress = $user->getAddress() ?? '';
+            }
+        }
+        $viewData['prefilledAddress'] = $prefilledAddress;
 
         return view('cart.index')->with('viewData', $viewData);
     }
@@ -162,9 +199,10 @@ class CartController extends Controller
      */
     public function purchaseConfirmation(): View
     {
-        $viewData            = [];
-        $viewData['title']   = __('cart.purchase_title');
-        $viewData['orderId'] = session('orderId');
+        $viewData              = [];
+        $viewData['title']     = __('cart.purchase_title');
+        $viewData['orderId']   = session('orderId');
+        $viewData['orderDate'] = now()->format('d/m/Y H:i');
 
         return view('cart.purchase')->with('viewData', $viewData);
     }

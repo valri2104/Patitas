@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-4">
+    <div class="container mt-4" data-confirm-remove="{{ __('cart.confirm_remove') }}">
         <h1>{{ $viewData['title'] }}</h1>
         
         @if(count($viewData['cartProducts']) > 0)
@@ -24,20 +24,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @php $totalAmount = 0; @endphp
                                         @foreach($viewData['cartProducts'] as $item)
-                                            @php 
-                                                $subtotal = $item['product']->getPrice() * $item['quantity'];
-                                                $totalAmount += $subtotal;
-                                            @endphp
                                             <tr>
-                                                <td>
+                                                <td class="align-middle" style="width: 90px;">
+                                                    <img src="{{ $item['product']->getImageUrl() }}" alt="{{ $item['product']->getName() }}" class="img-fluid rounded" />
+                                                </td>
+                                                <td class="align-middle">
                                                     <strong>{{ $item['product']->getName() }}</strong>
                                                     @if($item['product']->getStock() < $item['quantity'])
                                                         <span class="badge bg-warning text-dark ms-2">{{ __('cart.low_stock') }}</span>
                                                     @endif
                                                 </td>
-                                                <td>${{ number_format($item['product']->getPrice(), 2) }}</td>
+                                                <td>${{ $item['productPriceFormatted'] }}</td>
                                                 <td>
                                                     <form method="POST" action="{{ route('cart.updateQuantity') }}" class="d-flex align-items-center">
                                                         @csrf
@@ -50,13 +48,12 @@
                                                         </button>
                                                     </form>
                                                 </td>
-                                                <td><strong>${{ number_format($subtotal, 2) }}</strong></td>
+                                                <td><strong>${{ $item['subtotalFormatted'] }}</strong></td>
                                                 <td>
-                                                    <form method="POST" action="{{ route('cart.remove') }}" class="d-inline">
+                                                    <form method="POST" action="{{ route('cart.remove') }}" class="d-inline js-remove-form">
                                                         @csrf
                                                         <input type="hidden" name="product_id" value="{{ $item['product']->getId() }}">
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm" 
-                                                                onclick="return confirm('{{ __('cart.confirm_remove') }}')">
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm">
                                                             {{ __('cart.remove') }}
                                                         </button>
                                                     </form>
@@ -78,7 +75,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-2">
                                 <span>{{ __('cart.subtotal') }}:</span>
-                                <span>${{ number_format($totalAmount, 2) }}</span>
+                                <span>${{ $viewData['totalAmountFormatted'] }}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>{{ __('cart.shipping') }}:</span>
@@ -87,14 +84,14 @@
                             <hr>
                             <div class="d-flex justify-content-between mb-3">
                                 <strong>{{ __('cart.total') }}:</strong>
-                                <strong class="text-primary">${{ number_format($totalAmount, 2) }}</strong>
+                                <strong class="text-primary">${{ $viewData['totalAmountFormatted'] }}</strong>
                             </div>
                             
                             @auth
                                 <div class="mb-3">
                                     <label for="delivery_address" class="form-label">{{ __('cart.delivery_address') }}</label>
                                     <textarea class="form-control" id="delivery_address" name="delivery_address" 
-                                              rows="3" placeholder="{{ __('cart.address_placeholder') }}">{{ auth()->user()->getAddress() ?? '' }}</textarea>
+                                              rows="3" placeholder="{{ __('cart.address_placeholder') }}">{{ $viewData['prefilledAddress'] }}</textarea>
                                     <small class="form-text text-muted">{{ __('cart.address_help') }}</small>
                                 </div>
                                 
@@ -131,10 +128,23 @@
     </div>
 
     <script>
+        const cartRoot = document.querySelector('[data-confirm-remove]');
+        const CART_CONFIRM_REMOVE = cartRoot ? cartRoot.getAttribute('data-confirm-remove') : '';
         function setDeliveryAddress() {
             const textarea = document.getElementById('delivery_address');
             const input = document.getElementById('delivery_address_input');
-            input.value = textarea.value;
+            if (textarea && input) {
+                input.value = textarea.value;
+            }
         }
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.js-remove-form').forEach(function(form) {
+                form.addEventListener('submit', function (e) {
+                    if (!confirm(CART_CONFIRM_REMOVE)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        });
     </script>
 @endsection
