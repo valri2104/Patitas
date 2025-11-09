@@ -237,6 +237,6 @@ return [
             'title' => 'Admin - Patitas',
             'subtitle' => 'Patitas Admin',
             'footer' => 'Patitas Admin Panel copy ©',
-        ],
+    ],
 
 ];
