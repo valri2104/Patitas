@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function index(): View
     {
         $viewData           = [];
-        $viewData['title']  = __('app.orders.history.title');
+        $viewData['title']  = __('orders.index.title');
         $viewData['orders'] = Order::with(['orderItems.product'])
             ->where('user_id', Auth::user()->getId())
             ->orderByDesc('orderDate')
@@ -33,7 +33,7 @@ class OrderController extends Controller
             ->firstOrFail();
 
         $viewData          = [];
-        $viewData['title'] = __('app.orders.show.title', ['id' => $order->getId()]);
+        $viewData['title'] = __('orders.show.title', ['id' => $order->getId()]);
         $viewData['order'] = $order;
 
         return view('order.show')->with('viewData', $viewData);
