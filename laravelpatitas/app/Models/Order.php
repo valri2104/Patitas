@@ -88,6 +88,21 @@ class Order extends Model
         $this->attributes['deliveryAddress'] = $deliveryAddress;
     }
 
+    public function getShippingAddress(): string
+    {
+        return $this->getDeliveryAddress();
+    }
+
+    public function getNotes(): ?string
+    {
+        return $this->attributes['notes'] ?? null;
+    }
+
+    public function setNotes(?string $notes): void
+    {
+        $this->attributes['notes'] = $notes;
+    }
+
     public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
