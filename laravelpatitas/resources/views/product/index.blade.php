@@ -97,7 +97,7 @@
                     <div class="col-md-6">
                         <div class="card border-success h-100">
                             <div class="card-header bg-success text-white fw-bold">
-                                {{ __('app.products.list.affordable') }}
+                                {{ __('app.products.list.more_affordable') }}
                             </div>
                             <div class="card-body">
                                 @foreach ($viewData['cheapProducts'] as $product)
