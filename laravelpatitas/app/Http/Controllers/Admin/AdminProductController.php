@@ -21,7 +21,6 @@ class AdminProductController extends Controller
         $viewData['title']    = __('admin.products.index.title');
         $viewData['subtitle'] = __('admin.products.index.subtitle');
 
-        // Get all products (including out of stock for admin view)
         $viewData['products'] = Product::orderBy('name', 'asc')->get();
 
         return view('admin.product.index')->with('viewData', $viewData);
@@ -49,7 +48,6 @@ class AdminProductController extends Controller
             'imageUrl'     => 'nullable|string',
         ]);
 
-        // Set default value for customizable if not provided
         $validatedData['customizable'] = $validatedData['customizable'] ?? false;
 
         $product = new Product;
@@ -108,7 +106,6 @@ class AdminProductController extends Controller
             'imageUrl'     => 'nullable|string',
         ]);
 
-        // Set default value for customizable if not provided
         $validatedData['customizable'] = $validatedData['customizable'] ?? false;
 
         $product->setName($validatedData['name']);
