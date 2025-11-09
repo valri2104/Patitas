@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Utils\CartManager;
 use App\Http\Requests\Cart\UpdateQuantityRequest;
 use App\Http\Requests\Cart\AddRequest;
+use App\Http\Requests\Cart\RemoveRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -80,11 +81,9 @@ class CartController extends Controller
         return Redirect::route('cart.index');
     }
 
-    public function remove(Request $request): RedirectResponse
+    public function remove(RemoveRequest $request): RedirectResponse
     {
-        $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-        ]);
+        $request->validated();
         CartManager::removeProduct($request->input('product_id'));
 
         return Redirect::route('cart.index');
