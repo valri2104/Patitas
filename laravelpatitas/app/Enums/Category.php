@@ -7,5 +7,5 @@ enum Category: string
     case Alimento  = 'Alimento';
     case Juguetes  = 'Juguetes';
     case Medicina  = 'Medicina';
-    case Accesorio = 'Accesorio';
+    case Accesorio = 'Accesorios';
 }

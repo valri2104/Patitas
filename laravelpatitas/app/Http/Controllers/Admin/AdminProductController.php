@@ -11,6 +11,7 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use app\Enums\Category;
 
 class AdminProductController extends Controller
 {
@@ -88,7 +89,7 @@ class AdminProductController extends Controller
         $viewData['title']      = __('admin.products.edit.title', ['name' => $product->getName()]);
         $viewData['subtitle']   = __('admin.products.edit.subtitle');
         $viewData['product']    = $product;
-        $viewData['categories'] = ['Alimento', 'Juguetes', 'Medicina', 'Accesorios'];
+        $viewData['categories'] = array_map(fn($c) => $c->value, Category::cases());
 
         return view('admin.product.edit')->with('viewData', $viewData);
     }
