@@ -77,3 +77,12 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::put('/products/{id}', $adminProductController . '@update')->name('admin.product.update');
     Route::delete('/products/{id}', $adminProductController . '@destroy')->name('admin.product.destroy');
 });
+
+// Admin Order Management Routes
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    $adminOrderController = 'App\\Http\\Controllers\\Admin\\AdminOrderController';
+
+    Route::get('/orders', $adminOrderController . '@index')->name('admin.order.index');
+    Route::get('/orders/{id}', $adminOrderController . '@show')->name('admin.order.show');
+    Route::put('/orders/{id}/status', $adminOrderController . '@updateStatus')->name('admin.order.updateStatus');
+});
