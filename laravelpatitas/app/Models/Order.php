@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use DateTime;
 
 class Order extends Model
 {
@@ -68,12 +69,12 @@ class Order extends Model
         $this->attributes['total'] = $total;
     }
 
-    public function getOrderDate(): \DateTime
+    public function getOrderDate(): DateTime
     {
         return $this->attributes['orderDate'];
     }
 
-    public function setOrderDate(\DateTime $orderDate): void
+    public function setOrderDate(DateTime $orderDate): void
     {
         $this->attributes['orderDate'] = $orderDate;
     }
