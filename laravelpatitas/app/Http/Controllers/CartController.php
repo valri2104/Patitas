@@ -75,10 +75,7 @@ class CartController extends Controller
 
     public function add(Request $request): RedirectResponse
     {
-        $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-            'quantity'   => 'required|integer|min:1',
-        ]);
+        $request->validated();
         CartManager::addProduct($request->input('product_id'), $request->input('quantity'));
 
         return Redirect::route('cart.index');
