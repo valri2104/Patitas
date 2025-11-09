@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use app\Enums\Category;
+use App\Http\Requests\AdminProductRequest;
 
 class AdminProductController extends Controller
 {
@@ -36,17 +37,9 @@ class AdminProductController extends Controller
         return view('admin.product.create')->with('viewData', $viewData);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(AdminProductRequest $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'name'         => 'required|string|max:255|unique:products,name',
-            'description'  => 'required|string',
-            'price'        => 'required|numeric|min:0',
-            'stock'        => 'required|integer|min:0',
-            'category'     => 'required|in:Alimento,Juguetes,Medicina,Accesorios',
-            'customizable' => 'boolean',
-            'imageUrl'     => 'nullable|string',
-        ]);
+        $validatedData = $request->validated();
 
         $validatedData['customizable'] = $validatedData['customizable'] ?? false;
 
@@ -92,19 +85,11 @@ class AdminProductController extends Controller
         return view('admin.product.edit')->with('viewData', $viewData);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(AdminProductRequest $request, int $id): RedirectResponse
     {
         $product = Product::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'name'         => 'required|string|max:255|unique:products,name,' . $id,
-            'description'  => 'required|string',
-            'price'        => 'required|numeric|min:0',
-            'stock'        => 'required|integer|min:0',
-            'category'     => 'required|in:Alimento,Juguetes,Medicina,Accesorios',
-            'customizable' => 'boolean',
-            'imageUrl'     => 'nullable|string',
-        ]);
+        $validatedData = $request->validated();
 
         $validatedData['customizable'] = $validatedData['customizable'] ?? false;
 
