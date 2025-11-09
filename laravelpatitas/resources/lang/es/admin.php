@@ -93,6 +93,57 @@ return [
         ],
     ],
 
+    'orders' => [
+        'index' => [
+            'title'         => 'Gestión de Pedidos',
+            'subtitle'      => 'Administra todos los pedidos registrados en el sistema',
+            'filter_status' => 'Filtrar por estado',
+            'all_statuses'  => 'Todos los estados',
+            'order_id'      => 'Pedido',
+            'customer'      => 'Cliente',
+            'date'          => 'Fecha',
+            'status'        => 'Estado',
+            'total'         => 'Total',
+            'actions'       => 'Acciones',
+            'no_orders'     => 'No hay pedidos registrados.',
+        ],
+        'show' => [
+            'title'         => 'Pedido #:id',
+            'subtitle'      => 'Detalle completo del pedido seleccionado',
+            'order_details' => 'Detalles del pedido',
+            'customer'      => 'Cliente',
+            'email'         => 'Correo electrónico',
+            'status'        => 'Estado',
+            'placed_on'     => 'Realizado el :date',
+            'delivery'      => 'Dirección de entrega',
+            'notes'         => 'Notas del pedido',
+            'items'         => 'Productos del pedido',
+            'product'       => 'Producto',
+            'quantity'      => 'Cantidad',
+            'unit_price'    => 'Precio unitario',
+            'subtotal'      => 'Subtotal',
+            'total'         => 'Total del pedido',
+        ],
+        'statuses' => [
+            'pending'   => 'Pendiente',
+            'confirmed' => 'Confirmado',
+            'shipped'   => 'Enviado',
+            'delivered' => 'Entregado',
+            'cancelled' => 'Cancelado',
+        ],
+        'messages' => [
+            'status_updated' => 'El estado del pedido se actualizó correctamente.',
+        ],
+        'actions' => [
+            'view'          => 'Ver Detalles',
+            'update_status' => 'Actualizar estado',
+        ],
+        'filters' => [
+            'apply' => 'Aplicar filtro',
+            'clear' => 'Limpiar filtro',
+        ],
+    ],
+
     'navigation' => [
         'dashboard' => 'Panel de Control',
         'products'  => 'Productos',
@@ -228,15 +279,15 @@ return [
      */
     'admin' => [
         'index' => [
-            'title' => 'Panel de administración',
+            'title'           => 'Panel de administración',
             'welcome_message' => 'Welcome to the application',
         ],
     ],
 
     'layouts' => [
-            'title' => 'Admin - Patitas',
-            'subtitle' => 'Patitas Admin',
-            'footer' => 'Patitas Admin Panel copy ©',
+        'title'    => 'Admin - Patitas',
+        'subtitle' => 'Patitas Admin',
+        'footer'   => 'Patitas Admin Panel copy ©',
     ],
 
 ];
