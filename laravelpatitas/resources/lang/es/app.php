@@ -29,8 +29,8 @@ return [
             'all_categories'     => 'Todas las categorías',
             'showing_category'   => 'Mostrando productos de: :category',
             'products_found'     => ':count producto encontrado|:count productos encontrados',
-            'top3' => 'Nuestros 3 mejores productos',
-            'more_affordable' => 'Nuestros productos más accesibles',
+            'top3'               => 'Nuestros 3 mejores productos',
+            'more_affordable'    => 'Nuestros productos más accesibles',
         ],
         'show' => [
             'title'           => 'Detalles del Producto',
@@ -62,6 +62,22 @@ return [
         ],
     ],
 
+    'orders' => [
+        'history' => [
+            'title' => 'Historial de pedidos',
+            'empty' => 'Aún no tienes pedidos registrados.',
+        ],
+        'show' => [
+            'title'            => 'Pedido #:id',
+            'summary'          => 'Resumen del pedido',
+            'items'            => 'Productos del pedido',
+            'totals'           => 'Totales',
+            'status'           => 'Estado',
+            'placed_on'        => 'Realizado el :date',
+            'delivery_address' => 'Dirección de entrega',
+        ],
+    ],
+
     'navigation' => [
         'home'     => 'Inicio',
         'products' => 'Productos',
@@ -87,7 +103,7 @@ return [
 
     'layouts' => [
         'app' => [
-            'title' => 'Patitas',
+            'title'    => 'Patitas',
             'subtitle' => 'Patitas',
         ],
     ],
