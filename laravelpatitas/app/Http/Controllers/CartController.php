@@ -10,6 +10,7 @@ use App\Utils\CartManager;
 use App\Http\Requests\Cart\UpdateQuantityRequest;
 use App\Http\Requests\Cart\AddRequest;
 use App\Http\Requests\Cart\RemoveRequest;
+use App\Http\Requests\Cart\PurchaseRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -89,7 +90,7 @@ class CartController extends Controller
         return Redirect::route('cart.index');
     }
 
-    public function purchase(Request $request): RedirectResponse
+    public function purchase(PurchaseRequest $request): RedirectResponse
     {
         // Validate user authentication
         if (! Auth::check()) {
@@ -104,9 +105,7 @@ class CartController extends Controller
         }
 
         // Validate delivery address
-        $request->validate([
-            'delivery_address' => 'required|string|min:10|max:500',
-        ]);
+        $request->validated();
 
         // Validate stock availability before processing
         foreach ($cartProducts as $cartProduct) {
