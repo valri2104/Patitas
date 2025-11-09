@@ -85,17 +85,7 @@ return [
         'currency'      => 'COP',
     ],
 
-    'admin' => [
-        'mesage'
-    ],
-
     'layouts' => [
-        'admin' => [
-            'title' => 'Admin - Patitas',
-            'subtitle' => 'Patitas Admin',
-            'panel' => 'Panel Administrativo',
-            'footer' => 'Patitas Admin Panel copy ©',
-        ],
         'app' => [
             'title' => 'Patitas',
             'subtitle' => 'Patitas',
