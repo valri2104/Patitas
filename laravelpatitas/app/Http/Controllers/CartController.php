@@ -7,10 +7,11 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use App\Utils\CartManager;
+use App\Http\Requests\Cart\UpdateQuantityRequest;
+use App\Http\Requests\Cart\AddRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\Cart\UpdateQuantityRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -71,12 +72,9 @@ class CartController extends Controller
         return Redirect::route('cart.index');
     }
 
-    public function add(Request $request): RedirectResponse
+    public function add(AddRequest $request): RedirectResponse
     {
-        $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-            'quantity'   => 'required|integer|min:1',
-        ]);
+        $request->validated();
         CartManager::addProduct($request->input('product_id'), $request->input('quantity'));
 
         return Redirect::route('cart.index');
