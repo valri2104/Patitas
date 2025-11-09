@@ -9,6 +9,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\Category;
 
 class Product extends Model
 {
@@ -40,6 +41,7 @@ class Product extends Model
     protected $casts = [
         'customizable' => 'boolean',
         'price'        => 'decimal:2',
+        'category' => Category::class,
     ];
 
     public function getId(): int

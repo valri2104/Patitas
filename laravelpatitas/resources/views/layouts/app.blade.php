@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
-    <title>@yield('title', 'Patitas')</title>
+    <title>@yield('title', __('app.layouts.app.title'))</title>
 
 </head>
 
@@ -19,7 +19,7 @@
             <a class="navbar-brand" href="{{ route('home.index') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="logo" width="55" height="55"
                     class="d-inline-block align-text-center">
-                <span class="fs-1">Patitas</span>
+                <span class="fs-1">{{ __('app.layouts.app.subtitle') }}</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,8 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active" href="{{ route('product.index') }}">{{ __('app.navigation.products') }}</a>
+                    <a class="nav-link active"
+                        href="{{ route('product.index') }}">{{ __('app.navigation.products') }}</a>
                     <a class="nav-link active" href="{{ route('cart.index') }}">{{ __('app.navigation.cart') }}</a>
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
