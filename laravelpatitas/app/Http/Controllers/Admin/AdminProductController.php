@@ -11,7 +11,7 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use app\Enums\Category;
+use App\Enums\Category;
 use App\Http\Requests\AdminProductRequest;
 
 class AdminProductController extends Controller

@@ -7,6 +7,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use App\Utils\CartManager;
+use App\Http\Requests\Cart\UpdateQuantityRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -62,7 +63,7 @@ class CartController extends Controller
         return view('cart.index')->with('viewData', $viewData);
     }
 
-    public function updateQuantity(Request $request): RedirectResponse
+    public function updateQuantity(UpdateQuantityRequest $request): RedirectResponse
     {
         $request->validate([
             'product_id' => 'required|integer|exists:products,id',
