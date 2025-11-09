@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Exception;
 
 class CartController extends Controller
 {
@@ -171,7 +172,7 @@ class CartController extends Controller
                 ->with('success', __('cart.messages.purchase_successful'))
                 ->with('orderId', $order->getId());
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
 
             return Redirect::route('cart.index')
