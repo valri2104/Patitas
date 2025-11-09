@@ -85,6 +85,10 @@ return [
         'currency'      => 'COP',
     ],
 
+    'admin' => [
+        'mesage'
+    ],
+
     'layouts' => [
         'admin' => [
             'title' => 'Admin - Patitas',

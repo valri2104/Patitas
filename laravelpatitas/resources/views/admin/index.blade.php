@@ -3,6 +3,6 @@
 @section('content')
 
     <div class="text-center">
-        Welcome to the application
+        {{ __('admin.admin.index.welcome_message') }}
     </div>
 @endsection

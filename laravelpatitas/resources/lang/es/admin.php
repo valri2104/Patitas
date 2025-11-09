@@ -229,7 +229,14 @@ return [
     'admin' => [
         'index' => [
             'title' => 'Panel de administración',
+            'welcome_message' => 'Welcome to the application',
         ],
     ],
+
+    'layouts' => [
+            'title' => 'Admin - Patitas',
+            'subtitle' => 'Patitas Admin',
+            'footer' => 'Patitas Admin Panel copy ©',
+        ],
 
 ];
