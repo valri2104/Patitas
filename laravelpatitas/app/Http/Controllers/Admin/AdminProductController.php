@@ -11,6 +11,8 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Enums\Category;
+use App\Http\Requests\AdminProductRequest;
 
 class AdminProductController extends Controller
 {
@@ -20,7 +22,6 @@ class AdminProductController extends Controller
         $viewData['title']    = __('admin.products.index.title');
         $viewData['subtitle'] = __('admin.products.index.subtitle');
 
-        // Get all products (including out of stock for admin view)
         $viewData['products'] = Product::orderBy('name', 'asc')->get();
 
         return view('admin.product.index')->with('viewData', $viewData);
@@ -36,19 +37,10 @@ class AdminProductController extends Controller
         return view('admin.product.create')->with('viewData', $viewData);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(AdminProductRequest $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'name'         => 'required|string|max:255|unique:products,name',
-            'description'  => 'required|string',
-            'price'        => 'required|numeric|min:0',
-            'stock'        => 'required|integer|min:0',
-            'category'     => 'required|in:Alimento,Juguetes,Medicina,Accesorios',
-            'customizable' => 'boolean',
-            'imageUrl'     => 'nullable|string',
-        ]);
+        $validatedData = $request->validated();
 
-        // Set default value for customizable if not provided
         $validatedData['customizable'] = $validatedData['customizable'] ?? false;
 
         $product = new Product;
@@ -88,26 +80,17 @@ class AdminProductController extends Controller
         $viewData['title']      = __('admin.products.edit.title', ['name' => $product->getName()]);
         $viewData['subtitle']   = __('admin.products.edit.subtitle');
         $viewData['product']    = $product;
-        $viewData['categories'] = ['Alimento', 'Juguetes', 'Medicina', 'Accesorios'];
+        $viewData['categories'] = array_map(fn($c) => $c->value, Category::cases());
 
         return view('admin.product.edit')->with('viewData', $viewData);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(AdminProductRequest $request, int $id): RedirectResponse
     {
         $product = Product::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'name'         => 'required|string|max:255|unique:products,name,' . $id,
-            'description'  => 'required|string',
-            'price'        => 'required|numeric|min:0',
-            'stock'        => 'required|integer|min:0',
-            'category'     => 'required|in:Alimento,Juguetes,Medicina,Accesorios',
-            'customizable' => 'boolean',
-            'imageUrl'     => 'nullable|string',
-        ]);
+        $validatedData = $request->validated();
 
-        // Set default value for customizable if not provided
         $validatedData['customizable'] = $validatedData['customizable'] ?? false;
 
         $product->setName($validatedData['name']);

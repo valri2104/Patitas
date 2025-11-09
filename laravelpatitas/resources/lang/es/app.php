@@ -29,6 +29,8 @@ return [
             'all_categories'     => 'Todas las categorías',
             'showing_category'   => 'Mostrando productos de: :category',
             'products_found'     => ':count producto encontrado|:count productos encontrados',
+            'top3' => 'Nuestros 3 mejores productos',
+            'more_affordable' => 'Nuestros productos más accesibles',
         ],
         'show' => [
             'title'           => 'Detalles del Producto',
@@ -83,4 +85,10 @@ return [
         'currency'      => 'COP',
     ],
 
+    'layouts' => [
+        'app' => [
+            'title' => 'Patitas',
+            'subtitle' => 'Patitas',
+        ],
+    ],
 ];

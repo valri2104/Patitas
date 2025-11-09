@@ -7,12 +7,17 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use App\Utils\CartManager;
+use App\Http\Requests\Cart\UpdateQuantityRequest;
+use App\Http\Requests\Cart\AddRequest;
+use App\Http\Requests\Cart\RemoveRequest;
+use App\Http\Requests\Cart\PurchaseRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Exception;
 
 class CartController extends Controller
 {
@@ -61,39 +66,31 @@ class CartController extends Controller
         return view('cart.index')->with('viewData', $viewData);
     }
 
-    public function updateQuantity(Request $request): RedirectResponse
+    public function updateQuantity(UpdateQuantityRequest $request): RedirectResponse
     {
-        $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-            'quantity'   => 'required|integer|min:1',
-        ]);
+        $request->validated();
         CartManager::updateQuantity($request->input('product_id'), $request->input('quantity'));
 
         return Redirect::route('cart.index');
     }
 
-    public function add(Request $request): RedirectResponse
+    public function add(AddRequest $request): RedirectResponse
     {
-        $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-            'quantity'   => 'required|integer|min:1',
-        ]);
+        $request->validated();
         CartManager::addProduct($request->input('product_id'), $request->input('quantity'));
 
         return Redirect::route('cart.index');
     }
 
-    public function remove(Request $request): RedirectResponse
+    public function remove(RemoveRequest $request): RedirectResponse
     {
-        $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-        ]);
+        $request->validated();
         CartManager::removeProduct($request->input('product_id'));
 
         return Redirect::route('cart.index');
     }
 
-    public function purchase(Request $request): RedirectResponse
+    public function purchase(PurchaseRequest $request): RedirectResponse
     {
         // Validate user authentication
         if (! Auth::check()) {
@@ -108,9 +105,7 @@ class CartController extends Controller
         }
 
         // Validate delivery address
-        $request->validate([
-            'delivery_address' => 'required|string|min:10|max:500',
-        ]);
+        $request->validated();
 
         // Validate stock availability before processing
         foreach ($cartProducts as $cartProduct) {
@@ -171,7 +166,7 @@ class CartController extends Controller
                 ->with('success', __('cart.messages.purchase_successful'))
                 ->with('orderId', $order->getId());
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
 
             return Redirect::route('cart.index')

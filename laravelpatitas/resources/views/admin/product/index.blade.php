@@ -89,7 +89,6 @@
                                                             <i class="fas fa-edit"></i>
                                                         </a>
 
-                                                        <!-- Delete Button -->
                                                         <form
                                                             action="{{ route('admin.product.destroy', $product->getId()) }}"
                                                             method="POST" class="d-inline delete-form">

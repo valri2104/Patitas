@@ -9,7 +9,7 @@
         crossorigin="anonymous" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
-    <title>@yield('title', 'Admin - Patitas')</title>
+    <title>@yield('title', __('admin.layouts.title'))</title>
 
 </head>
 
@@ -20,7 +20,7 @@
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/logo.png') }}" alt="logo" width="55" height="55"
                     class="d-inline-block align-text-center">
-                <span class="fs-1">Patitas Admin</span>
+                <span class="fs-1">{{ __('admin.layouts.subtitle') }}</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
 
     <header class="bg-primary text-white py-3">
         <div class="container">
-            <h1 class="mb-0">@yield('title', 'Panel Administrativo')</h1>
+            <h1 class="mb-0">@yield('title', __('admin.index.title'))</h1>
             @hasSection('subtitle')
                 <p class="mb-0 mt-1">@yield('subtitle')</p>
             @endif
@@ -64,7 +64,7 @@
     <footer class="bg-dark text-white py-3 mt-auto">
         <div class="container text-center">
             <small>
-                Patitas Admin Panel &copy; {{ date('Y') }}
+                {{ __('admin.layouts.footer') }} {{ date('Y') }}
             </small>
         </div>
     </footer>
