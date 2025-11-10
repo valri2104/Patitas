@@ -29,11 +29,10 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto align-items-lg-center">
-                    <a class="nav-link active" href="{{ route('order.index') }}">{{ __('app.navigation.order') }}</a>
                     <a class="nav-link active"
                         href="{{ route('product.index') }}">{{ __('app.navigation.products') }}</a>
                     <a class="nav-link active" href="{{ route('cart.index') }}">{{ __('app.navigation.cart') }}</a>
-                    
+
                     @auth
                         <a class="nav-link active" href="{{ route('appointment.index') }}">
                             <i class="fas fa-calendar-check me-1"></i>{{ __('app.navigation.appointments') }}
