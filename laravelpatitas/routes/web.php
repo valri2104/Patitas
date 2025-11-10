@@ -127,7 +127,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
 
 // Admin Review Management Routes
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
-    $adminReviewController = 'App\\Http\\Controllers\\Admin\\ReviewController';
+    $adminReviewController = 'App\\Http\\Controllers\\Admin\\AdminReviewController';
 
     Route::get('/reviews', $adminReviewController . '@index')->name('admin.review.index');
     Route::delete('/reviews/{id}', $adminReviewController . '@destroy')->name('admin.review.destroy');
