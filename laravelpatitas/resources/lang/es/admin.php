@@ -163,6 +163,8 @@ return [
             'placeholder'  => 'Buscar por nombre o correo',
             'all_ratings'  => 'Todas las calificaciones',
             'all_products' => 'Todos los productos',
+            'all'          => 'Todas',
+            'stars'        => ':rating★',
         ],
         'table' => [
             'author'      => 'Usuario',
@@ -176,7 +178,8 @@ return [
             'deleted' => 'Reseña eliminada correctamente.',
         ],
         'actions' => [
-            'delete' => 'Eliminar reseña',
+            'delete'         => 'Eliminar reseña',
+            'confirm_delete' => '¿Estás seguro de que deseas eliminar esta reseña?',
         ],
     ],
 
