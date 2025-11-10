@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Cart\AddRequest;
+use App\Http\Requests\Cart\PurchaseRequest;
+use App\Http\Requests\Cart\RemoveRequest;
+use App\Http\Requests\Cart\UpdateQuantityRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
 use App\Utils\CartManager;
-use App\Http\Requests\Cart\UpdateQuantityRequest;
-use App\Http\Requests\Cart\AddRequest;
-use App\Http\Requests\Cart\RemoveRequest;
-use App\Http\Requests\Cart\PurchaseRequest;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Exception;
 
 class CartController extends Controller
 {
@@ -90,22 +90,18 @@ class CartController extends Controller
 
     public function purchase(PurchaseRequest $request): RedirectResponse
     {
-        // Validate user authentication
         if (! Auth::check()) {
             return Redirect::route('login')->with('error', __('cart.messages.login_required'));
         }
 
         $cartProducts = CartManager::getCartProducts();
 
-        // Validate cart is not empty
         if (empty($cartProducts)) {
             return Redirect::route('cart.index')->with('error', __('cart.messages.empty_cart'));
         }
 
-        // Validate delivery address
-        $request->validated();
+        $validatedData = $request->validated();
 
-        // Validate stock availability before processing
         foreach ($cartProducts as $cartProduct) {
             $product  = $cartProduct['product'];
             $quantity = $cartProduct['quantity'];
@@ -119,23 +115,18 @@ class CartController extends Controller
         try {
             DB::beginTransaction();
 
-            // Create the order
             $order = new Order;
             $order->setUserId(Auth::id());
             $order->setOrderDate(now());
             $order->setStatus('pending');
-            $order->setTotal(0); // Will be calculated after adding items
-            $order->setDeliveryAddress($request->input('delivery_address'));
+            $order->setTotal(0);
+            $order->setDeliveryAddress($validatedData['delivery_address']);
             $order->save();
 
-            $totalAmount = 0;
-
-            // Create order items and update stock
             foreach ($cartProducts as $cartProduct) {
                 $product  = $cartProduct['product'];
                 $quantity = $cartProduct['quantity'];
 
-                // Create order item
                 $orderItem = new OrderItem;
                 $orderItem->setOrderId($order->getId());
                 $orderItem->setProductId($product->getId());
@@ -143,27 +134,19 @@ class CartController extends Controller
                 $orderItem->setUnitPrice($product->getPrice());
                 $orderItem->save();
 
-                // Update product stock
                 $product->decreaseStock($quantity);
                 $product->save();
-
-                // Add to total
-                $totalAmount += $orderItem->calculateSubtotal();
             }
 
-            // Update order total
-            $order->setTotal($totalAmount);
+            $order->setTotal($order->calculateTotal());
             $order->save();
 
-            // Clear cart only if everything was successful
             CartManager::clearCart();
 
             DB::commit();
 
-            return Redirect::route('cart.purchase')
-                ->with('success', __('cart.messages.purchase_successful'))
-                ->with('orderId', $order->getId());
-
+            return Redirect::route('order.show', $order->getId())
+                ->with('success', __('cart.messages.purchase_successful'));
         } catch (Exception $e) {
             DB::rollBack();
 

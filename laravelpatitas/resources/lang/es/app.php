@@ -14,10 +14,17 @@ return [
     |
     */
 
+    'layouts' => [
+        'app' => [
+            'title'    => 'Patitas - Cuidado y productos para tus mascotas',
+            'subtitle' => 'Patitas',
+        ],
+    ],
+
     'home' => [
-        'title'            => 'Patitas - Tienda de Mascotas',
-        'welcome_message'  => 'Bienvenido a Patitas, tu tienda de confianza para productos de mascotas',
-        'explore_products' => 'Explorar Productos',
+        'title'            => 'Bienvenido a Patitas',
+        'welcome_message'  => 'Los mejores productos y servicios para tus mascotas en un solo lugar.',
+        'explore_products' => 'Explorar productos',
     ],
 
     'products' => [
@@ -29,8 +36,8 @@ return [
             'all_categories'     => 'Todas las categorías',
             'showing_category'   => 'Mostrando productos de: :category',
             'products_found'     => ':count producto encontrado|:count productos encontrados',
-            'top3' => 'Nuestros 3 mejores productos',
-            'more_affordable' => 'Nuestros productos más accesibles',
+            'top3'               => 'Top 3 productos más populares',
+            'more_affordable'    => 'Productos más económicos',
         ],
         'show' => [
             'title'           => 'Detalles del Producto',
@@ -85,10 +92,4 @@ return [
         'currency'      => 'COP',
     ],
 
-    'layouts' => [
-        'app' => [
-            'title' => 'Patitas',
-            'subtitle' => 'Patitas',
-        ],
-    ],
 ];
