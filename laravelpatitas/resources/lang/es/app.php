@@ -57,6 +57,7 @@ return [
             'availability'    => 'Disponibilidad',
             'shipping'        => 'Envío',
             'free_shipping'   => 'Envío gratuito',
+            'reviews_count'   => ':count reseña|:count reseñas',
         ],
         'categories' => [
             'Alimento'   => 'Alimento',
@@ -65,24 +66,25 @@ return [
             'Accesorios' => 'Accesorios',
         ],
         'actions' => [
-            'add_to_cart' => 'Agregar al carrito',
+            'add_to_cart'     => 'Agregar al carrito',
+            'add_review'      => 'Agregar reseña',
+            'delete_review'   => 'Eliminar reseña',
+            'confirm_delete'  => '¿Estás seguro de que deseas eliminar esta reseña?',
+            'login_to_review' => 'Inicia sesión para dejar una reseña',
+            'first_review'    => 'Sé el primero en opinar sobre este producto',
         ],
     ],
 
     'navigation' => [
-      
-        'home'         => 'Inicio',
-        'products'     => 'Productos',
-        'about'        => 'Acerca de',
-        'contact'      => 'Contacto',
-        'login'        => 'Iniciar Sesión',
-        'register'     => 'Registrarse',
-        'logout'       => 'Cerrar Sesión',
-        'cart'         => 'Carrito',
-        'balance'      => 'Saldo',
-        'appointments' => 'Mis Citas',
-        'orders'       => 'Mis Pedidos',
-
+        'home'     => 'Inicio',
+        'products' => 'Productos',
+        'about'    => 'Acerca de',
+        'contact'  => 'Contacto',
+        'login'    => 'Iniciar Sesión',
+        'register' => 'Registrarse',
+        'logout'   => 'Cerrar Sesión',
+        'cart'     => 'Carrito',
+        'balance'  => 'Saldo',
     ],
 
     'common' => [
@@ -95,6 +97,7 @@ return [
         'error'         => 'Error',
         'success'       => 'Éxito',
         'currency'      => 'COP',
+        'select'        => 'Seleccione',
     ],
 
 ];

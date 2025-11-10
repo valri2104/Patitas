@@ -7,8 +7,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Category;
+use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -59,11 +62,39 @@ class ProductController extends Controller
 
     public function show(int $id): View
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with(['reviews.user'])->findOrFail($id);
 
-        $viewData            = [];
-        $viewData['title']   = $product->getName();
-        $viewData['product'] = $product;
+        $reviews = $product->reviews()
+            ->with('user')
+            ->orderByDesc('created_at')
+            ->get();
+
+        $averageRating = $reviews->avg('qualification');
+
+        $user         = Auth::user();
+        $userReview   = null;
+        $canReview    = false;
+        $hasPurchased = false;
+
+        if ($user) {
+            $userReview = $reviews->firstWhere(fn (Review $review) => $review->getUserId() === $user->getId());
+
+            $hasPurchased = OrderItem::whereHas('order', function ($query) use ($user) {
+                $query->where('user_id', $user->getId());
+            })->where('product_id', $product->getId())->exists();
+
+            $canReview = $hasPurchased && $userReview === null;
+        }
+
+        $viewData                  = [];
+        $viewData['title']         = $product->getName();
+        $viewData['product']       = $product;
+        $viewData['reviews']       = $reviews;
+        $viewData['reviewsCount']  = $reviews->count();
+        $viewData['averageRating'] = $averageRating ? number_format($averageRating, 1) : null;
+        $viewData['userReview']    = $userReview;
+        $viewData['canReview']     = $canReview;
+        $viewData['hasPurchased']  = $hasPurchased;
 
         return view('product.show')->with('viewData', $viewData);
     }

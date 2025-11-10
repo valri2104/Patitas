@@ -30,6 +30,15 @@ Route::middleware(['auth'])->group(function () use ($orderController) {
     Route::get('/orders/{id}', $orderController . '@show')->name('order.show');
 });
 
+// ============================================================================
+// REVIEW ROUTES (Requires authentication)
+// ============================================================================
+$reviewController = 'App\\Http\\Controllers\\ReviewController';
+Route::middleware(['auth'])->group(function () use ($reviewController) {
+    Route::post('/reviews', $reviewController . '@store')->name('review.store');
+    Route::delete('/reviews/{id}', $reviewController . '@destroy')->name('review.destroy');
+});
+
 // User register routes
 $registerController = 'App\\Http\\Controllers\\Auth\\RegisterController';
 Route::get('/register', $registerController . '@showRegistrationForm')->name('register');
