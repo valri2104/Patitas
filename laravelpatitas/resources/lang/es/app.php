@@ -18,7 +18,7 @@ return [
         'app' => [
             'title'    => 'Patitas - Cuidado y productos para tus mascotas',
             'subtitle' => 'Patitas',
-            'footer'   => 'Patitas copy ©'
+            'footer'   => 'Patitas copy ©',
         ],
     ],
 
@@ -98,15 +98,18 @@ return [
     ],
 
     'navigation' => [
-        'home'     => 'Inicio',
-        'products' => 'Productos',
-        'about'    => 'Acerca de',
-        'contact'  => 'Contacto',
-        'login'    => 'Iniciar Sesión',
-        'register' => 'Registrarse',
-        'logout'   => 'Cerrar Sesión',
-        'cart'     => 'Carrito',
-        'balance'  => 'Saldo',
+        'home'         => 'Inicio',
+        'products'     => 'Productos',
+        'about'        => 'Acerca de',
+        'contact'      => 'Contacto',
+        'login'        => 'Iniciar Sesión',
+        'register'     => 'Registrarse',
+        'logout'       => 'Cerrar Sesión',
+        'cart'         => 'Carrito',
+        'order'        => 'Mis pedidos',
+        'orders'       => 'Mis pedidos',
+        'appointments' => 'Citas veterinarias',
+        'balance'      => 'Saldo',
     ],
 
     'common' => [
