@@ -110,6 +110,9 @@ return [
         'orders'       => 'Mis pedidos',
         'appointments' => 'Citas veterinarias',
         'balance'      => 'Saldo',
+        'language'     => 'Idioma',
+        'language_es'  => 'Español',
+        'language_en'  => 'Inglés',
     ],
 
     'common' => [
