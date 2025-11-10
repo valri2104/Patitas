@@ -35,7 +35,7 @@
                         <select class="form-select @error('category') is-invalid @enderror" id="category" name="category" required>
                             <option value="" disabled>{{ __('admin.products.form.category_placeholder') }}</option>
                             @foreach($viewData['categories'] as $category)
-                                <option value="{{ $category }}" {{ old('category', $viewData['product']->getCategory()) == $category ? 'selected' : '' }}>{{ __('admin.products.categories.' . $category) }}</option>
+                                <option value="{{ $category->value }}" {{ old('category', $viewData['product']->getCategory()) == $category->value ? 'selected' : '' }}>{{ __('admin.products.categories.' . $category->value) }}</option>
                             @endforeach
                         </select>
                         @error('category')<div class="invalid-feedback">{{ $message }}</div>@enderror

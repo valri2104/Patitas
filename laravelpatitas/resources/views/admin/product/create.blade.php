@@ -42,9 +42,9 @@
                                 <option value="" disabled selected>
                                     {{ __('admin.products.form.category_placeholder') }}</option>
                                 @foreach ($viewData['categories'] as $category)
-                                    <option value="{{ $category }}"
-                                        {{ old('category') == $category ? 'selected' : '' }}>
-                                        {{ __('admin.products.categories.' . $category) }}</option>
+                                    <option value="{{ $category->value }}"
+                                        {{ old('category') == $category->value ? 'selected' : '' }}>
+                                        {{ __('admin.products.categories.' . $category->value) }}</option>
                                 @endforeach
                             </select>
                             @error('category')
