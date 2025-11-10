@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Enums\Role;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -24,7 +25,9 @@ class AdminUserController extends Controller
         $viewData = [];
         $viewData['title'] = __('admin.users.create.title');
         $viewData['subtitle'] = __('admin.users.create.subtitle');
-        $viewData['']
+        $viewData['role'] = array_map(fn($c) => $c->value, Role::cases());
+
+        return view('admin.user.create')->with('viewData', $viewData);
     }
 
     public function store(Request $request)
