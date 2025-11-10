@@ -15,39 +15,29 @@
 
                             <div class="d-flex flex-wrap gap-2">
 
-                                <a href="{{ route('admin.order.index') }}"
-                                    class="btn {{ empty($selectedStatus) ? 'btn-dark' : 'btn-outline-dark' }} btn-sm">
+                                <a href="{{ route('admin.order.index') }}" @class([
+                                    'btn btn-sm',
+                                    'btn-dark' => empty($selectedStatus),
+                                    'btn-outline-dark' => !empty($selectedStatus),
+                                ])>
                                     {{ __('admin.orders.index.all_statuses') }}
                                 </a>
 
                                 @foreach ($statuses as $status)
-                                    @switch($status)
-                                        @case('pending')
-                                            @php($class = 'btn-warning text-dark')
-                                        @break
-
-                                        @case('confirmed')
-                                            @php($class = 'btn-primary')
-                                        @break
-
-                                        @case('shipped')
-                                            @php($class = 'btn-secondary')
-                                        @break
-
-                                        @case('delivered')
-                                            @php($class = 'btn-success')
-                                        @break
-
-                                        @case('cancelled')
-                                            @php($class = 'btn-danger')
-                                        @break
-
-                                        @default
-                                            @php($class = 'btn-outline-secondary')
-                                    @endswitch
-
                                     <a href="{{ route('admin.order.index', ['status' => $status]) }}"
-                                        class="btn {{ $selectedStatus === $status ? $class : 'btn-outline-secondary' }} btn-sm">
+                                        @class([
+                                            'btn btn-sm',
+                                            $selectedStatus === $status
+                                                ? match ($status) {
+                                                    'pending' => 'btn-warning text-dark',
+                                                    'confirmed' => 'btn-primary',
+                                                    'shipped' => 'btn-secondary',
+                                                    'delivered' => 'btn-success',
+                                                    'cancelled' => 'btn-danger',
+                                                    default => 'btn-outline-secondary',
+                                                }
+                                                : 'btn-outline-secondary',
+                                        ])>
                                         {{ __('admin.orders.statuses.' . $status) }}
                                     </a>
                                 @endforeach
@@ -78,46 +68,27 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($orders as $order)
-                                            @php($status = $order->getStatus())
-
                                             <tr>
                                                 <td class="fw-semibold">#{{ $order->getId() }}</td>
-                                                <td>{{ optional($order->getUser())->getName() ?? __('admin.orders.index.unknown_customer') }}
+
+                                                <td>
+                                                    {{ optional($order->getUser())->getName() ?? __('admin.orders.index.unknown_customer') }}
                                                 </td>
+
                                                 <td>{{ $order->getOrderDate()->format('d/m/Y H:i') }}</td>
 
                                                 <td>
-                                                    @switch($status)
-                                                        @case('pending')
-                                                            <span
-                                                                class="badge bg-warning text-dark">{{ __('admin.orders.statuses.pending') }}</span>
-                                                        @break
-
-                                                        @case('confirmed')
-                                                            <span
-                                                                class="badge bg-primary">{{ __('admin.orders.statuses.confirmed') }}</span>
-                                                        @break
-
-                                                        @case('shipped')
-                                                            <span class="badge text-white" style="background-color:#6f42c1;">
-                                                                {{ __('admin.orders.statuses.shipped') }}
-                                                            </span>
-                                                        @break
-
-                                                        @case('delivered')
-                                                            <span
-                                                                class="badge bg-success">{{ __('admin.orders.statuses.delivered') }}</span>
-                                                        @break
-
-                                                        @case('cancelled')
-                                                            <span
-                                                                class="badge bg-danger">{{ __('admin.orders.statuses.cancelled') }}</span>
-                                                        @break
-
-                                                        @default
-                                                            <span
-                                                                class="badge bg-secondary">{{ __('admin.orders.statuses.unknown') }}</span>
-                                                    @endswitch
+                                                    <span
+                                                        class="badge
+                                                            @if ($order->getStatus() === 'pending') bg-warning text-dark
+                                                            @elseif ($order->getStatus() === 'confirmed') bg-primary
+                                                            @elseif ($order->getStatus() === 'shipped') text-white
+                                                            @elseif ($order->getStatus() === 'delivered') bg-success
+                                                            @elseif ($order->getStatus() === 'cancelled') bg-danger
+                                                            @else bg-secondary @endif"
+                                                        @if ($order->getStatus() === 'shipped') style="background-color:#6f42c1;" @endif>
+                                                        {{ __('admin.orders.statuses.' . ($order->getStatus() ?? 'unknown')) }}
+                                                    </span>
                                                 </td>
 
                                                 <td class="fw-bold">
@@ -128,7 +99,6 @@
                                                 <td class="text-center">
                                                     <div
                                                         class="d-flex flex-column flex-lg-row justify-content-center align-items-stretch gap-2">
-
                                                         <a href="{{ route('admin.order.show', $order->getId()) }}"
                                                             class="btn btn-sm btn-outline-primary w-100">
                                                             <i class="fas fa-eye me-1"></i>
@@ -144,7 +114,7 @@
                                                             <select name="status" class="form-select form-select-sm">
                                                                 @foreach ($statuses as $statusOption)
                                                                     <option value="{{ $statusOption }}"
-                                                                        @selected($statusOption === $status)>
+                                                                        @selected($statusOption === $order->getStatus())>
                                                                         {{ __('admin.orders.statuses.' . $statusOption) }}
                                                                     </option>
                                                                 @endforeach
@@ -164,7 +134,6 @@
                         @endif
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
