@@ -86,12 +86,12 @@ class Review extends Model
 
     public function getCreatedAt(): Carbon
     {
-        return $this->attributes['created_at'];
+        return Carbon::parse($this->attributes['created_at']);
     }
 
     public function getUpdatedAt(): Carbon
     {
-        return $this->attributes['updated_at'];
+        return Carbon::parse($this->attributes['updated_at']);
     }
 
     public function user(): BelongsTo
