@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AdminUserRequest;
 use App\Models\User;
 use App\Enums\Role;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class AdminUserController extends Controller
@@ -20,7 +21,7 @@ class AdminUserController extends Controller
         return view('admin.user.index')->with('viewData', $viewData);
     }
 
-    public function create()
+    public function create(): View
     {
         $viewData = [];
         $viewData['title'] = __('admin.users.create.title');
@@ -30,28 +31,75 @@ class AdminUserController extends Controller
         return view('admin.user.create')->with('viewData', $viewData);
     }
 
-    public function store(Request $request)
+    public function store(AdminUserRequest $request): RedirectResponse
     {
-        //
+        $validatedData = $request->validated();
+
+        $user = new User;
+        $user->setName($validatedData['name']);
+        $user->setEmail($validatedData['email']);
+        $user->setPhone($validatedData['phone']);
+        $user->setAddress($validatedData['address']);
+        $user->setPassword($validatedData['password']);
+        $user->setRole($validatedData['role']);
+
+        $user->save();
+
+        return redirect()->route('admin.user.index')
+            ->with('success', __('admin.users.messages.created'));
     }
 
-    public function show(string $id)
+    public function show(string $id): View
     {
-        //
+        $user = User::findOrFail($id);
+
+        $viewData = [];
+        $viewData['title'] = __('admin.users.show.title');
+        $viewData['user'] = $user;
+
+        return view('admin.user.show')->with('viewData', $viewData);
     }
 
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $user = User::findOrFail($id);
+
+        $viewData = [];
+        $viewData['title'] = __('admin.users.edit.title');
+        $viewData['subtitle'] = __('admin.users.ediit.subtitle');
+        $viewData['user'] = $user;
+        $viewData['role'] = array_map(fn($c) => $c->value, Role::cases());
+
+        return view('admin.user.edit')->with('vewData', $viewData);
     }
 
-    public function update(Request $request, string $id)
+    public function update(AdminUserRequest $request, string $id): RedirectResponse
     {
-        //
+        $user = User::findOrFail($id);
+
+        $validatedData = $request->validated();
+
+        $user->setName($validatedData['name']);
+        $user->setEmail($validatedData['email']);
+        $user->setPhone($validatedData['phone']);
+        $user->setAddress($validatedData['address']);
+        $user->setPassword($validatedData['password']);
+        $user->setRole($validatedData['role']);
+
+        $user->save();
+
+        return redirect()->route('admin.user.index')
+            ->with('success', __('admin.users.messages.updated'));
     }
 
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $userName = $user->getName();
+
+        $user->delete();
+
+        return redirect()->route('admin.user.index')
+            ->with('success', __('admin.users.message.deleted', ['name' => $userName]));
     }
 }
