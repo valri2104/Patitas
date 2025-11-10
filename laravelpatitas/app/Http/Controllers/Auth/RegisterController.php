@@ -50,9 +50,6 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Handle registration with UserRequest.
-     */
     public function register(UserRequest $request): RedirectResponse
     {
         $user = $this->create($request->validated());
@@ -62,17 +59,6 @@ class RegisterController extends Controller
         return redirect($this->redirectTo());
     }
 
-    /**
-     * Show the registration form.
-     */
-    public function showRegistrationForm()
-    {
-        return view('auth.register');
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     */
     protected function create(array $data): User
     {
         $user = new User;
@@ -81,7 +67,7 @@ class RegisterController extends Controller
         $user->setPhone($data['phone']);
         $user->setAddress($data['address']);
         $user->setPassword($data['password']);
-        $user->setRole(Role::Buyer); // Set default role explicitly
+        $user->setRole(Role::Buyer);
         $user->save();
 
         return $user;
