@@ -33,6 +33,15 @@
                     <a class="nav-link active"
                         href="{{ route('product.index') }}">{{ __('app.navigation.products') }}</a>
                     <a class="nav-link active" href="{{ route('cart.index') }}">{{ __('app.navigation.cart') }}</a>
+                    
+                    @auth
+                        <a class="nav-link active" href="{{ route('appointment.index') }}">
+                            <i class="fas fa-calendar-check me-1"></i>{{ __('app.navigation.appointments') }}
+                        </a>
+                        <a class="nav-link active" href="{{ route('order.index') }}">
+                            <i class="fas fa-shopping-bag me-1"></i>{{ __('app.navigation.orders') }}
+                        </a>
+                    @endauth
 
                     @auth
                         @php

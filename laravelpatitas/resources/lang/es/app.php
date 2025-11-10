@@ -71,16 +71,19 @@ return [
     ],
 
     'navigation' => [
-        'home'     => 'Inicio',
-        'products' => 'Productos',
-        'about'    => 'Acerca de',
-        'contact'  => 'Contacto',
-        'login'    => 'Iniciar Sesión',
-        'register' => 'Registrarse',
-        'logout'   => 'Cerrar Sesión',
-        'cart'     => 'Carrito',
-        'balance'  => 'Saldo',
-        'order' => 'Mis pedidos',
+      
+        'home'         => 'Inicio',
+        'products'     => 'Productos',
+        'about'        => 'Acerca de',
+        'contact'      => 'Contacto',
+        'login'        => 'Iniciar Sesión',
+        'register'     => 'Registrarse',
+        'logout'       => 'Cerrar Sesión',
+        'cart'         => 'Carrito',
+        'balance'      => 'Saldo',
+        'appointments' => 'Mis Citas',
+        'orders'       => 'Mis Pedidos',
+
     ],
 
     'common' => [

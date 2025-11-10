@@ -34,6 +34,11 @@
                         href="{{ route('admin.product.index') }}">{{ __('admin.navigation.products') }}</a>
                     <a class="nav-link" href="{{ route('admin.user.index') }}">{{ __('admin.navigation.users') }}</a>
                     <a class="nav-link" href="{{ route('admin.order.index') }}">{{ __('admin.navigation.orders') }}</a>
+
+                    <a class="nav-link" href="{{ route('admin.appointment.index') }}">
+                        <i class="fas fa-calendar-alt me-1"></i>{{ __('admin.navigation.appointments') }}
+                    </a>
+
                 </div>
                 <div class="navbar-nav">
                     <form id="logout" action="{{ route('logout') }}" method="POST">
