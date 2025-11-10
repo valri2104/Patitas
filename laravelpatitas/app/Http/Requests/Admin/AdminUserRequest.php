@@ -4,11 +4,11 @@
  * Developed by: Valeria Cardona
  */
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class AdminUserRequest extends FormRequest
 {
     public function authorize(): bool
     {

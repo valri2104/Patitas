@@ -9,10 +9,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Enums\Category;
-use App\Http\Requests\AdminProductRequest;
+use App\Http\Requests\Admin\AdminProductRequest;
 
 class AdminProductController extends Controller
 {
@@ -32,7 +31,7 @@ class AdminProductController extends Controller
         $viewData               = [];
         $viewData['title']      = __('admin.products.create.title');
         $viewData['subtitle']   = __('admin.products.create.subtitle');
-        $viewData['categories'] = ['Alimento', 'Juguetes', 'Medicina', 'Accesorios'];
+        $viewData['categories'] = array_map(fn($c) => $c->value, Category::cases());
 
         return view('admin.product.create')->with('viewData', $viewData);
     }

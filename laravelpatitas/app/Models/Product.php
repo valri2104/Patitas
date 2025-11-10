@@ -28,6 +28,9 @@ class Product extends Model
      * $this->attributes['imageUrl'] - string - product image URL
      * $this->attributes['created_at'] - timestamp - creation date
      * $this->attributes['updated_at'] - timestamp - last update date
+     *
+     * $this->review - Review[] - reviews about the product
+     * $this->orderItem- OrderItem[] -  oerder items of the product
      */
     protected $fillable = [
         'name',

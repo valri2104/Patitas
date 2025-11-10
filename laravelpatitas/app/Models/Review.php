@@ -21,6 +21,9 @@ class Review extends Model
      * $this->attributes['description'] - string - contains the review description
      * $this->attributes['created_at'] - Carbon - contains the date when review was created
      * $this->attributes['updated_at'] - Carbon - contains the date when the review was updated
+     *
+     * this->user - User - user that made the review
+     * this->product - Product - product that belongs the review
      */
     use HasFactory;
 

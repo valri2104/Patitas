@@ -30,6 +30,9 @@ class User extends Authenticatable
      * $this->attributes['role'] - enum[Role::class] - contains the user role
      * $this->attributes['created_at'] - timestamp - contains the created date
      * $this->attributes['updated_at'] - timestamp - contains the updated date
+     *
+     * $this->review - Review[] - reviews that were made for the user
+     * $this->order - Order[] - orders that were made for the user
      */
     protected $table = 'users';
 
