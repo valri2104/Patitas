@@ -42,7 +42,8 @@
                                             <tr>
                                                 <td class="align-middle" style="width: 90px;">
                                                     <img src="{{ $item['product']->getImageUrl() }}"
-                                                        alt="{{ $item['product']->getName() }}" class="img-fluid rounded" />
+                                                        alt="{{ $item['product']->getName() }}"
+                                                        class="img-fluid rounded" />
                                                 </td>
                                                 <td class="align-middle">
                                                     <strong>{{ $item['product']->getName() }}</strong>
@@ -147,26 +148,8 @@
             </div>
         @endif
     </div>
-
-    <script>
-        const cartRoot = document.querySelector('[data-confirm-remove]');
-        const CART_CONFIRM_REMOVE = cartRoot ? cartRoot.getAttribute('data-confirm-remove') : '';
-
-        function setDeliveryAddress() {
-            const textarea = document.getElementById('delivery_address');
-            const input = document.getElementById('delivery_address_input');
-            if (textarea && input) {
-                input.value = textarea.value;
-            }
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.js-remove-form').forEach(function(form) {
-                form.addEventListener('submit', function(e) {
-                    if (!confirm(CART_CONFIRM_REMOVE)) {
-                        e.preventDefault();
-                    }
-                });
-            });
-        });
-    </script>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/cart.js') }}"></script>
+@endpush
