@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminUserRequest;
 use App\Models\User;
-use App\Enums\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -23,10 +23,10 @@ class AdminUserController extends Controller
 
     public function create(): View
     {
-        $viewData = [];
-        $viewData['title'] = __('admin.users.create.title');
+        $viewData             = [];
+        $viewData['title']    = __('admin.users.create.title');
         $viewData['subtitle'] = __('admin.users.create.subtitle');
-        $viewData['role'] = Role::cases();
+        $viewData['role']     = Role::cases();
 
         return view('admin.user.create')->with('viewData', $viewData);
     }
@@ -53,9 +53,9 @@ class AdminUserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $viewData = [];
+        $viewData          = [];
         $viewData['title'] = __('admin.users.show.title');
-        $viewData['user'] = $user;
+        $viewData['user']  = $user;
 
         return view('admin.user.show')->with('viewData', $viewData);
     }
@@ -64,11 +64,11 @@ class AdminUserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $viewData = [];
-        $viewData['title'] = __('admin.users.edit.title');
+        $viewData             = [];
+        $viewData['title']    = __('admin.users.edit.title');
         $viewData['subtitle'] = __('admin.users.ediit.subtitle');
-        $viewData['user'] = $user;
-        $viewData['roles'] = Role::cases();
+        $viewData['user']     = $user;
+        $viewData['roles']    = Role::cases();
 
         return view('admin.user.edit')->with('viewData', $viewData);
     }
@@ -93,7 +93,7 @@ class AdminUserController extends Controller
 
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id);
+        $user     = User::findOrFail($id);
         $userName = $user->getName();
 
         $user->delete();

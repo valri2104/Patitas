@@ -79,6 +79,7 @@ return [
         'logout'   => 'Cerrar Sesión',
         'cart'     => 'Carrito',
         'balance'  => 'Saldo',
+        'order' => 'Mis pedidos',
     ],
 
     'common' => [
