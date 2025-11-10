@@ -86,3 +86,26 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::get('/orders/{id}', $adminOrderController . '@show')->name('admin.order.show');
     Route::put('/orders/{id}/status', $adminOrderController . '@updateStatus')->name('admin.order.updateStatus');
 });
+
+// ============================================================================
+// APPOINTMENT ROUTES (Requires authentication)
+// ============================================================================
+$appointmentController = 'App\\Http\\Controllers\\AppointmentController';
+Route::middleware(['auth'])->group(function () use ($appointmentController) {
+    Route::get('/appointments', $appointmentController . '@index')->name('appointment.index');
+    Route::get('/appointments/create', $appointmentController . '@create')->name('appointment.create');
+    Route::post('/appointments', $appointmentController . '@store')->name('appointment.store');
+    Route::get('/appointments/{id}', $appointmentController . '@show')->name('appointment.show');
+    Route::delete('/appointments/{id}', $appointmentController . '@destroy')->name('appointment.destroy');
+});
+
+// Admin Appointment Management Routes
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    $adminAppointmentController = 'App\\Http\\Controllers\\Admin\\AdminAppointmentController';
+
+    Route::get('/appointments', $adminAppointmentController . '@index')->name('admin.appointment.index');
+    Route::get('/appointments/{id}', $adminAppointmentController . '@show')->name('admin.appointment.show');
+    Route::get('/appointments/{id}/edit', $adminAppointmentController . '@edit')->name('admin.appointment.edit');
+    Route::put('/appointments/{id}', $adminAppointmentController . '@update')->name('admin.appointment.update');
+    Route::delete('/appointments/{id}', $adminAppointmentController . '@destroy')->name('admin.appointment.destroy');
+});
