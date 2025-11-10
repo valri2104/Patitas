@@ -106,6 +106,7 @@ return [
             'total'         => 'Total',
             'actions'       => 'Acciones',
             'no_orders'     => 'No hay pedidos registrados.',
+            'unknown_customer' => 'Cliente no disponible',
         ],
         'show' => [
             'title'         => 'Pedido #:id',

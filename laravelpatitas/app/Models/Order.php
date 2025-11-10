@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -68,12 +70,12 @@ class Order extends Model
         $this->attributes['total'] = $total;
     }
 
-    public function getOrderDate(): \DateTime
+    public function getOrderDate(): Carbon
     {
-        return $this->attributes['orderDate'];
+        return Carbon::parse($this->attributes['orderDate']);
     }
 
-    public function setOrderDate(\DateTime $orderDate): void
+    public function setOrderDate(DateTimeInterface $orderDate): void
     {
         $this->attributes['orderDate'] = $orderDate;
     }
