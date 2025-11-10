@@ -76,7 +76,7 @@ class Order extends Model
         return Carbon::parse($this->attributes['orderDate']);
     }
 
-    public function setOrderDate(Carbon $orderDate): void
+    public function setOrderDate(DateTimeInterface $orderDate): void
     {
         $this->attributes['orderDate'] = $orderDate;
     }
