@@ -6,10 +6,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Enums\Category;
 
 class ProductController extends Controller
 {
@@ -20,7 +20,7 @@ class ProductController extends Controller
         $viewData['subtitle'] = __('app.products.list.subtitle');
 
         // Available categories
-        $viewData['categories'] = array_map(fn($c) => $c->value, Category::cases());
+        $viewData['categories'] = array_map(fn ($c) => $c->value, Category::cases());
 
         // Get selected category from query parameter
         $selectedCategory             = $request->query('category');
