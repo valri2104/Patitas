@@ -271,9 +271,9 @@ return [
             'delete_error'     => 'No se pudo eliminar el usuario. Inténtalo de nuevo.',
         ],
         'roles' => [
-            'admin'        => 'Administrador',
-            'buyer'        => 'Comprador',
-            'veterinarian' => 'Veterinario',
+            'Admin'        => 'Administrador',
+            'Buyer'        => 'Comprador',
+            'Veterinarian' => 'Veterinario',
         ],
     ],
 

@@ -31,7 +31,7 @@ class AdminProductController extends Controller
         $viewData               = [];
         $viewData['title']      = __('admin.products.create.title');
         $viewData['subtitle']   = __('admin.products.create.subtitle');
-        $viewData['categories'] = array_map(fn($c) => $c->value, Category::cases());
+        $viewData['categories'] = Category::cases();
 
         return view('admin.product.create')->with('viewData', $viewData);
     }
@@ -79,7 +79,7 @@ class AdminProductController extends Controller
         $viewData['title']      = __('admin.products.edit.title', ['name' => $product->getName()]);
         $viewData['subtitle']   = __('admin.products.edit.subtitle');
         $viewData['product']    = $product;
-        $viewData['categories'] = array_map(fn($c) => $c->value, Category::cases());
+        $viewData['categories'] = Category::cases();
 
         return view('admin.product.edit')->with('viewData', $viewData);
     }

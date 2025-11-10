@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            {{ __('admin.users.index.total_products', ['count' => count($viewData['users'])]) }}</h5>
+                            {{ __('admin.users.index.total_users', ['count' => count($viewData['users'])]) }}</h5>
                     </div>
                     <div class="card-body p-0">
                         @if (count($viewData['users']) > 0)

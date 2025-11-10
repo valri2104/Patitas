@@ -76,7 +76,7 @@
                                 <option value="" disabled>{{ __('admin.users.form.role_placeholder') }}</option>
                                 @foreach ($viewData['roles'] as $role)
                                     <option value="{{ $role->value }}"
-                                        {{ old('role', $viewData['user']->getRole()->value) == $role->value ? 'selected' : '' }}>
+                                        {{ old('role', $viewData['user']->getRole()->value ?? $viewData['user']->getRole()) == $role->value ? 'selected' : '' }}>
                                         {{ __('admin.users.roles.' . $role->value) }}
                                     </option>
                                 @endforeach

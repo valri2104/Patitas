@@ -100,14 +100,18 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($password);
     }
 
-    public function getCreatedAt(): Carbon
+    public function getCreatedAt(): ?Carbon
     {
-        return $this->attributes['created_at'];
+        return isset($this->attributes['created_at'])
+        ? Carbon::parse($this->attributes['created_at'])
+        : null;
     }
 
     public function getUpdatedAt(): Carbon
     {
-        return $this->attributes['updated_at'];
+        return isset($this->attributes['updated_at'])
+        ? Carbon::parse($this->attributes['updated_at'])
+        : null;
     }
 
     public function setRole(Role|string $role): void
