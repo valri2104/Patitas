@@ -1,11 +1,37 @@
 @extends('layouts.app')
 
-@section('title', $viewData['product']->getName())
+@section('title', $viewData['title'])
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>{{ __('app.products.reviews.messages.validation_error') }}
+                    <ul class="mb-0 mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <!-- Breadcrumb Navigation -->
             <nav aria-label="breadcrumb" class="mb-4">
                 <ol class="breadcrumb">
@@ -191,6 +217,134 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+            <!-- Product Reviews -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="border-top pt-4">
+                        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-md-between mb-4">
+                            <div>
+                                <h3 class="h4 text-primary mb-1">
+                                    <i class="fas fa-star me-2"></i>{{ __('app.products.reviews.title') }}
+                                </h3>
+                                <p class="text-muted mb-0">
+                                    {{ trans_choice('app.products.reviews.count', $viewData['reviewsCount'], ['count' => $viewData['reviewsCount']]) }}
+                                </p>
+                            </div>
+                            <div class="text-warning mt-3 mt-md-0">
+                                @if ($viewData['averageRating'])
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= round($viewData['averageRating']))
+                                            <i class="fas fa-star"></i>
+                                        @else
+                                               <i class="far fa-star text-muted"></i>
+                                        @endif
+                                    @endfor
+                                    <span class="ms-2 text-dark">
+                                        {{ $viewData['averageRating'] }} {{ __('app.common.of') ?? 'de' }} 5
+                                    </span>
+                                @else
+                                    <span class="text-muted">{{ __('app.products.reviews.no_reviews') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        @if ($viewData['reviewsCount'] === 0)
+                            <p class="text-muted">{{ __('app.products.reviews.no_reviews') }}</p>
+                        @else
+                            <div class="row g-3 mb-4">
+                                @foreach ($viewData['reviews'] as $review)
+                                    <div class="col-12">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <strong>{{ $review->getUser()?->getName() }}</strong>
+                                                        <small class="text-muted ms-2">
+                                                            {{ \Carbon\Carbon::parse($review->getCreatedAt())->format('d/m/Y H:i') }}
+                                                        </small>
+                                                    </div>
+                                                    <div class="text-warning">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $review->getQualification())
+                                                                <i class="fas fa-star"></i>
+                                                            @else
+                                                                <i class="far fa-star text-muted"></i>
+                                                            @endif
+                                                        @endfor
+                                                    </div>
+                                                </div>
+                                                <p class="mt-3 mb-0">{{ $review->getDescription() }}</p>
+
+                                                @auth
+                                                    @if (auth()->id() === $review->getUserId())
+                                                        <form action="{{ route('review.destroy', $review->getId()) }}" method="POST" class="mt-3">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('{{ __('app.products.actions.confirm_delete') }}')">
+                                                                <i class="fas fa-trash me-1"></i>{{ __('app.products.actions.delete_review') }}
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                @endauth
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        @auth
+                            @if ($viewData['canReview'])
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h4 class="h5 text-primary mb-3">
+                                            <i class="fas fa-pen-fancy me-2"></i>{{ __('app.products.reviews.write_title') }}
+                                        </h4>
+                                        <form method="POST" action="{{ route('review.store') }}">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $viewData['product']->getId() }}">
+
+                                            <div class="mb-3">
+                                                <label for="qualification" class="form-label">{{ __('app.products.reviews.rating_label') }}</label>
+                                                <select name="qualification" id="qualification" class="form-select @error('qualification') is-invalid @enderror" required>
+                                                    <option value="">{{ __('app.common.select') }}</option>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <option value="{{ $i }}" {{ old('qualification') == $i ? 'selected' : '' }}>{{ $i }} / 5</option>
+                                                    @endfor
+                                                </select>
+                                                @error('qualification')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="description" class="form-label">{{ __('app.products.reviews.description_label') }}</label>
+                                                <textarea name="description" id="description" rows="4" class="form-control @error('description') is-invalid @enderror" required>{{ old('description') }}</textarea>
+                                                @error('description')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-paper-plane me-2"></i>{{ __('app.products.reviews.submit') }}
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            @elseif (! $viewData['hasPurchased'])
+                                <p class="text-muted">{{ __('app.products.reviews.messages.purchase_required') }}</p>
+                            @elseif ($viewData['userReview'])
+                                <p class="text-muted">{{ __('app.products.reviews.messages.already_reviewed') }}</p>
+                            @endif
+                        @else
+                            <p class="text-muted">
+                                <i class="fas fa-user-lock me-2"></i>{{ __('app.products.reviews.login_message') }}
+                            </p>
+                        @endauth
                     </div>
                 </div>
             </div>

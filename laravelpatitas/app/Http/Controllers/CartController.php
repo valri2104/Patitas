@@ -152,11 +152,11 @@ class CartController extends Controller
                 $product->save();
             }
 
-            $order->setTotal($order->calculateTotal());
+            $order->setTotal($totalAmount);
             $order->save();
 
             if ($user instanceof User) {
-                $user->decreaseBalance($order->getTotal());
+                $user->decreaseBalance($totalAmount);
                 $user->save();
             }
 

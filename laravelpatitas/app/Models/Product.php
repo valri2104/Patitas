@@ -7,6 +7,9 @@
 namespace App\Models;
 
 use App\Enums\Category;
+
+use function asset;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -115,12 +118,29 @@ class Product extends Model
 
     public function getImageUrl(): string
     {
-        return $this->attributes['imageUrl'];
+        $imageUrl = $this->attributes['imageUrl'] ?? '';
+
+        if (! empty($imageUrl)) {
+            return $imageUrl;
+        }
+
+        return $this->getDefaultImageUrl();
     }
 
     public function setImageUrl(string $imageUrl): void
     {
         $this->attributes['imageUrl'] = $imageUrl;
+    }
+
+    private function getDefaultImageUrl(): string
+    {
+        return asset(match ($this->getCategory()) {
+            'Alimento'   => 'images/mascotas1.jpeg',
+            'Juguetes'   => 'images/mascotas2.jpeg',
+            'Medicina'   => 'images/mascotas3.jpeg',
+            'Accesorios' => 'images/mascotas4.jpeg',
+            default      => 'images/mascotas5.png',
+        });
     }
 
     public function getCreatedAt(): string

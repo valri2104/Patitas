@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class OrderController extends Controller
 {
@@ -14,18 +14,13 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(): View|RedirectResponse
+    public function index(): View
     {
+        /** @var User $user */
         $user = Auth::user();
 
-        if (!$user) {
-            return redirect()
-                ->route('login')
-                ->withErrors('Debes iniciar sesión para ver tus pedidos.');
-        }
-
-        $viewData = [];
-        $viewData['title'] = __('orders.index.title');
+        $viewData           = [];
+        $viewData['title']  = __('orders.index.title');
         $viewData['orders'] = Order::with(['orderItems.product'])
             ->where('user_id', $user->getId())
             ->orderByDesc('orderDate')
@@ -34,22 +29,17 @@ class OrderController extends Controller
         return view('order.index')->with('viewData', $viewData);
     }
 
-    public function show(int $id): View|RedirectResponse
+    public function show(int $id): View
     {
+        /** @var User $user */
         $user = Auth::user();
-
-        if (!$user) {
-            return redirect()
-                ->route('login')
-                ->withErrors('Debes iniciar sesión para ver este pedido.');
-        }
 
         $order = Order::with(['orderItems.product'])
             ->where('id', $id)
             ->where('user_id', $user->getId())
             ->firstOrFail();
 
-        $viewData = [];
+        $viewData          = [];
         $viewData['title'] = __('orders.show.title', ['id' => $order->getId()]);
         $viewData['order'] = $order;
 

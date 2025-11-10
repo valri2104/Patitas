@@ -30,6 +30,15 @@ Route::middleware(['auth'])->group(function () use ($orderController) {
     Route::get('/orders/{id}', $orderController . '@show')->name('order.show');
 });
 
+// ============================================================================
+// REVIEW ROUTES (Requires authentication)
+// ============================================================================
+$reviewController = 'App\\Http\\Controllers\\ReviewController';
+Route::middleware(['auth'])->group(function () use ($reviewController) {
+    Route::post('/reviews', $reviewController . '@store')->name('review.store');
+    Route::delete('/reviews/{id}', $reviewController . '@destroy')->name('review.destroy');
+});
+
 // User register routes
 $registerController = 'App\\Http\\Controllers\\Auth\\RegisterController';
 Route::get('/register', $registerController . '@showRegistrationForm')->name('register');
@@ -108,4 +117,12 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::get('/appointments/{id}/edit', $adminAppointmentController . '@edit')->name('admin.appointment.edit');
     Route::put('/appointments/{id}', $adminAppointmentController . '@update')->name('admin.appointment.update');
     Route::delete('/appointments/{id}', $adminAppointmentController . '@destroy')->name('admin.appointment.destroy');
+});
+
+// Admin Review Management Routes
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    $adminReviewController = 'App\\Http\\Controllers\\Admin\\ReviewController';
+
+    Route::get('/reviews', $adminReviewController . '@index')->name('admin.review.index');
+    Route::delete('/reviews/{id}', $adminReviewController . '@destroy')->name('admin.review.destroy');
 });
