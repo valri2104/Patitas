@@ -6,7 +6,6 @@ use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
 
 class ReviewSeeder extends Seeder
 {
@@ -30,22 +29,20 @@ class ReviewSeeder extends Seeder
         // Create a majority of positive reviews
         Review::factory()
             ->count($highRatingBias)
-            ->state(fn () => $this->randomUserProductState($users, $products))
+            ->state(fn () => [
+                'user_id'    => $users->random()->getId(),
+                'product_id' => $products->random()->getId(),
+            ])
             ->create();
 
         // Create the remaining reviews with lower ratings
         Review::factory()
             ->lowRating()
             ->count($totalReviews - $highRatingBias)
-            ->state(fn () => $this->randomUserProductState($users, $products))
+            ->state(fn () => [
+                'user_id'    => $users->random()->getId(),
+                'product_id' => $products->random()->getId(),
+            ])
             ->create();
-    }
-
-    private function randomUserProductState(Collection $users, Collection $products): array
-    {
-        return [
-            'user_id'    => $users->random()->getId(),
-            'product_id' => $products->random()->getId(),
-        ];
     }
 }

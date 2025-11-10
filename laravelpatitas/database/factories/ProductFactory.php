@@ -192,22 +192,38 @@ class ProductFactory extends Factory
      */
     private function generateImageUrlByCategory(string $category): string
     {
-        $baseUrl = 'https://via.placeholder.com/400x400/';
-        $colors  = [
-            'Alimento'   => '8B4513/FFFFFF', // Brown
-            'Juguetes'   => 'FF6B6B/FFFFFF', // Red
-            'Medicina'   => '4ECDC4/FFFFFF', // Teal
-            'Accesorios' => '45B7D1/FFFFFF', // Blue
+        $images = [
+            'Alimento' => [
+                'https://images.unsplash.com/photo-1558944351-c9c6f1f73878?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1514986888952-8cd320577b68?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1598136490944-56ad1b2361da?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1589926673403-36e84854d76a?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1576506295286-c6f014f4614f?auto=format&fit=crop&w=800&q=80',
+            ],
+            'Juguetes' => [
+                'https://images.unsplash.com/photo-1619983093673-9f5847ae97c0?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1591940745748-9c8fbd4c35c7?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?auto=format&fit=crop&w=800&q=80',
+            ],
+            'Medicina' => [
+                'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1580281657521-958301ebf743?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1584467735871-bd95bbb33817?auto=format&fit=crop&w=800&q=80',
+            ],
+            'Accesorios' => [
+                'https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1525253013412-55c1a69a5738?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1582284540023-5d91a6f5d23f?auto=format&fit=crop&w=800&q=80',
+            ],
         ];
 
-        $categoryLabels = [
-            'Alimento'   => 'Food',
-            'Juguetes'   => 'Toys',
-            'Medicina'   => 'Medicine',
-            'Accesorios' => 'Accessories',
-        ];
-
-        return $baseUrl . $colors[$category] . '?text=' . $categoryLabels[$category];
+        return $this->faker->randomElement($images[$category]);
     }
 
     /**
