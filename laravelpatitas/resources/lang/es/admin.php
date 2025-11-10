@@ -150,13 +150,14 @@ return [
     ],
 
     'navigation' => [
-        'dashboard' => 'Panel de Control',
-        'products'  => 'Productos',
-        'users'     => 'Usuarios',
-        'orders'    => 'Pedidos',
-        'reports'   => 'Reportes',
-        'settings'  => 'Configuración',
-        'logout'    => 'Cerrar Sesión',
+        'dashboard'    => 'Panel de Control',
+        'products'     => 'Productos',
+        'users'        => 'Usuarios',
+        'orders'       => 'Pedidos',
+        'appointments' => 'Citas Veterinarias',
+        'reports'      => 'Reportes',
+        'settings'     => 'Configuración',
+        'logout'       => 'Cerrar Sesión',
     ],
 
     'common' => [

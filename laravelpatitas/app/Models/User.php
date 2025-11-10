@@ -34,6 +34,7 @@ class User extends Authenticatable
      *
      * $this->review - Review[] - reviews that were made for the user
      * $this->order - Order[] - orders that were made for the user
+     * $this->appointments - Appointment[] - veterinary appointments made by the user
      */
     protected $table = 'users';
 
@@ -170,5 +171,10 @@ class User extends Authenticatable
     public function order(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
     }
 }
