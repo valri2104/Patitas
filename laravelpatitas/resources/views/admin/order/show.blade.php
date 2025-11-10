@@ -14,11 +14,9 @@
             </a>
         </div>
 
-        <!-- Datos del pedido -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <div class="row g-4">
-                    <!-- Cliente -->
                     <div class="col-lg-4">
                         <div class="border rounded p-3 h-100">
                             <h2 class="h5 text-muted mb-3">
@@ -33,7 +31,6 @@
                         </div>
                     </div>
 
-                    <!-- Detalles del pedido -->
                     <div class="col-lg-4">
                         <div class="border rounded p-3 h-100">
                             <h2 class="h5 text-muted mb-3">
@@ -83,7 +80,6 @@
                         </div>
                     </div>
 
-                    <!-- Dirección de envío -->
                     <div class="col-lg-4">
                         <div class="border rounded p-3 h-100">
                             <h2 class="h5 text-muted mb-3">
@@ -102,7 +98,6 @@
             </div>
         </div>
 
-        <!-- Actualizar estado -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <form action="{{ route('admin.order.updateStatus', $viewData['order']->getId()) }}" method="POST"
@@ -128,7 +123,6 @@
             </div>
         </div>
 
-        <!-- Productos -->
         <div class="card shadow-sm">
             <div class="card-body">
                 <h2 class="h4 text-primary mb-3">
