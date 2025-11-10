@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Product;
 use App\Models\User;
 use App\Utils\CartManager;
 use App\Http\Requests\Cart\UpdateQuantityRequest;
@@ -13,7 +12,6 @@ use App\Http\Requests\Cart\RemoveRequest;
 use App\Http\Requests\Cart\PurchaseRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
