@@ -70,6 +70,7 @@ return [
     ],
 
     'navigation' => [
+      
         'home'         => 'Inicio',
         'products'     => 'Productos',
         'about'        => 'Acerca de',
@@ -81,6 +82,7 @@ return [
         'balance'      => 'Saldo',
         'appointments' => 'Mis Citas',
         'orders'       => 'Mis Pedidos',
+
     ],
 
     'common' => [
