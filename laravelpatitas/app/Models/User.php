@@ -26,6 +26,7 @@ class User extends Authenticatable
      * $this->attributes['email'] - string - contains the user email
      * $this->attributes['phone'] - string - contains the user telephone number
      * $this->attributes['address'] - string - contains the user address
+     * $this->attributes['balance'] - float - contains the available balance for purchases
      * $this->attributes['password'] - string - contains the user password
      * $this->attributes['role'] - enum[Role::class] - contains the user role
      * $this->attributes['created_at'] - timestamp - contains the created date
@@ -36,13 +37,14 @@ class User extends Authenticatable
      */
     protected $table = 'users';
 
-    protected $fillable = ['name', 'email', 'phone', 'password', 'address', 'role'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'address', 'role', 'balance'];
 
     public $timestamps = true;
 
     protected $casts = [
         'role'              => Role::class,
         'email_verified_at' => 'datetime',
+        'balance'           => 'decimal:2',
     ];
 
     protected $hidden = [
@@ -93,6 +95,34 @@ class User extends Authenticatable
     public function setAddress(?string $address): void
     {
         $this->attributes['address'] = $address;
+    }
+
+    public function getBalance(): float
+    {
+        return (float) $this->attributes['balance'];
+    }
+
+    public function setBalance(float $balance): void
+    {
+        $this->attributes['balance'] = $balance;
+    }
+
+    public function hasBalance(float $amount): bool
+    {
+        return $this->getBalance() >= $amount;
+    }
+
+    public function decreaseBalance(float $amount): void
+    {
+        if ($amount <= 0.0) {
+            return;
+        }
+
+        if (! $this->hasBalance($amount)) {
+            return;
+        }
+
+        $this->setBalance($this->getBalance() - $amount);
     }
 
     public function setPassword(string $password): void

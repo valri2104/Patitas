@@ -102,6 +102,8 @@ class CartController extends Controller
 
         $validatedData = $request->validated();
 
+        $totalAmount = 0.0;
+
         foreach ($cartProducts as $cartProduct) {
             $product  = $cartProduct['product'];
             $quantity = $cartProduct['quantity'];
@@ -110,6 +112,18 @@ class CartController extends Controller
                 return Redirect::route('cart.index')
                     ->with('error', __('cart.messages.insufficient_stock', ['product' => $product->getName()]));
             }
+
+            $totalAmount += $product->getPrice() * $quantity;
+        }
+
+        /** @var User $user */
+        $user = Auth::user();
+
+        if ($user instanceof User && ! $user->hasBalance($totalAmount)) {
+            return Redirect::route('cart.index')
+                ->with('error', __('cart.messages.insufficient_balance', [
+                    'balance' => number_format($user->getBalance(), 0, ',', '.'),
+                ]));
         }
 
         try {
@@ -141,12 +155,19 @@ class CartController extends Controller
             $order->setTotal($order->calculateTotal());
             $order->save();
 
+            if ($user instanceof User) {
+                $user->decreaseBalance($order->getTotal());
+                $user->save();
+            }
+
             CartManager::clearCart();
 
             DB::commit();
 
             return Redirect::route('order.show', $order->getId())
-                ->with('success', __('cart.messages.purchase_successful'));
+                ->with('success', __('cart.messages.purchase_successful', [
+                    'balance' => number_format($user?->getBalance() ?? 0, 0, ',', '.'),
+                ]));
         } catch (Exception $e) {
             DB::rollBack();
 
