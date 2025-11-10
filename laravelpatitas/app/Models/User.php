@@ -75,7 +75,7 @@ class User extends Authenticatable
         $this->attributes['email'] = $email;
     }
 
-    public function getPhone(): string
+    public function getPhone(): ?string
     {
         return $this->attributes['phone'];
     }
