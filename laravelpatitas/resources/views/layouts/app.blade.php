@@ -65,7 +65,7 @@
 
     <!-- header -->
 
-    <div class="container my-4">
+    <div class="container-fluid p-0">
         @yield('content')
     </div>
 
@@ -79,6 +79,13 @@
         </div>
     </div>
     <!-- footer -->
+    <footer class="bg-dark text-white py-3 mt-auto">
+        <div class="container text-center">
+            <small>
+                {{ __('app.layouts.app.footer') }} {{ date('Y') }}
+            </small>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>

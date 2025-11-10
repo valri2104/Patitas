@@ -56,7 +56,7 @@
     </header>
     <!-- header -->
 
-    <div class="container-fluid my-4">
+    <div class="container-fluid p-0">
         @yield('content')
     </div>
 
