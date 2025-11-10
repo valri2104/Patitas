@@ -68,7 +68,7 @@ class AdminUserController extends Controller
         $viewData['title'] = __('admin.users.edit.title');
         $viewData['subtitle'] = __('admin.users.ediit.subtitle');
         $viewData['user'] = $user;
-        $viewData['role'] = array_map(fn($c) => $c->value, Role::cases());
+        $viewData['roles'] = array_map(fn($c) => $c->value, Role::cases());
 
         return view('admin.user.edit')->with('viewData', $viewData);
     }
