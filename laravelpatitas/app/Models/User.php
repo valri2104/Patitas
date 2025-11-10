@@ -9,6 +9,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\Role;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -32,6 +33,7 @@ class User extends Authenticatable
      * $this->attributes['created_at'] - timestamp - contains the created date
      * $this->attributes['updated_at'] - timestamp - contains the updated date
      *
+     * $this->appointments - Appointment[] - appointments created by the user
      * $this->review - Review[] - reviews that were made for the user
      * $this->order - Order[] - orders that were made for the user
      * $this->appointments - Appointment[] - veterinary appointments made by the user
@@ -173,8 +175,18 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function orders(): HasMany
+    {
+        return $this->order();
+    }
+
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    public function getAppointments(): Collection
+    {
+        return $this->appointments;
     }
 }

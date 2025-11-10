@@ -45,7 +45,7 @@
                                                 {{ __('appointments.status_' . $appointment->getStatus()) }}
                                             </span>
                                         </p>
-                                        <p><strong>{{ __('appointments.reason') }}:</strong> {{ Str::limit($appointment->getReason(), 100) }}</p>
+                                        <p><strong>{{ __('appointments.reason') }}:</strong> {{ \Illuminate\Support\Str::limit($appointment->getReason(), 100) }}</p>
                                     </div>
                                     <div class="card-footer bg-transparent">
                                         <div class="d-flex justify-content-between">

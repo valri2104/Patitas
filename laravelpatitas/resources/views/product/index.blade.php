@@ -160,7 +160,7 @@
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">{{ $product->getName() }}</h5>
                                         <p class="card-text text-muted flex-grow-1">
-                                            {{ Str::limit($product->getDescription(), 100) }}
+                                            {{ \Illuminate\Support\Str::limit($product->getDescription(), 100) }}
                                         </p>
 
                                         <!-- Price -->
