@@ -73,6 +73,25 @@ return [
             'login_to_review' => 'Inicia sesión para dejar una reseña',
             'first_review'    => 'Sé el primero en opinar sobre este producto',
         ],
+        'reviews' => [
+            'title'             => 'Reseñas',
+            'average_rating'    => 'Calificación promedio',
+            'count'             => '(:count reseña)|(:count reseñas)',
+            'no_reviews'        => 'Aún no hay reseñas para este producto.',
+            'your_review'       => 'Tu reseña',
+            'write_title'       => 'Escribe tu reseña',
+            'rating_label'      => 'Calificación',
+            'description_label' => 'Comentario',
+            'submit'            => 'Enviar reseña',
+            'login_message'     => 'Inicia sesión para dejar una reseña.',
+            'messages'          => [
+                'created'           => '¡Gracias por tu reseña!',
+                'deleted'           => 'Reseña eliminada correctamente.',
+                'already_reviewed'  => 'Ya has reseñado este producto.',
+                'purchase_required' => 'Necesitas comprar el producto antes de poder reseñarlo.',
+                'validation_error'  => 'Por favor corrige los errores del formulario.',
+            ],
+        ],
     ],
 
     'navigation' => [
@@ -97,6 +116,7 @@ return [
         'error'         => 'Error',
         'success'       => 'Éxito',
         'currency'      => 'COP',
+        'of'            => 'de',
         'select'        => 'Seleccione',
     ],
 

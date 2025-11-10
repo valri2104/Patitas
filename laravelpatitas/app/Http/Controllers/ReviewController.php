@@ -36,7 +36,7 @@ class ReviewController extends Controller
 
         if (! $hasPurchased) {
             return redirect()->route('product.show', $product->getId())
-                ->with('error', __('reviews.messages.purchase_required'));
+                ->with('error', __('app.products.reviews.messages.purchase_required'));
         }
 
         $alreadyReviewed = Review::where('user_id', $user->getId())
@@ -45,7 +45,7 @@ class ReviewController extends Controller
 
         if ($alreadyReviewed) {
             return redirect()->route('product.show', $product->getId())
-                ->with('error', __('reviews.messages.already_reviewed'));
+                ->with('error', __('app.products.reviews.messages.already_reviewed'));
         }
 
         $review = new Review;
@@ -56,7 +56,7 @@ class ReviewController extends Controller
         $review->save();
 
         return redirect()->route('product.show', $product->getId())
-            ->with('success', __('reviews.messages.created'));
+            ->with('success', __('app.products.reviews.messages.created'));
     }
 
     public function destroy(int $id): RedirectResponse
@@ -74,6 +74,6 @@ class ReviewController extends Controller
         $review->delete();
 
         return redirect()->route('product.show', $productId)
-            ->with('success', __('reviews.messages.deleted'));
+            ->with('success', __('app.products.reviews.messages.deleted'));
     }
 }
