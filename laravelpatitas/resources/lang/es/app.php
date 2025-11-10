@@ -78,6 +78,7 @@ return [
         'register' => 'Registrarse',
         'logout'   => 'Cerrar Sesión',
         'cart'     => 'Carrito',
+        'balance'  => 'Saldo',
     ],
 
     'common' => [
