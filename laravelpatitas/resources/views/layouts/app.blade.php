@@ -54,6 +54,32 @@
                         </span>
                     @endauth
 
+                    @php
+                        $currentLocale = app()->getLocale();
+                        $localeOptions = [
+                            'es' => __('app.navigation.language_es'),
+                            'en' => __('app.navigation.language_en'),
+                        ];
+                    @endphp
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="languageDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            title="{{ __('app.navigation.language') }}" aria-label="{{ __('app.navigation.language') }}">
+                            <i class="fas fa-globe me-1"></i>{{ strtoupper($currentLocale) }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            @foreach ($localeOptions as $localeKey => $localeName)
+                                <li>
+                                    <a class="dropdown-item d-flex justify-content-between align-items-center {{ $currentLocale === $localeKey ? 'active fw-bold' : '' }}"
+                                        href="{{ route('language.change', ['locale' => $localeKey]) }}">
+                                        <span>{{ $localeName }}</span>
+                                        <span class="text-uppercase">{{ $localeKey }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+
                     <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
                         <a class="nav-link active" href="{{ route('login') }}">{{ __('app.navigation.login') }}</a>

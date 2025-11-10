@@ -8,6 +8,9 @@ Auth::routes(); // laravel/ui default home route
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
 
+$languageController = 'App\\Http\\Controllers\\LanguageController';
+Route::get('/language/{locale}', $languageController . '@change')->name('language.change');
+
 // ============================================================================
 // CART ROUTES (No middleware required)
 // ============================================================================

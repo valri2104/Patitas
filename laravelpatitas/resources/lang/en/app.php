@@ -109,6 +109,9 @@ return [
         'orders'       => 'My orders',
         'appointments' => 'Veterinary appointments',
         'balance'      => 'Balance',
+        'language'     => 'Language',
+        'language_es'  => 'Spanish',
+        'language_en'  => 'English',
     ],
 
     'common' => [
