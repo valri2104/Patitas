@@ -149,12 +149,44 @@ return [
         ],
     ],
 
+    'reviews' => [
+        'index' => [
+            'title'    => 'Moderación de Reseñas',
+            'subtitle' => 'Administra y modera las reseñas de los productos',
+        ],
+        'filters' => [
+            'rating'       => 'Calificación',
+            'product'      => 'Producto',
+            'user'         => 'Usuario',
+            'apply'        => 'Aplicar filtros',
+            'clear'        => 'Limpiar filtros',
+            'placeholder'  => 'Buscar por nombre o correo',
+            'all_ratings'  => 'Todas las calificaciones',
+            'all_products' => 'Todos los productos',
+        ],
+        'table' => [
+            'author'      => 'Usuario',
+            'product'     => 'Producto',
+            'rating'      => 'Calificación',
+            'description' => 'Descripción',
+            'date'        => 'Fecha',
+            'actions'     => 'Acciones',
+        ],
+        'messages' => [
+            'deleted' => 'Reseña eliminada correctamente.',
+        ],
+        'actions' => [
+            'delete' => 'Eliminar reseña',
+        ],
+    ],
+
     'navigation' => [
         'dashboard'    => 'Panel de Control',
         'products'     => 'Productos',
         'users'        => 'Usuarios',
         'orders'       => 'Pedidos',
         'appointments' => 'Citas Veterinarias',
+        'reviews'      => 'Reseñas',
         'reports'      => 'Reportes',
         'settings'     => 'Configuración',
         'logout'       => 'Cerrar Sesión',

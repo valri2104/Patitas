@@ -118,3 +118,11 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::put('/appointments/{id}', $adminAppointmentController . '@update')->name('admin.appointment.update');
     Route::delete('/appointments/{id}', $adminAppointmentController . '@destroy')->name('admin.appointment.destroy');
 });
+
+// Admin Review Management Routes
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    $adminReviewController = 'App\\Http\\Controllers\\Admin\\ReviewController';
+
+    Route::get('/reviews', $adminReviewController . '@index')->name('admin.review.index');
+    Route::delete('/reviews/{id}', $adminReviewController . '@destroy')->name('admin.review.destroy');
+});
