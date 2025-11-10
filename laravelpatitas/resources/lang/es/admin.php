@@ -124,6 +124,8 @@ return [
             'unit_price'    => 'Precio unitario',
             'subtotal'      => 'Subtotal',
             'total'         => 'Total del pedido',
+            'print'         => 'Imprimir factura',
+            'back'          => 'Volver a la lista',
         ],
         'statuses' => [
             'pending'   => 'Pendiente',
