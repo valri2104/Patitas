@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,7 @@ class LoginController extends Controller
      */
     protected function redirectTo(): string
     {
+        /** @var User|null $user */
         $user = Auth::user();
 
         if (! $user) {

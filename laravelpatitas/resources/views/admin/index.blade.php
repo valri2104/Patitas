@@ -2,7 +2,7 @@
 @section('title', __('admin.admin.index.title'))
 @section('content')
 
-    <div class="text-center">
+    <div class="banner-admin">
         {{ __('admin.admin.index.welcome_message') }}
     </div>
 @endsection

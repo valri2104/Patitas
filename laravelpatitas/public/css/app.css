@@ -23,6 +23,41 @@ nav {
     object-fit: cover;
 }
 
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.banner-app {
+    width: 100%;
+    height: 500px;
+    background-image: url("/images/mascotas5.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    padding: 0 !important;
+    margin: 0 !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-admin {
+    width: 100%;
+    height: 500px;
+    background-image: url("/images/mascotas_admin.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    padding: 0 !important;
+    margin: 0 !important;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Product Catalog Styles */
 .product-card {
     transition: transform 0.2s ease-in-out;
