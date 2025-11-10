@@ -113,4 +113,30 @@ class Review extends Model
     {
         return $this->product;
     }
+
+    public static function averageForProduct(int $productId): float
+    {
+        $average = self::where('product_id', $productId)->avg('qualification');
+
+        return round((float) ($average ?? 0), 1);
+    }
+
+    public static function countForProduct(int $productId): int
+    {
+        return self::where('product_id', $productId)->count();
+    }
+
+    public function getStars(): string
+    {
+        $rating      = max(0, min(5, $this->getQualification()));
+        $filledStars = str_repeat('★', $rating);
+        $emptyStars  = str_repeat('☆', 5 - $rating);
+
+        return $filledStars . $emptyStars;
+    }
+
+    public function isOwnedBy(int $userId): bool
+    {
+        return $this->getUserId() === $userId;
+    }
 }
