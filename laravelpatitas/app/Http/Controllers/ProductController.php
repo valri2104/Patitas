@@ -69,7 +69,7 @@ class ProductController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        $averageRating = $reviews->avg('qualification');
+        $averageRating = $product->reviews()->avg('qualification');
 
         $user         = Auth::user();
         $userReview   = null;
@@ -91,6 +91,7 @@ class ProductController extends Controller
         $viewData['product']       = $product;
         $viewData['reviews']       = $reviews;
         $viewData['reviewsCount']  = $reviews->count();
+        $viewData['totalReviews']  = $reviews->count();
         $viewData['averageRating'] = $averageRating ? number_format($averageRating, 1) : null;
         $viewData['userReview']    = $userReview;
         $viewData['canReview']     = $canReview;
