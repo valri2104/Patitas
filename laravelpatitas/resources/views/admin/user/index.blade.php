@@ -13,7 +13,7 @@
                         <h2>{{ __('admin.users.index.title') }}</h2>
                         <p class="text-muted mb-0">{{ __('admin.users.index.subtitle') }}</p>
                     </div>
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus me-2"></i>{{ __('admin.users.index.create_new') }}
                     </a>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            {{ __('admin.users.index.total_products', ['count' => count($viewData['users'])]) }}</h5>
+                            {{ __('admin.users.index.total_users', ['count' => count($viewData['users'])]) }}</h5>
                     </div>
                     <div class="card-body p-0">
                         @if (count($viewData['users']) > 0)

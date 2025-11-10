@@ -24,11 +24,11 @@ class AdminUserRequest extends FormRequest
     {
         return [
             'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
+            'email'    => 'required|email|unique:users,email,' . $this->route('id'),
             'phone'    => 'nullable|string|max:10',
             'address'  => 'nullable|string|max:255',
-            'password' => 'required|string|min:8|confirmed',
-            'role'     => 'in:admin, buyer, veterianrian',
+            'password' => 'nullable|string|min:8|confirmed',
+            'role'     => 'in:Admin,Buyer,Veterinarian',
         ];
     }
 }

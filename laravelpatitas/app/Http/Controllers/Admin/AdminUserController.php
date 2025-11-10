@@ -26,7 +26,7 @@ class AdminUserController extends Controller
         $viewData = [];
         $viewData['title'] = __('admin.users.create.title');
         $viewData['subtitle'] = __('admin.users.create.subtitle');
-        $viewData['role'] = array_map(fn($c) => $c->value, Role::cases());
+        $viewData['role'] = Role::cases();
 
         return view('admin.user.create')->with('viewData', $viewData);
     }
@@ -68,9 +68,9 @@ class AdminUserController extends Controller
         $viewData['title'] = __('admin.users.edit.title');
         $viewData['subtitle'] = __('admin.users.ediit.subtitle');
         $viewData['user'] = $user;
-        $viewData['role'] = array_map(fn($c) => $c->value, Role::cases());
+        $viewData['roles'] = Role::cases();
 
-        return view('admin.user.edit')->with('vewData', $viewData);
+        return view('admin.user.edit')->with('viewData', $viewData);
     }
 
     public function update(AdminUserRequest $request, string $id): RedirectResponse
@@ -81,9 +81,8 @@ class AdminUserController extends Controller
 
         $user->setName($validatedData['name']);
         $user->setEmail($validatedData['email']);
-        $user->setPhone($validatedData['phone']);
-        $user->setAddress($validatedData['address']);
-        $user->setPassword($validatedData['password']);
+        $user->setPhone($validatedData['phone'] ?? null);
+        $user->setAddress($validatedData['address'] ?? null);
         $user->setRole($validatedData['role']);
 
         $user->save();
