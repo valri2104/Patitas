@@ -91,7 +91,7 @@ class AdminUserController extends Controller
             ->with('success', __('admin.users.messages.updated'));
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         $user     = User::findOrFail($id);
         $userName = $user->getName();
