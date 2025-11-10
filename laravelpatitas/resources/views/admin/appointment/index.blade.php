@@ -49,22 +49,31 @@
                                                 <td>{{ $appointment->getDate() }}</td>
                                                 <td>{{ $appointment->getTime() }}</td>
                                                 <td>
-                                                    <span class="badge bg-{{ $appointment->getStatus() === 'pending' ? 'warning' : ($appointment->getStatus() === 'confirmed' ? 'success' : ($appointment->getStatus() === 'completed' ? 'info' : 'danger')) }}">
+                                                    <span
+                                                        class="badge bg-{{ $appointment->getStatus() === 'pending' ? 'warning' : ($appointment->getStatus() === 'confirmed' ? 'success' : ($appointment->getStatus() === 'completed' ? 'info' : 'danger')) }}">
                                                         {{ __('appointments.status_' . $appointment->getStatus()) }}
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="{{ route('admin.appointment.show', ['id' => $appointment->getId()]) }}" class="btn btn-sm btn-info" title="{{ __('appointments.view') }}">
+                                                        <a href="{{ route('admin.appointment.show', ['id' => $appointment->getId()]) }}"
+                                                            class="btn btn-sm btn-info"
+                                                            title="{{ __('appointments.view') }}">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
-                                                        <a href="{{ route('admin.appointment.edit', ['id' => $appointment->getId()]) }}" class="btn btn-sm btn-warning" title="{{ __('appointments.edit') }}">
+                                                        <a href="{{ route('admin.appointment.edit', ['id' => $appointment->getId()]) }}"
+                                                            class="btn btn-sm btn-warning"
+                                                            title="{{ __('appointments.edit') }}">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <form action="{{ route('admin.appointment.destroy', ['id' => $appointment->getId()]) }}" method="POST" class="d-inline">
+                                                        <form
+                                                            action="{{ route('admin.appointment.destroy', ['id' => $appointment->getId()]) }}"
+                                                            method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('{{ __('appointments.confirm_delete') }}')" title="{{ __('appointments.delete') }}">
+                                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                                onclick="return confirm('{{ __('appointments.confirm_delete') }}')"
+                                                                title="{{ __('appointments.delete') }}">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>

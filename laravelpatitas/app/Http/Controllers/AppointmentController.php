@@ -32,13 +32,15 @@ class AppointmentController extends Controller
 
     public function store(AppointmentRequest $request): RedirectResponse
     {
+        $validatedData = $request->validated();
+
         $appointment = new Appointment;
         $appointment->setUserId(Auth::id());
-        $appointment->setDate($request->input('date'));
-        $appointment->setTime($request->input('time'));
-        $appointment->setPetName($request->input('pet_name'));
-        $appointment->setPetType($request->input('pet_type'));
-        $appointment->setReason($request->input('reason'));
+        $appointment->setDate($validatedData['date']);
+        $appointment->setTime($validatedData['time']);
+        $appointment->setPetName($validatedData['pet_name']);
+        $appointment->setPetType($validatedData['pet_type']);
+        $appointment->setReason($validatedData['reason']);
         $appointment->setStatus('pending');
         $appointment->save();
 

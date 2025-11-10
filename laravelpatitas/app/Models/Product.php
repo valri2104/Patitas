@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Collection;
 
 class Product extends Model
 {
@@ -210,4 +211,23 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    // app/Models/Product.php
+
+public static function topThreeExpensive(): Collection
+{
+    return self::inStock()
+        ->orderByDesc('price')
+        ->limit(3)
+        ->get();
+}
+
+public static function topThreeCheap(): Collection
+{
+    return self::inStock()
+        ->orderBy('price', 'asc')
+        ->limit(3)
+        ->get();
+}
+
 }
