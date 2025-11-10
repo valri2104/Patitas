@@ -44,18 +44,10 @@ class ProductController extends Controller
         $viewData['products'] = $query->get();
 
         // Get top 3 most expensive products (from all in-stock, not filtered)
-        $viewData['topProducts'] = Product::query()
-            ->inStock()
-            ->orderBy('price', 'desc')
-            ->limit(3)
-            ->get();
+        $viewData['topProducts'] = Product::topThreeExpensive();
 
         // Get 3 cheapest products (from all in-stock, not filtered)
-        $viewData['cheapProducts'] = Product::query()
-            ->inStock()
-            ->orderBy('price', 'asc')
-            ->limit(3)
-            ->get();
+        $viewData['cheapProducts'] = Product::topThreeCheap();
 
         return view('product.index')->with('viewData', $viewData);
     }
