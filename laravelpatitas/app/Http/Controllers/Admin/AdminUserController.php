@@ -70,7 +70,7 @@ class AdminUserController extends Controller
         $viewData['user'] = $user;
         $viewData['role'] = array_map(fn($c) => $c->value, Role::cases());
 
-        return view('admin.user.edit')->with('vewData', $viewData);
+        return view('admin.user.edit')->with('viewData', $viewData);
     }
 
     public function update(AdminUserRequest $request, string $id): RedirectResponse
