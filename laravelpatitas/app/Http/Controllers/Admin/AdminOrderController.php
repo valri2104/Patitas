@@ -46,6 +46,8 @@ class AdminOrderController extends Controller
         $viewData['title']    = __('admin.orders.show.title', ['id' => $order->getId()]);
         $viewData['subtitle'] = __('admin.orders.show.subtitle');
         $viewData['order']    = $order;
+        $viewData['status'] = $order->getStatus();
+        $viewData['total'] = $order->calculateTotal();
         $viewData['statuses'] = collect(Status::cases())->map(fn($s) => $s->value);
 
         return view('admin.order.show')->with('viewData', $viewData);
