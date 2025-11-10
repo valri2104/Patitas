@@ -67,11 +67,14 @@ class Appointment extends Model
 
     public function getTime(): string
     {
-        return $this->attributes['time'];
+        return substr($this->attributes['time'], 0, 5);
     }
 
     public function setTime(string $time): void
     {
+        if (strlen($time) === 5) {
+            $time .= ':00';
+        }
         $this->attributes['time'] = $time;
     }
 

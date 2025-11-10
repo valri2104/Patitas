@@ -12,9 +12,7 @@ use Illuminate\View\View;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of user's appointments.
-     */
+
     public function index(): View
     {
         $viewData                 = [];
@@ -24,9 +22,6 @@ class AppointmentController extends Controller
         return view('appointment.index')->with('viewData', $viewData);
     }
 
-    /**
-     * Show the form for creating a new appointment.
-     */
     public function create(): View
     {
         $viewData          = [];
@@ -35,9 +30,6 @@ class AppointmentController extends Controller
         return view('appointment.create')->with('viewData', $viewData);
     }
 
-    /**
-     * Store a newly created appointment in storage.
-     */
     public function store(AppointmentRequest $request): RedirectResponse
     {
         $appointment = new Appointment;
@@ -57,9 +49,6 @@ class AppointmentController extends Controller
             ->with('success', __('appointments.created_success'));
     }
 
-    /**
-     * Display the specified appointment.
-     */
     public function show(int $id): View
     {
         $viewData    = [];
@@ -76,9 +65,6 @@ class AppointmentController extends Controller
         return view('appointment.show')->with('viewData', $viewData);
     }
 
-    /**
-     * Remove the specified appointment from storage.
-     */
     public function destroy(int $id): RedirectResponse
     {
         $appointment = Appointment::findOrFail($id);
