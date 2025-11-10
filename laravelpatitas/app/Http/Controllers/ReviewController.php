@@ -6,6 +6,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
+use App\Http\Requests\ReviewRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,16 +18,12 @@ class ReviewController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(ReviewRequest $request): RedirectResponse
     {
         /** @var User $user */
         $user = Auth::user();
 
-        $validated = $request->validate([
-            'product_id'    => 'required|exists:products,id',
-            'qualification' => 'required|integer|between:1,5',
-            'description'   => 'required|string|min:10|max:500',
-        ]);
+        $validated = $request->validated();
 
         $product = Product::findOrFail($validated['product_id']);
 
