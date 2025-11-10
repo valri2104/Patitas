@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class AdminAppointmentController extends Controller
 {
-    /**
-     * Display a listing of all appointments.
-     */
+
     public function index(): View
     {
         $viewData                 = [];
@@ -25,9 +23,6 @@ class AdminAppointmentController extends Controller
         return view('admin.appointment.index')->with('viewData', $viewData);
     }
 
-    /**
-     * Display the specified appointment.
-     */
     public function show(int $id): View
     {
         $viewData    = [];
@@ -39,9 +34,6 @@ class AdminAppointmentController extends Controller
         return view('admin.appointment.show')->with('viewData', $viewData);
     }
 
-    /**
-     * Show the form for editing the specified appointment.
-     */
     public function edit(int $id): View
     {
         $viewData    = [];
@@ -53,9 +45,6 @@ class AdminAppointmentController extends Controller
         return view('admin.appointment.edit')->with('viewData', $viewData);
     }
 
-    /**
-     * Update the specified appointment in storage.
-     */
     public function update(AppointmentRequest $request, int $id): RedirectResponse
     {
         $appointment = Appointment::findOrFail($id);
@@ -76,9 +65,6 @@ class AdminAppointmentController extends Controller
             ->with('success', __('appointments.updated_success'));
     }
 
-    /**
-     * Remove the specified appointment from storage.
-     */
     public function destroy(int $id): RedirectResponse
     {
         $appointment = Appointment::findOrFail($id);
