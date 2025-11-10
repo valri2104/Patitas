@@ -32,7 +32,7 @@
                     <a class="nav-link" href="{{ route('admin.index') }}">{{ __('admin.navigation.dashboard') }}</a>
                     <a class="nav-link"
                         href="{{ route('admin.product.index') }}">{{ __('admin.navigation.products') }}</a>
-                    <a class="nav-link" href="#">{{ __('admin.navigation.users') }}</a>
+                    <a class="nav-link" href="{{ route('admin.user.index') }}">{{ __('admin.navigation.users') }}</a>
                     <a class="nav-link" href="#">{{ __('admin.navigation.orders') }}</a>
                 </div>
                 <div class="navbar-nav">

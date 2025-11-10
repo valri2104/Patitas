@@ -32,7 +32,7 @@ class AdminProductController extends Controller
         $viewData               = [];
         $viewData['title']      = __('admin.products.create.title');
         $viewData['subtitle']   = __('admin.products.create.subtitle');
-        $viewData['categories'] = ['Alimento', 'Juguetes', 'Medicina', 'Accesorios'];
+        $viewData['categories'] = array_map(fn($c) => $c->value, Category::cases());
 
         return view('admin.product.create')->with('viewData', $viewData);
     }

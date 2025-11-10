@@ -12,8 +12,8 @@ class AdminUserController extends Controller
     public function index(): View
     {
         $viewData             = [];
-        $viewData['title']    = __('users.index.title');
-        $viewData['subtitle'] = __('users.index.subtitle');
+        $viewData['title']    = __('admin.users.index.title');
+        $viewData['subtitle'] = __('admin.users.index.subtitle');
         $viewData['users']    = User::orderBy('name', 'asc')->get();
 
         return view('admin.user.index')->with('viewData', $viewData);
@@ -21,7 +21,10 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        //
+        $viewData = [];
+        $viewData['title'] = __('admin.users.create.title');
+        $viewData['subtitle'] = __('admin.users.create.subtitle');
+        $viewData['']
     }
 
     public function store(Request $request)
