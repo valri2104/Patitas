@@ -19,7 +19,8 @@
                             <div class="mb-3">
                                 <label for="date" class="form-label">{{ __('appointments.date') }} *</label>
                                 <input type="date" class="form-control @error('date') is-invalid @enderror"
-                                    id="date" name="date" value="{{ old('date') }}" min="{{ date('Y-m-d') }}" required>
+                                    id="date" name="date" value="{{ old('date') }}" min="{{ date('Y-m-d') }}"
+                                    required>
                                 @error('date')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -45,15 +46,21 @@
 
                             <div class="mb-3">
                                 <label for="pet_type" class="form-label">{{ __('appointments.pet_type') }} *</label>
-                                <select class="form-select @error('pet_type') is-invalid @enderror"
-                                    id="pet_type" name="pet_type" required>
+                                <select class="form-select @error('pet_type') is-invalid @enderror" id="pet_type"
+                                    name="pet_type" required>
                                     <option value="">{{ __('appointments.select_pet_type') }}</option>
-                                    <option value="Dog" {{ old('pet_type') === 'Dog' ? 'selected' : '' }}>{{ __('appointments.pet_types.dog') }}</option>
-                                    <option value="Cat" {{ old('pet_type') === 'Cat' ? 'selected' : '' }}>{{ __('appointments.pet_types.cat') }}</option>
-                                    <option value="Bird" {{ old('pet_type') === 'Bird' ? 'selected' : '' }}>{{ __('appointments.pet_types.bird') }}</option>
-                                    <option value="Rabbit" {{ old('pet_type') === 'Rabbit' ? 'selected' : '' }}>{{ __('appointments.pet_types.rabbit') }}</option>
-                                    <option value="Hamster" {{ old('pet_type') === 'Hamster' ? 'selected' : '' }}>{{ __('appointments.pet_types.hamster') }}</option>
-                                    <option value="Other" {{ old('pet_type') === 'Other' ? 'selected' : '' }}>{{ __('appointments.pet_types.other') }}</option>
+                                    <option value="Dog" {{ old('pet_type') === 'Dog' ? 'selected' : '' }}>
+                                        {{ __('appointments.pet_types.dog') }}</option>
+                                    <option value="Cat" {{ old('pet_type') === 'Cat' ? 'selected' : '' }}>
+                                        {{ __('appointments.pet_types.cat') }}</option>
+                                    <option value="Bird" {{ old('pet_type') === 'Bird' ? 'selected' : '' }}>
+                                        {{ __('appointments.pet_types.bird') }}</option>
+                                    <option value="Rabbit" {{ old('pet_type') === 'Rabbit' ? 'selected' : '' }}>
+                                        {{ __('appointments.pet_types.rabbit') }}</option>
+                                    <option value="Hamster" {{ old('pet_type') === 'Hamster' ? 'selected' : '' }}>
+                                        {{ __('appointments.pet_types.hamster') }}</option>
+                                    <option value="Other" {{ old('pet_type') === 'Other' ? 'selected' : '' }}>
+                                        {{ __('appointments.pet_types.other') }}</option>
                                 </select>
                                 @error('pet_type')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -62,8 +69,8 @@
 
                             <div class="mb-3">
                                 <label for="reason" class="form-label">{{ __('appointments.reason') }} *</label>
-                                <textarea class="form-control @error('reason') is-invalid @enderror"
-                                    id="reason" name="reason" rows="4" required>{{ old('reason') }}</textarea>
+                                <textarea class="form-control @error('reason') is-invalid @enderror" id="reason" name="reason" rows="4"
+                                    required>{{ old('reason') }}</textarea>
                                 @error('reason')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

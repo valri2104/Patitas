@@ -17,13 +17,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    {{-- Columna de ícono o avatar --}}
+                    {{-- Column of icon --}}
                     <div class="col-md-3 text-center mb-4">
                         <img src="https://ui-avatars.com/api/?name={{ urlencode($viewData['user']->getName()) }}&background=0D8ABC&color=fff&size=200"
                             alt="{{ $viewData['user']->getName() }}" class="img-fluid rounded-circle border shadow-sm">
                     </div>
 
-                    {{-- Columna con la información --}}
+                    {{-- Column of information --}}
                     <div class="col-md-9">
                         <dl class="row">
                             <dt class="col-sm-3">{{ __('admin.users.form.name') }}:</dt>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                {{-- Acciones --}}
+                {{-- Actions --}}
                 <div class="d-flex justify-content-end gap-2 mt-4">
                     <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">
                         <i class="fas fa-list me-2"></i>{{ __('admin.users.actions.back_to_list') }}

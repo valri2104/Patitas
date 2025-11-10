@@ -38,25 +38,33 @@
                                     </div>
                                     <div class="card-body">
                                         <p><strong>{{ __('appointments.date') }}:</strong> {{ $appointment->getDate() }}</p>
-                                        <p><strong>{{ __('appointments.time') }}:</strong> {{ $appointment->getTime() }}</p>
-                                        <p><strong>{{ __('appointments.pet_type') }}:</strong> {{ $appointment->getPetType() }}</p>
+                                        <p><strong>{{ __('appointments.time') }}:</strong> {{ $appointment->getTime() }}
+                                        </p>
+                                        <p><strong>{{ __('appointments.pet_type') }}:</strong>
+                                            {{ $appointment->getPetType() }}</p>
                                         <p><strong>{{ __('appointments.status') }}:</strong>
-                                            <span class="badge bg-{{ $appointment->getStatus() === 'pending' ? 'warning' : ($appointment->getStatus() === 'confirmed' ? 'success' : ($appointment->getStatus() === 'completed' ? 'info' : 'danger')) }}">
+                                            <span
+                                                class="badge bg-{{ $appointment->getStatus() === 'pending' ? 'warning' : ($appointment->getStatus() === 'confirmed' ? 'success' : ($appointment->getStatus() === 'completed' ? 'info' : 'danger')) }}">
                                                 {{ __('appointments.status_' . $appointment->getStatus()) }}
                                             </span>
                                         </p>
-                                        <p><strong>{{ __('appointments.reason') }}:</strong> {{ \Illuminate\Support\Str::limit($appointment->getReason(), 100) }}</p>
+                                        <p><strong>{{ __('appointments.reason') }}:</strong>
+                                            {{ \Illuminate\Support\Str::limit($appointment->getReason(), 100) }}</p>
                                     </div>
                                     <div class="card-footer bg-transparent">
                                         <div class="d-flex justify-content-between">
-                                            <a href="{{ route('appointment.show', ['id' => $appointment->getId()]) }}" class="btn btn-sm btn-info">
+                                            <a href="{{ route('appointment.show', ['id' => $appointment->getId()]) }}"
+                                                class="btn btn-sm btn-info">
                                                 <i class="fas fa-eye me-1"></i>{{ __('appointments.view') }}
                                             </a>
                                             @if ($appointment->getStatus() === 'pending')
-                                                <form action="{{ route('appointment.destroy', ['id' => $appointment->getId()]) }}" method="POST" class="d-inline">
+                                                <form
+                                                    action="{{ route('appointment.destroy', ['id' => $appointment->getId()]) }}"
+                                                    method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('{{ __('appointments.confirm_delete') }}')">
+                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('{{ __('appointments.confirm_delete') }}')">
                                                         <i class="fas fa-trash me-1"></i>{{ __('appointments.cancel') }}
                                                     </button>
                                                 </form>

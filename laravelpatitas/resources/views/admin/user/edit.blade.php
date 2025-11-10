@@ -38,7 +38,6 @@
                             @enderror
                         </div>
 
-                        {{-- Email --}}
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">
                                 {{ __('admin.users.form.email') }} <span class="text-danger">*</span>
@@ -53,7 +52,6 @@
                     </div>
 
                     <div class="row">
-                        {{-- Phone --}}
                         <div class="col-md-6 mb-3">
                             <label for="phone" class="form-label">
                                 {{ __('admin.users.form.phone') }}
@@ -66,7 +64,6 @@
                             @enderror
                         </div>
 
-                        {{-- Role --}}
                         <div class="col-md-6 mb-3">
                             <label for="role" class="form-label">
                                 {{ __('admin.users.form.role') }} <span class="text-danger">*</span>
@@ -87,7 +84,6 @@
                         </div>
                     </div>
 
-                    {{-- Address --}}
                     <div class="mb-3">
                         <label for="address" class="form-label">
                             {{ __('admin.users.form.address') }}
@@ -99,7 +95,6 @@
                         @enderror
                     </div>
 
-                    {{-- Buttons --}}
                     <div class="d-flex justify-content-end gap-2">
                         <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times me-2"></i>{{ __('admin.common.cancel') }}
