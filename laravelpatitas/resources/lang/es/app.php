@@ -18,6 +18,7 @@ return [
         'app' => [
             'title'    => 'Patitas - Cuidado y productos para tus mascotas',
             'subtitle' => 'Patitas',
+            'footer'   => 'Patitas copy ©'
         ],
     ],
 
