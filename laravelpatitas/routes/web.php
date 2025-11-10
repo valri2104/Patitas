@@ -21,8 +21,17 @@ Route::middleware(['auth'])->group(function () use ($cartController) {
     Route::get('/cart/purchase', $cartController . '@purchaseConfirmation')->name('cart.purchase.confirmation');
 });
 
+// ============================================================================
+// ORDER ROUTES (Requires authentication)
+// ============================================================================
+$orderController = 'App\\Http\\Controllers\\OrderController';
+Route::middleware(['auth'])->group(function () use ($orderController) {
+    Route::get('/orders', $orderController . '@index')->name('order.index');
+    Route::get('/orders/{id}', $orderController . '@show')->name('order.show');
+});
+
 // User register routes
-$registerController = 'App\Http\Controllers\Auth\RegisterController';
+$registerController = 'App\\Http\\Controllers\\Auth\\RegisterController';
 Route::get('/register', $registerController . '@showRegistrationForm')->name('register');
 Route::post('/register', $registerController . '@register')->name('register');
 
@@ -32,18 +41,18 @@ Route::post('/register', $registerController . '@register')->name('register');
 
 // Public Product Catalog Routes
 
-$productController = 'App\Http\Controllers\ProductController';
+$productController = 'App\\Http\\Controllers\\ProductController';
 Route::get('/products', $productController . '@index')->name('product.index');
 Route::get('/products/{id}', $productController . '@show')->name('product.show');
 
 // ============================================================================
 // ADMIN ROUTES (Requires authentication and admin role)
 // ============================================================================
-Route::get('/admin/dashboard', 'App\Http\Controllers\Admin\AdminController@index')->name('admin.index');
+Route::get('/admin/dashboard', 'App\\Http\\Controllers\\Admin\\AdminController@index')->name('admin.index');
 
 // Admin User Management Routes
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
-    $adminUserController = 'App\Http\Controllers\Admin\AdminUserController';
+    $adminUserController = 'App\\Http\\Controllers\\Admin\\AdminUserController';
 
     // User CRUD Routes
     Route::get('/users', $adminUserController . '@index')->name('admin.user.index');
@@ -57,7 +66,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
 
 // Admin Product Management Routes
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
-    $adminProductController = 'App\Http\Controllers\Admin\AdminProductController';
+    $adminProductController = 'App\\Http\\Controllers\\Admin\\AdminProductController';
 
     // Product CRUD Routes
     Route::get('/products', $adminProductController . '@index')->name('admin.product.index');
@@ -67,4 +76,13 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::get('/products/{id}/edit', $adminProductController . '@edit')->name('admin.product.edit');
     Route::put('/products/{id}', $adminProductController . '@update')->name('admin.product.update');
     Route::delete('/products/{id}', $adminProductController . '@destroy')->name('admin.product.destroy');
+});
+
+// Admin Order Management Routes
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    $adminOrderController = 'App\\Http\\Controllers\\Admin\\AdminOrderController';
+
+    Route::get('/orders', $adminOrderController . '@index')->name('admin.order.index');
+    Route::get('/orders/{id}', $adminOrderController . '@show')->name('admin.order.show');
+    Route::put('/orders/{id}/status', $adminOrderController . '@updateStatus')->name('admin.order.updateStatus');
 });
