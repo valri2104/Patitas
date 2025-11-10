@@ -14,7 +14,7 @@
                             <h2 class="h4 fw-bold mb-3 mb-md-0">{{ __('admin.orders.index.filter_status') }}</h2>
 
                             <div class="d-flex flex-wrap gap-2">
-                                {{-- Botón "Todos" --}}
+
                                 <a href="{{ route('admin.order.index') }}"
                                     class="btn {{ empty($selectedStatus) ? 'btn-dark' : 'btn-outline-dark' }} btn-sm">
                                     {{ __('admin.orders.index.all_statuses') }}
