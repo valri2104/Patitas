@@ -28,13 +28,18 @@ class AdminReviewController extends Controller
             ->paginate(20)
             ->withQueryString();
 
-        $viewData = [];
-        $viewData['title'] = __('admin.reviews.index.title');
-        $viewData['subtitle'] = __('admin.reviews.indes.subtitle');
-        $viewData['reviews'] = $reviews;
+        $viewData             = [];
+        $viewData['title']    = __('admin.reviews.index.title');
+        $viewData['subtitle'] = __('admin.reviews.index.subtitle');
+        $viewData['info']     = __('admin.reviews.index.info');
+        $viewData['reviews']  = $reviews;
         $viewData['products'] = Product::orderBy('name')->get();
-        $viewData['filters'] = compact('rating', 'productId', 'userSearch');
-        $viewData['selectedRating'] = $rating ? (int) $rating : null;
+        $viewData['filters']  = [
+            'rating'     => $rating,
+            'productId'  => $productId,
+            'userSearch' => $userSearch,
+        ];
+        $viewData['selectedRating'] = $rating !== null ? (int) $rating : null;
 
         return view('admin.review.index')->with('viewData', $viewData);
     }

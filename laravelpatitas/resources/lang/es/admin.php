@@ -153,6 +153,8 @@ return [
         'index' => [
             'title'    => 'Moderación de Reseñas',
             'subtitle' => 'Administra y modera las reseñas de los productos',
+            'info'     => 'Supervisa el contenido generado por los usuarios para mantener la calidad del catálogo.',
+            'empty'    => 'No se encontraron reseñas con los filtros seleccionados.',
         ],
         'filters' => [
             'rating'       => 'Calificación',
