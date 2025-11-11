@@ -99,6 +99,7 @@ return [
     'navigation' => [
         'home'         => 'Home',
         'products'     => 'Products',
+        'partner_products' => 'Partner Products',
         'about'        => 'About',
         'contact'      => 'Contact',
         'login'        => 'Sign In',
@@ -126,6 +127,32 @@ return [
         'currency'      => 'COP',
         'of'            => 'of',
         'select'        => 'Select',
+    ],
+
+    'partners' => [
+        'title'    => 'Partner Products - Supplements',
+        'subtitle' => 'Supplements from our partner team',
+        'fields'   => [
+            'identifier' => 'Product ID: :id',
+            'partner_badge' => 'Partner Product',
+            'description_unavailable' => 'Description not available',
+            'price_unavailable' => 'Price not available',
+            'price' => ':price :currency',
+        ],
+        'messages' => [
+            'unavailable' => 'Partner products are not available right now.',
+            'timeout'     => 'Partner products could not be loaded due to a timeout.',
+            'error'       => 'An unexpected error occurred while loading partner products.',
+            'empty'       => 'No partner products were found.',
+        ],
+        'actions' => [
+            'view_partner_site' => 'View on partner site',
+            'back_to_catalog'   => 'Back to our catalog',
+        ],
+        'banner' => [
+            'message' => 'These products belong to our trusted partner team.',
+            'badge'   => 'Allied',
+        ],
     ],
 
 ];

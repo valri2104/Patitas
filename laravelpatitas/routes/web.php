@@ -14,6 +14,9 @@ Route::get('/language/{locale}', $languageController . '@change')->name('languag
 $apiController = 'App\\Http\\Controllers\\Api\\ApiController';
 Route::get('/api/products', $apiController . '@products')->name('api.products');
 
+$partnerController = 'App\\Http\\Controllers\\PartnerController';
+Route::get('/partners', $partnerController . '@index')->name('partner.index');
+
 // ============================================================================
 // CART ROUTES (No middleware required)
 // ============================================================================

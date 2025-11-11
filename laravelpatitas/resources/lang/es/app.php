@@ -100,6 +100,7 @@ return [
     'navigation' => [
         'home'         => 'Inicio',
         'products'     => 'Productos',
+        'partner_products' => 'Productos Aliados',
         'about'        => 'Acerca de',
         'contact'      => 'Contacto',
         'login'        => 'Iniciar Sesión',
@@ -134,6 +135,32 @@ return [
         'currency'      => 'COP',
         'of'            => 'de',
         'select'        => 'Seleccione',
+    ],
+
+    'partners' => [
+        'title'    => 'Productos Aliados - Suplementos',
+        'subtitle' => 'Suplementos de nuestro equipo asociado',
+        'fields'   => [
+            'identifier' => 'ID del producto: :id',
+            'partner_badge' => 'Producto Aliado',
+            'description_unavailable' => 'Descripción no disponible',
+            'price_unavailable' => 'Precio no disponible',
+            'price' => ':price :currency',
+        ],
+        'messages' => [
+            'unavailable' => 'Productos aliados no disponibles en este momento.',
+            'timeout'     => 'No se pudieron cargar los productos aliados por tiempo de espera.',
+            'error'       => 'Ocurrió un error inesperado al cargar los productos aliados.',
+            'empty'       => 'No se encontraron productos aliados.',
+        ],
+        'actions' => [
+            'view_partner_site' => 'Ver en sitio aliado',
+            'back_to_catalog'   => 'Volver a nuestro catálogo',
+        ],
+        'banner' => [
+            'message' => 'Estos productos pertenecen a nuestro equipo aliado de confianza.',
+            'badge'   => 'Aliado',
+        ],
     ],
 
 ];

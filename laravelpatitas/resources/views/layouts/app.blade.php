@@ -31,6 +31,9 @@
                 <div class="navbar-nav ms-auto align-items-lg-center">
                     <a class="nav-link active"
                         href="{{ route('product.index') }}">{{ __('app.navigation.products') }}</a>
+                    <a class="nav-link active d-flex align-items-center" href="{{ route('partner.index') }}">
+                        <i class="fas fa-handshake me-1"></i>{{ __('app.navigation.partner_products') }}
+                    </a>
                     <a class="nav-link active" href="{{ route('cart.index') }}">{{ __('app.navigation.cart') }}</a>
 
                     @auth

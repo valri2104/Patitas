@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Log;
 
 class WeatherService
 {
-    private string $apiKey;
+    private string $apiKey = '';
 
     private string $baseUrl = 'https://api.openweathermap.org/data/2.5';
 
     public function __construct()
     {
-        $this->apiKey = config('services.openweathermap.key', '');
+        $configuredKey = config('services.openweathermap.key');
+        $this->apiKey  = is_string($configuredKey) ? $configuredKey : '';
     }
 
     /**
