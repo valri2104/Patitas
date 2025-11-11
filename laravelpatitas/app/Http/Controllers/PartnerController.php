@@ -71,8 +71,12 @@ class PartnerController extends Controller
 
         return array_map(static function (array $product): array {
             return [
-                'id'   => $product['id']   ?? null,
-                'name' => $product['name'] ?? '',
+                'id'          => $product['id']          ?? null,
+                'name'        => $product['name']        ?? '',
+                'description' => $product['description'] ?? null,
+                'price'       => $product['price']       ?? null,
+                'image'       => $product['image']       ?? null,
+                'url'         => $product['url']         ?? null,
             ];
         }, $apiData['data']);
     }
