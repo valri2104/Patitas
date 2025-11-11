@@ -1,0 +1,43 @@
+.appointment-email-body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333333;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.appointment-email-header {
+    background-color: #0d6efd;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.appointment-email-content {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border: 1px solid #dee2e6;
+    border-radius: 0 0 5px 5px;
+}
+
+.appointment-email-detail-row {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-left: 3px solid #0d6efd;
+}
+
+.appointment-email-detail-label {
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+.appointment-email-footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #6c757d;
+    font-size: 14px;
+}
+
