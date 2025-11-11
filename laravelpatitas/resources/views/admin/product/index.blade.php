@@ -7,7 +7,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <!-- Header with Create Button -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <h2>{{ __('admin.products.index.title') }}</h2>
@@ -18,7 +17,6 @@
                     </a>
                 </div>
 
-                <!-- Products Table -->
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
@@ -75,14 +73,12 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group" role="group">
-                                                        <!-- View Button -->
                                                         <a href="{{ route('admin.product.show', $product->getId()) }}"
                                                             class="btn btn-primary"
                                                             title="{{ __('admin.products.actions.view') }}">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
 
-                                                        <!-- Edit Button -->
                                                         <a href="{{ route('admin.product.edit', $product->getId()) }}"
                                                             class="btn btn-info"
                                                             title="{{ __('admin.products.actions.edit') }}">
