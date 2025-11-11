@@ -112,6 +112,13 @@ return [
         'balance'      => 'Saldo',
     ],
 
+    'weather' => [
+        'feels_like' => 'Sensación térmica',
+        'humidity'   => 'Humedad',
+        'wind'       => 'Viento',
+        'powered_by' => 'Datos proporcionados por',
+    ],
+
     'common' => [
         'yes'           => 'Sí',
         'no'            => 'No',
