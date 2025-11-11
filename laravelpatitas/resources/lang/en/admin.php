@@ -153,6 +153,8 @@ return [
         'index' => [
             'title'    => 'Review Moderation',
             'subtitle' => 'Manage and moderate product reviews',
+            'info'     => 'Monitor user-generated content to keep the catalog quality high.',
+            'empty'    => 'No reviews match the selected filters.',
         ],
         'filters' => [
             'rating'       => 'Rating',

@@ -7,10 +7,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Review extends Model
 {
@@ -153,6 +153,18 @@ class Review extends Model
         return Str::limit($this->getDescription(), 100);
     }
 
+    public function getShortDescription(): string
+    {
+        return $this->getShortDescriptionAttribute();
+    }
+
+    public function getFormattedCreatedAt(): ?string
+    {
+        $createdAt = $this->getCreatedAt();
+
+        return $createdAt ? $createdAt->format('d/m/Y H:i') : null;
+    }
+
     public function scopeFilter($query, ?int $rating, ?int $productId, ?string $userSearch)
     {
         if ($rating && in_array($rating, [1, 2, 3, 4, 5])) {
@@ -163,14 +175,13 @@ class Review extends Model
             $query->where('product_id', $productId);
         }
 
-        if (!empty($userSearch)) {
+        if (! empty($userSearch)) {
             $query->whereHas('user', function ($userQuery) use ($userSearch): void {
                 $userQuery->where('name', 'like', '%' . $userSearch . '%')
-                          ->orWhere('email', 'like', '%' . $userSearch . '%');
+                    ->orWhere('email', 'like', '%' . $userSearch . '%');
             });
         }
 
         return $query;
     }
 }
-

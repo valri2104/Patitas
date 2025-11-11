@@ -5,6 +5,11 @@
 
 @section('content')
     <div class="container-fluid">
+        <div class="alert alert-info d-flex align-items-center gap-2 mb-4" role="alert">
+            <i class="fas fa-star-half-alt"></i>
+            <span>{{ $viewData['info'] }}</span>
+        </div>
+
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
@@ -12,7 +17,7 @@
 
                     <a href="{{ route('admin.review.index') }}"
                         class="btn btn-sm {{ $viewData['selectedRating'] === null ? 'btn-primary' : 'btn-outline-primary' }}">
-                        {{ __('admin.reviews.filters.all') }}
+                        {{ __('admin.reviews.filters.all_ratings') }}
                     </a>
 
                     @for ($i = 5; $i >= 1; $i--)
@@ -39,9 +44,8 @@
                     </div>
                     <div class="col-md-4">
                         <label for="user" class="form-label">{{ __('admin.reviews.filters.user') }}</label>
-                        <input type="text" name="user" id="user"
-                            value="{{ $viewData['filters']['userSearch'] ?? '' }}" class="form-control"
-                            placeholder="{{ __('admin.reviews.filters.placeholder') }}">
+                        <input type="text" name="user" id="user" value="{{ $viewData['filters']['userSearch'] ?? '' }}"
+                            class="form-control" placeholder="{{ __('admin.reviews.filters.placeholder') }}">
                     </div>
                     <div class="col-md-4 d-flex align-items-end gap-2">
                         <button type="submit" class="btn btn-primary">
@@ -90,9 +94,11 @@
                                         @endfor
                                     </td>
                                     <td style="max-width: 320px;">
-                                        <span class="text-muted">{{ $review->short_description }}</span>
+                                        <span class="text-muted">{{ $review->getShortDescription() }}</span>
                                     </td>
-                                    <td>{{ $review->formatted_date }}</td>
+                                    <td>
+                                        {{ $review->getFormattedCreatedAt() ?? __('admin.reviews.table.date') }}
+                                    </td>
                                     <td class="text-end">
                                         <form action="{{ route('admin.review.destroy', $review->getId()) }}" method="POST"
                                             class="d-inline">
@@ -108,7 +114,7 @@
                             @empty
                                 <tr>
                                     <td colspan="6" class="text-center py-4 text-muted">
-                                        {{ __('admin.reviews.index.subtitle') }}
+                                        {{ __('admin.reviews.index.empty') }}
                                     </td>
                                 </tr>
                             @endforelse
