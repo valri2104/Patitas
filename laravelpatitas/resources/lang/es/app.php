@@ -100,6 +100,7 @@ return [
     'navigation' => [
         'home'         => 'Inicio',
         'products'     => 'Productos',
+        'partner_products' => 'Productos Aliados',
         'about'        => 'Acerca de',
         'contact'      => 'Contacto',
         'login'        => 'Iniciar Sesión',

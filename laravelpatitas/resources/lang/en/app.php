@@ -99,6 +99,7 @@ return [
     'navigation' => [
         'home'         => 'Home',
         'products'     => 'Products',
+        'partner_products' => 'Partner Products',
         'about'        => 'About',
         'contact'      => 'Contact',
         'login'        => 'Sign In',
