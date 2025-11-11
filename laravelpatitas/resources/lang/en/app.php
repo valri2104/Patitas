@@ -128,4 +128,18 @@ return [
         'select'        => 'Select',
     ],
 
+    'partners' => [
+        'title'    => 'Partner Products',
+        'subtitle' => 'Supplements from our partner team',
+        'fields'   => [
+            'identifier' => 'Product ID: :id',
+        ],
+        'messages' => [
+            'unavailable' => 'Partner products are not available right now.',
+            'timeout'     => 'Partner products could not be loaded due to a timeout.',
+            'error'       => 'An unexpected error occurred while loading partner products.',
+            'empty'       => 'No partner products were found.',
+        ],
+    ],
+
 ];

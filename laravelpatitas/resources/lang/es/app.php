@@ -136,4 +136,18 @@ return [
         'select'        => 'Seleccione',
     ],
 
+    'partners' => [
+        'title'    => 'Productos Aliados',
+        'subtitle' => 'Suplementos de nuestro equipo asociado',
+        'fields'   => [
+            'identifier' => 'ID del producto: :id',
+        ],
+        'messages' => [
+            'unavailable' => 'Productos aliados no disponibles en este momento.',
+            'timeout'     => 'No se pudieron cargar los productos aliados por tiempo de espera.',
+            'error'       => 'Ocurrió un error inesperado al cargar los productos aliados.',
+            'empty'       => 'No se encontraron productos aliados.',
+        ],
+    ],
+
 ];
