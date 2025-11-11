@@ -15,11 +15,11 @@ class PartnerController extends Controller
     public function index(): View
     {
         $viewData                 = [];
-        $viewData['title']        = __('partners.title');
-        $viewData['subtitle']     = __('partners.subtitle');
+        $viewData['title']        = __('partner.title');
+        $viewData['subtitle']     = __('partner.subtitle');
         $viewData['products']     = [];
         $viewData['apiAvailable'] = false;
-        $viewData['errorMessage'] = __('partners.messages.unavailable');
+        $viewData['errorMessage'] = __('partner.error_loading');
 
         try {
             $cachedProducts = Cache::get(self::CACHE_KEY);
@@ -44,16 +44,17 @@ class PartnerController extends Controller
                         'status' => $response->status(),
                         'body'   => $response->body(),
                     ]);
+                    $viewData['errorMessage'] = __('partner.error_loading');
                 }
             }
         } catch (ConnectionException $exception) {
-            $viewData['errorMessage'] = __('partners.messages.timeout');
+            $viewData['errorMessage'] = __('partner.error_loading');
 
             Log::error('Partner supplements API connection error.', [
                 'message' => $exception->getMessage(),
             ]);
         } catch (\Throwable $exception) {
-            $viewData['errorMessage'] = __('partners.messages.error');
+            $viewData['errorMessage'] = __('partner.error_loading');
 
             Log::error('Partner supplements API unexpected error.', [
                 'message' => $exception->getMessage(),
