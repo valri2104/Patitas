@@ -12,6 +12,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class RegisterController extends Controller
 {
@@ -57,6 +58,14 @@ class RegisterController extends Controller
         Auth::login($user);
 
         return redirect($this->redirectTo());
+    }
+
+    public function showRegistrationForm(): View
+    {
+        $viewData          = [];
+        $viewData['title'] = __('app.navigation.register');
+
+        return view('auth.register')->with('viewData', $viewData);
     }
 
     protected function create(array $data): User
