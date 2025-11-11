@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () use ($reviewController) {
 // User register routes
 $registerController = 'App\\Http\\Controllers\\Auth\\RegisterController';
 Route::get('/register', $registerController . '@showRegistrationForm')->name('register');
-Route::post('/register', $registerController . '@register')->name('register');
+Route::post('/register', $registerController . '@register')->name('register.submit');
 
 // ============================================================================
 // PUBLIC ROUTES (No middleware required)
